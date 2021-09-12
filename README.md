@@ -16,5 +16,8 @@ Backend: Express
 Frontend: React  
 Database: mysql, sequelize(ORM)  
 - - -
+## Backend repo link
+[metro-map-backend](https://github.com/skullkim/metro-map-backend)
+- - -
 ## License
 This project is licensed under the terms of the MIT license.
