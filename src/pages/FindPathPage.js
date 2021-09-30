@@ -1,11 +1,11 @@
-import SearchPathNavBar from "../components/SearchPathNavBar";
+import SearchPathOptions from "../components/SearchPathOptions";
 import SubwayMap from "../components/SubwayMap";
 
 
 const FindPathPage = () => {
   return (
     <>
-      <SearchPathNavBar />
+      <SearchPathOptions />
       <SubwayMap />
     </>
   );
