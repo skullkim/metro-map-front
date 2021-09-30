@@ -1,14 +1,13 @@
-import SearchPathOptions from "../components/SearchPathOptions";
-import SubwayMap from "../components/SubwayMap";
-
+import SubwayMap from '../components/map/SubwayMap';
+import SearchContainer from '../components/search/SearchContainer';
 
 const FindPathPage = () => {
   return (
     <>
-      <SearchPathOptions />
+      <SearchContainer />
       <SubwayMap />
     </>
   );
-}
+};
 
 export default FindPathPage;

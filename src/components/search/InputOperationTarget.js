@@ -1,26 +1,27 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const InputBox = styled.div`
-  height: 45px;
-  width: 242px;
-  position: relative;
-  left: 108px;
+  flex: 2;
+  display: flex;
 `;
 
 const InputLabel = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 25px;
   font-size: 18px;
   font-weight: bold;
 `;
 
 const InputStation = styled.input`
-  height: 48px;
+  height: 40px;
   width: 60px;
+  margin-left: 5px;
   padding: 0;
-  border: 1px solid #2867B226;
+  border: 1px solid #2867b226;
   border-radius: 10px;
-  margin-left: 10px;
-  margin-right: 15px;
-  background-color: #2867B226;
+  background-color: #2867b226;
 `;
 
 const InputOperationTarget = () => {
@@ -36,6 +37,6 @@ const InputOperationTarget = () => {
       </InputLabel>
     </InputBox>
   );
-}
+};
 
 export default InputOperationTarget;
