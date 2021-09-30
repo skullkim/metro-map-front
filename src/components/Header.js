@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import HeaderNav from "./HeaderNav";
+
 const HeaderBox = styled.header`
   height: 85px;
   width: 100%;
@@ -11,7 +13,7 @@ const Logo = styled.img`
   height: 55px;
   width: 55px;
   position: absolute;
-  top: 10px;
+  top: 15px;
   left: 129px
 `;
 
@@ -21,6 +23,7 @@ const Header = () => {
     <>
       <HeaderBox>
         <Logo src='/logo.svg'/>
+        <HeaderNav />
       </HeaderBox>
     </>
   )
