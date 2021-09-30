@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import InputOperationTarget from "./InputOperationTarget";
 import SelectOperationTarget from "./SelectOperationTarget";
 
 const OptionsBox = styled.section`
@@ -8,12 +9,14 @@ const OptionsBox = styled.section`
   margin: 26px 0;
   position: relative;
   left: 198px;
+  display: flex;
 `;
 
 const SearchPathOptions = () => {
   return (
     <OptionsBox>
       <SelectOperationTarget />
+      <InputOperationTarget />
     </OptionsBox>
   );
 }

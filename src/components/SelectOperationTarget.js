@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const SelectBox = styled.div`
   height: 45px;
-  width: 293ps;
+  width: 350px;
 `;
 
 const TargetButton = styled.button`
