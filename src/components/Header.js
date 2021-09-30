@@ -7,10 +7,21 @@ const HeaderBox = styled.header`
   border-bottom: 5px solid #2867B2;
 `;
 
+const Logo = styled.img`
+  height: 55px;
+  width: 55px;
+  position: absolute;
+  top: 10px;
+  left: 129px
+`;
+
+
 const Header = () => {
   return (
     <>
-      <HeaderBox />
+      <HeaderBox>
+        <Logo src='/logo.svg'/>
+      </HeaderBox>
     </>
   )
 }
