@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import InputOperationTarget from "./InputOperationTarget";
+import SearchComponent from "./SearchComponent";
 import SelectOperationTarget from "./SelectOperationTarget";
 
 const OptionsBox = styled.section`
@@ -10,6 +11,7 @@ const OptionsBox = styled.section`
   position: relative;
   left: 198px;
   display: flex;
+  align-items: center;
 `;
 
 const SearchPathOptions = () => {
@@ -17,6 +19,7 @@ const SearchPathOptions = () => {
     <OptionsBox>
       <SelectOperationTarget />
       <InputOperationTarget />
+      <SearchComponent />
     </OptionsBox>
   );
 }
