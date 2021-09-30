@@ -2,7 +2,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import GlobalStyle from "./components/GlobalStyle";
 import Header from "./components/Header";
-import SubwayMap from "./components/SubwayMap";
+import FindPathPage from "./pages/FindPathPage";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
         <Header />
 
         <Switch>
-          <Route path='/' component={SubwayMap}/>
+          <Route path='/' component={FindPathPage}/>
         </Switch>
       </Router>
     </>
