@@ -1,8 +1,12 @@
+import GlobalStyle from "./components/GlobalStyle";
 import SubwayMap from "./components/SubwayMap";
 
 function App() {
   return (
-    <SubwayMap />
+    <>
+      <GlobalStyle />
+      <SubwayMap />
+    </>
   );
 }
 
