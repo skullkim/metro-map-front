@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import InputOperationTarget from "./InputOperationTarget";
+import ResetButton from "./ResetButton";
 import SearchComponent from "./SearchComponent";
 import SelectOperationTarget from "./SelectOperationTarget";
 
@@ -20,6 +21,7 @@ const SearchPathOptions = () => {
       <SelectOperationTarget />
       <InputOperationTarget />
       <SearchComponent />
+      <ResetButton />
     </OptionsBox>
   );
 }
