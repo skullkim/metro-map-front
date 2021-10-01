@@ -5,7 +5,7 @@ const SearchTargetStore = observable({
 
   selectTarget(target) {
     this.target = target;
-  }
+  },
 });
 
 export default SearchTargetStore;

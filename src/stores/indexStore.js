@@ -1,4 +1,4 @@
-import SearchTargetStore from "./SearchTargetStore";
+import SearchTargetStore from "./searchTargetStore";
 
 const indexStore = () => ({
   SearchTargetStore,
