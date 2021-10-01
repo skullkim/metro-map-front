@@ -1,4 +1,7 @@
+import {useObserver} from 'mobx-react';
 import styled from 'styled-components';
+
+import indexStore from "../../stores/indexStore";
 
 const InputBox = styled.div`
   flex: 2;
@@ -25,18 +28,43 @@ const InputStation = styled.input`
 `;
 
 const InputOperationTarget = () => {
-  return (
+  const {SearchTargetStore: targetStore} = indexStore();
+
+  const handleChange = ({target: {name, value}}) => {
+    switch (name) {
+      case 'from':
+        targetStore.setFrom(value);
+        break;
+      case 'to':
+        targetStore.setTo(value);
+        break;
+      default:
+        throw new Error(`invalid target ${name}`)
+    }
+  }
+
+  return useObserver(() => (
     <InputBox>
       <InputLabel>
         출발
-        <InputStation type='text' maxLength='5' />
+        <InputStation
+          type='text'
+          name='from'
+          maxLength='3'
+          onChange={handleChange}
+        />
       </InputLabel>
       <InputLabel>
         도착
-        <InputStation type='text' maxLength='5' />
+        <InputStation
+          type='text'
+          name='to'
+          maxLength='3'
+          onChange={handleChange}
+        />
       </InputLabel>
     </InputBox>
-  );
+  ));
 };
 
 export default InputOperationTarget;
