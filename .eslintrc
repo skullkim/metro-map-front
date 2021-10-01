@@ -11,6 +11,8 @@
     "jest": true
   },
   "ignorePatterns": [
+    "scripts/",
+    "config/",
     "node_modules/",
     ".idea/"
   ],
