@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 import InputOperationTarget from './InputOperationTarget';
-import SearchBtn from './SearchBtn';
 import SelectOperationTarget from './SelectOperationTarget';
+import SubmitButton from './SubmitButton';
 
 const OptionsBox = styled.section`
   margin-top: 30px;
@@ -17,7 +17,7 @@ const SearchContainer = () => {
     <OptionsBox>
       <SelectOperationTarget />
       <InputOperationTarget />
-      <SearchBtn />
+      <SubmitButton />
     </OptionsBox>
   );
 };
