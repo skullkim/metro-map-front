@@ -4,6 +4,8 @@ const SearchTargetStore = observable({
   target: '',
   from: '',
   to: '',
+  stopover: '',
+  stopoverSelected: false,
 
   selectTarget(target) {
     this.target = target;
@@ -12,9 +14,15 @@ const SearchTargetStore = observable({
   setFrom(from) {
     this.from = from;
   },
+
   setTo(to) {
     this.to = to;
+  },
+
+  setStopoverSelected() {
+    this.stopoverSelected = !this.stopoverSelected;
   }
+
 });
 
 export default SearchTargetStore;
