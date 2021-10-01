@@ -1,4 +1,7 @@
+import {useObserver} from 'mobx-react';
 import styled from 'styled-components';
+
+import indexStore from "../../stores/indexStore";
 
 const SelectBox = styled.div`
   flex: 3;
@@ -21,13 +24,21 @@ const TargetButton = styled.button`
 `;
 
 const SelectOperationTarget = () => {
-  return (
+  const {SearchTargetStore} = indexStore();
+
+  const handleClick = (event) => {
+    const {target: {name}} = event;
+    event.preventDefault();
+    SearchTargetStore.selectTarget(name);
+  }
+
+  return useObserver(() => (
     <SelectBox>
-      <TargetButton>최단거리</TargetButton>
-      <TargetButton>최소시간</TargetButton>
-      <TargetButton>최소비용</TargetButton>
+      <TargetButton onClick={handleClick} name='distance'>최단거리</TargetButton>
+      <TargetButton onClick={handleClick} name='time'>최소시간</TargetButton>
+      <TargetButton onClick={handleClick} name='cost'>최소비용</TargetButton>
     </SelectBox>
-  );
+  ));
 };
 
 export default SelectOperationTarget;

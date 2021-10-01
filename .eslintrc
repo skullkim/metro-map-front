@@ -24,6 +24,7 @@
     },
     "insert_final_newline": true
   },
+  "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module",
     "allowImportExportEveryWhere": true,
