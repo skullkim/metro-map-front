@@ -1,7 +1,7 @@
 export const STATION_CATEGORY = {
-  START_STATION: 'from',
-  STOPOVER_STATION: 'stopover',
-  ARRIVE_STATION: 'to',
+  START_STATION: 'startStation',
+  STOPOVER_STATION: 'stopoverStation',
+  ARRIVE_STATION: 'arriveStation',
 };
 Object.freeze(STATION_CATEGORY);
 

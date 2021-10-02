@@ -16,12 +16,12 @@ const SearchButton = () => {
       `${PATH.MIN_PATH}${targetStore.target}`;
 
     const data = targetStore.stopoverSelected ? {
-      from: targetStore.from,
-      stopover: targetStore.stopover,
-      to: targetStore.to,
+      startStation: targetStore.startStation,
+      stopoverStation: targetStore.stopoverStation,
+      arriveStation: targetStore.arriveStation,
     } : {
-      from: targetStore.from,
-      to: targetStore.to,
+      startStation: targetStore.startStation,
+      arriveStation: targetStore.arriveStation,
     };
     axios({
       method: 'GET',

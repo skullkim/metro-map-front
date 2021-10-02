@@ -34,13 +34,13 @@ const InputOperationTarget = () => {
   const handleChange = ({target: {name, value}}) => {
     switch (name) {
       case STATION_CATEGORY.START_STATION:
-        targetStore.setFrom(value);
+        targetStore.setStartStation(value);
         break;
       case STATION_CATEGORY.STOPOVER_STATION:
-        targetStore.setStopover(value);
+        targetStore.setStopoverStation(value);
         break;
       case STATION_CATEGORY.ARRIVE_STATION:
-        targetStore.setTo(value);
+        targetStore.setArriveState(value);
         break;
       default:
         throw new Error(`invalid target ${name}`)
