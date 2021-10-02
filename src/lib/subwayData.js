@@ -1,3 +1,10 @@
+export const STATION_CATEGORY = {
+  START_STATION: 'from',
+  STOPOVER_STATION: 'stopover',
+  ARRIVE_STATION: 'to',
+};
+Object.freeze(STATION_CATEGORY);
+
 export const subwayConfig = {
   height: 1200,
   width: 2000,
