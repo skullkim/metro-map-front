@@ -11,6 +11,8 @@
     "jest": true
   },
   "ignorePatterns": [
+    "scripts/",
+    "config/",
     "node_modules/",
     ".idea/"
   ],
@@ -24,6 +26,7 @@
     },
     "insert_final_newline": true
   },
+  "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module",
     "allowImportExportEveryWhere": true,

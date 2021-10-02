@@ -1,11 +1,20 @@
-import GlobalStyle from "./components/GlobalStyle";
-import SubwayMap from "./components/SubwayMap";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import HeaderNav from './components/header/HeaderNav';
+import GlobalStyle from './components/styles/GlobalStyle';
+// eslint-disable-next-line import/extensions
+import FindPathPage from './pages/FindPathPage.js';
 
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <SubwayMap />
+      <Router>
+        <GlobalStyle />
+        <HeaderNav />
+        <Switch>
+          <Route path='/' component={FindPathPage} />
+        </Switch>
+      </Router>
     </>
   );
 }
