@@ -35,6 +35,9 @@ const InputOperationTarget = () => {
       case 'from':
         targetStore.setFrom(value);
         break;
+      case 'stopover':
+        targetStore.setStopover(value);
+        break;
       case 'to':
         targetStore.setTo(value);
         break;
