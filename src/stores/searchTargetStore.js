@@ -19,6 +19,10 @@ const SearchTargetStore = observable({
     this.to = to;
   },
 
+  setStopover(stopover) {
+    this.stopover = stopover;
+  },
+
   setStopoverSelected() {
     this.stopoverSelected = !this.stopoverSelected;
   }

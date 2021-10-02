@@ -54,6 +54,17 @@ const InputOperationTarget = () => {
           onChange={handleChange}
         />
       </InputLabel>
+      {targetStore.stopoverSelected &&
+        <InputLabel>
+          경유지
+          <InputStation
+            type='text'
+            name='stopover'
+            maxLength='3'
+            onChange={handleChange}
+          />
+        </InputLabel>
+      }
       <InputLabel>
         도착
         <InputStation
