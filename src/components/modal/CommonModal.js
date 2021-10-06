@@ -1,4 +1,7 @@
+import PropTypes from 'prop-types';
 import styled from "styled-components";
+
+import Portal from "./Portal";
 
 const ModalBox = styled.section`
   height: 460px;
@@ -6,7 +9,10 @@ const ModalBox = styled.section`
   position: absolute;
   top: 25%;
   left: 35%;
-  background-color: red;
+  display: flex;
+  justify-content: center;
+  border-radius: 15px;
+  background-color: white;
 `;
 
 const ModalOverlay = styled.div`
@@ -24,4 +30,20 @@ const ModalTitle = styled.b`
   font-size: 30px;
 `;
 
-export {ModalBox, ModalTitle, ModalOverlay};
+const CommonModalBox = ({children}) => {
+  return (
+    <Portal>
+      <ModalOverlay>
+        <ModalBox>
+          {children}
+        </ModalBox>
+      </ModalOverlay>
+    </Portal>
+  );
+}
+
+CommonModalBox.propTypes = {
+  children: PropTypes.element.isRequired,
+}
+
+export {ModalTitle, CommonModalBox};
