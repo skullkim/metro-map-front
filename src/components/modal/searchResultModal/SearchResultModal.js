@@ -7,9 +7,11 @@ import SearchResultData from "./SearchResultData";
 const SearchResultModal = () => {
   return (
     <CommonModalBox>
-      <ModalTitle>검색 결과</ModalTitle>
-      <SearchResultData />
-      <ModalCloseButton />
+      <>
+        <ModalTitle>검색 결과</ModalTitle>
+        <SearchResultData />
+        <ModalCloseButton />
+      </>
     </CommonModalBox>
   );
 }
