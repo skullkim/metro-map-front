@@ -1,9 +1,13 @@
+import axios from 'axios';
+import {useEffect} from 'react';
 import styled, { css } from "styled-components";
+
+import {PATH} from '../../../lib/dataServerPath';
+import indexStore from "../../../stores/indexStore";
 
 const ResultDataBox = styled.section`
   width: 463px;
   height: 56px;
-  //background-color: red;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,6 +28,36 @@ const DataTitle = styled.b`
 const Data = styled(DataTitle)``;
 
 const SearchResultData = () => {
+  const {SearchTargetStore: targetStore} = indexStore();
+
+  useEffect(() => {
+    const url = targetStore.stopoverSelected ?
+      `${PATH.MIN_PATH_STOPOVER}${targetStore.target}` :
+      `${PATH.MIN_PATH}${targetStore.target}`;
+
+    const data = targetStore.stopoverSelected ? {
+      startStation: targetStore.startStation,
+      stopoverStation: targetStore.stopoverStation,
+      arriveStation: targetStore.arriveStation,
+    } : {
+      startStation: targetStore.startStation,
+      arriveStation: targetStore.arriveStation,
+    };
+    axios({
+      method: 'GET',
+      url: `${process.env.REACT_APP_SERVER_ORIGIN}${url}`,
+      params: data,
+    })
+      .then((res) => {
+        // eslint-disable-next-line no-console
+        console.log(res);
+      })
+      .catch(err => {
+        // eslint-disable-next-line no-console
+        console.log(err.response);
+      })
+  }, []);
+
   return (
     <ResultDataBox>
       <DataBox first>
