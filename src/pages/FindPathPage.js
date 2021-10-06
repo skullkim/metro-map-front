@@ -1,7 +1,7 @@
 import {useObserver} from 'mobx-react';
 
 import SubwayMap from '../components/map/SubwayMap';
-import SearchResultModal from "../components/modal/SearchResultModal";
+import SearchResultModal from "../components/modal/searchResultModal/SearchResultModal";
 import SearchContainer from '../components/search/SearchContainer';
 import indexStore from "../stores/indexStore";
 

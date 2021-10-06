@@ -21,7 +21,7 @@ const ModalCloseButton = () => {
     event.preventDefault();
     closeModal.setSearchResultModal(false);
   }
-  
+
   return (
     <CloseModal onClick={handleClick}>
       홈으로 돌아가기
