@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import indexStore from "../../stores/indexStore";
+
 const CloseModal = styled.button`
   height: 44px;
   width: 189px;
@@ -13,7 +15,18 @@ const CloseModal = styled.button`
 `;
 
 const ModalCloseButton = () => {
-  return (<CloseModal>홈으로 돌아가기</CloseModal>);
+  const {ModalOpenStore: closeModal} = indexStore();
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    closeModal.setSearchResultModal(false);
+  }
+  
+  return (
+    <CloseModal onClick={handleClick}>
+      홈으로 돌아가기
+    </CloseModal>
+  );
 }
 
 export default ModalCloseButton;
