@@ -26,7 +26,29 @@ export const subwayConfig = {
   },
 };
 
-export default {
+
+export const subwayResultConfig = {
+  height: 225,
+  width: 480,
+  staticGraph: true,
+  overflow: 'scrollbar',
+  automaticRearrangeAfterDropNode: false,
+  node: {
+    fontSize: 10,
+    labelProperty: 'name',
+    size: 110,
+    strokeWidth: 4,
+  },
+  link: {
+    renderLabel: true,
+    semanticStrokeWidth: true,
+    height: 500,
+    fontSize: 25,
+    fontWeight: 'bolder',
+  },
+};
+
+const subwayData = {
   nodes: [
     // 1호선
     { id: '101', name: '101', x: 90, y: 590, labelPosition: 'left' },
@@ -321,3 +343,5 @@ export default {
   focusedNodeId: 'nodeIdToTriggerZoomAnimation',
   initialZoom: 0.1,
 };
+
+export default subwayData;
