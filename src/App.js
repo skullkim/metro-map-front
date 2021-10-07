@@ -4,6 +4,7 @@ import HeaderNav from './components/header/HeaderNav';
 import GlobalStyle from './components/styles/GlobalStyle';
 // eslint-disable-next-line import/extensions
 import FindPathPage from './pages/FindPathPage.js';
+import SignUp from './pages/SignUp';
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
         <GlobalStyle />
         <HeaderNav />
         <Switch>
-          <Route path='/' component={FindPathPage} />
+          <Route exact path='/' component={FindPathPage} />
+          <Route path='/sign-up' component={SignUp} />
         </Switch>
       </Router>
     </>
