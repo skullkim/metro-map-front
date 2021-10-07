@@ -1,8 +1,8 @@
 import axios from 'axios';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import styled, { css } from "styled-components";
 
-import {PATH} from '../../../lib/dataServerPath';
+import { makePathData, makeReqQuery, makeReqUrl } from "../../../lib/makeRequest";
 import indexStore from "../../../stores/indexStore";
 
 const ResultDataBox = styled.section`
@@ -27,30 +27,25 @@ const DataTitle = styled.b`
 
 const Data = styled(DataTitle)``;
 
+
 const SearchResultData = () => {
   const {SearchTargetStore: targetStore} = indexStore();
+  const [searchResult, setSearchResult] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  const [searchedPath, setSearchedPath] = useState([]);
 
   useEffect(() => {
-    const url = targetStore.stopoverSelected ?
-      `${PATH.MIN_PATH_STOPOVER}${targetStore.target}` :
-      `${PATH.MIN_PATH}${targetStore.target}`;
+    const url = makeReqUrl(targetStore);
+    const data = makeReqQuery(targetStore);
 
-    const data = targetStore.stopoverSelected ? {
-      startStation: targetStore.startStation,
-      stopoverStation: targetStore.stopoverStation,
-      arriveStation: targetStore.arriveStation,
-    } : {
-      startStation: targetStore.startStation,
-      arriveStation: targetStore.arriveStation,
-    };
     axios({
       method: 'GET',
       url: `${process.env.REACT_APP_SERVER_ORIGIN}${url}`,
       params: data,
     })
-      .then((res) => {
-        // eslint-disable-next-line no-console
-        console.log(res);
+      .then(({data: {data: resultData}}) => {
+        setSearchResult(makePathData(targetStore, resultData));
+        setSearchedPath(resultData.path);
       })
       .catch(err => {
         // eslint-disable-next-line no-console
@@ -60,22 +55,12 @@ const SearchResultData = () => {
 
   return (
     <ResultDataBox>
-      <DataBox first>
-        <DataTitle>출발역 / 도착역</DataTitle>
-        <Data>120 -&gt; 806</Data>
-      </DataBox>
-      <DataBox>
-        <DataTitle>요금 정보</DataTitle>
-        <Data>3333원</Data>
-      </DataBox>
-      <DataBox>
-        <DataTitle>거리 정보</DataTitle>
-        <Data>3.3km</Data>
-      </DataBox>
-      <DataBox>
-        <DataTitle>소요 시간</DataTitle>
-        <Data>3시간 34분</Data>
-      </DataBox>
+      {searchResult.length && searchResult.map(({title, data, first}) => (
+        <DataBox first={first} key={title}>
+          <DataTitle>{title}</DataTitle>
+          <Data>{data}</Data>
+        </DataBox>
+      ))}
     </ResultDataBox>
   );
 }
