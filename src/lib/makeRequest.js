@@ -1,4 +1,5 @@
 import { PATH } from "./dataServerPath";
+import subwayData from "./subwayData";
 
 export const makePathData = ({stopoverSelected, startStation, stopoverStation, arriveStation}, {cost, distance, time}) => {
   return [
@@ -25,6 +26,27 @@ export const makePathData = ({stopoverSelected, startStation, stopoverStation, a
       first: false,
     }
   ]
+}
+
+
+export const makeSubwayPathGraph = (path) => {
+  const result = {
+    nodes: [],
+    links: [],
+  };
+
+  path.forEach(({station}) => {
+    const tmp = subwayData.nodes.filter(({name}) => name === station)[0];
+    result.nodes = result.nodes.concat({...tmp, x: tmp.x / 5.5 + 30, y: tmp.y / 5.5 + 30});
+  });
+
+  for(let i = 1; i < path.length; i += 1) {
+    result.links = result.links.concat(subwayData.links.find(({source, target}) => {
+      return (path[i - 1].station === source && path[i].station === target);
+    }));
+  }
+
+  return result;
 }
 
 export const makeReqUrl = ({stopoverSelected, target}) => {
