@@ -1,6 +1,7 @@
-export const PATH = {
-  MIN_PATH: '/path/',
-  MIN_PATH_STOPOVER: '/path/stopover/',
+export const Path = {
+  minPath: '/path/',
+  minPathStopover: '/path/stopover/',
+  signUp: '/authentication/signup',
 };
 
-Object.freeze(PATH);
+Object.freeze(Path);

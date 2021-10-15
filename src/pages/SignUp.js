@@ -12,7 +12,11 @@ import {
   Wrapper
 } from "../components/styles/Authorization";
 import WarningMessage from "../components/styles/WarningMessage";
+import { Api } from "../lib/customAxios";
+import {Path} from '../lib/dataServerPath';
 import { maxLen, regExp, warning } from "../lib/validateUserInfo";
+
+
 
 
 const SignUp = () => {
@@ -40,15 +44,28 @@ const SignUp = () => {
         .max(maxLen, `${warning.maxLen}`)
         .oneOf([yup.ref('password')], `${warning.verifyPasswordNotEqual}`)
     }),
-    onSubmit: () => {}
+    onSubmit: ({email, password}) => {
+      Api({
+        method: 'POST',
+        url: `${process.env.REACT_APP_SERVER_ORIGIN}${Path.signUp}`,
+        data: {email, password}
+      })
+        .then((data) => {
+          // eslint-disable-next-line no-console
+          console.log(data);
+        })
+        .catch(err => {
+          // eslint-disable-next-line no-console
+          console.log(err);
+        })
+    }
   });
 
   const handleChange = useCallback((event) => {
     formik.handleChange(event);
   }, []);
 
-  const handleSubmit = useCallback((event) => {
-    event.preventDefault();
+  const handleClick = useCallback(() => {
     formik.handleSubmit();
   }, []);
 
@@ -99,7 +116,7 @@ const SignUp = () => {
           null
         }
 
-        <SubmitBtn type='submit' onSubmit={handleSubmit}>회원가입</SubmitBtn>
+        <SubmitBtn onClick={handleClick}>회원가입</SubmitBtn>
         <LinkMessage to='/sign-in'>회원이신가요? 로그인하세요</LinkMessage>
       </Form>
     </Wrapper>
