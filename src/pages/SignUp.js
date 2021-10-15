@@ -11,7 +11,7 @@ import {
   SubmitBtn,
   Wrapper
 } from "../components/styles/Authorization";
-import WarningMessage from "../components/styles/WarningMessage";
+import { Warning, Success } from "../components/styles/ResultMessage";
 import { Api } from "../lib/customAxios";
 import {Path} from '../lib/dataServerPath';
 import { maxLen, regExp, warning } from "../lib/validateUserInfo";
@@ -21,6 +21,9 @@ import { maxLen, regExp, warning } from "../lib/validateUserInfo";
 
 const SignUp = () => {
   const [currentFocused, setCurrentFocused] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -50,13 +53,16 @@ const SignUp = () => {
         url: `${process.env.REACT_APP_SERVER_ORIGIN}${Path.signUp}`,
         data: {email, password}
       })
-        .then((data) => {
-          // eslint-disable-next-line no-console
-          console.log(data);
+        .then(({data: {data: {message}}}) => {
+          setSuccessMessage(message);
         })
         .catch(err => {
-          // eslint-disable-next-line no-console
-          console.log(err);
+          const {response: {status, data: {error: {message}}}} = err;
+          if(status === 400) {
+            setErrorMessage(message);
+            return;
+          }
+          return err;
         })
     }
   });
@@ -65,7 +71,8 @@ const SignUp = () => {
     formik.handleChange(event);
   }, []);
 
-  const handleClick = useCallback(() => {
+  const handleClick = useCallback((event) => {
+    event.preventDefault();
     formik.handleSubmit();
   }, []);
 
@@ -88,7 +95,7 @@ const SignUp = () => {
           onBlur={handleBlur}
         />
         {formik.touched.email && formik.errors.email && currentFocused === 'email' ?
-          <WarningMessage>{formik.errors.email}</WarningMessage> :
+          <Warning>{formik.errors.email}</Warning> :
           null
         }
 
@@ -100,7 +107,7 @@ const SignUp = () => {
           onBlur={handleBlur}
         />
         {formik.touched.password && formik.errors.password && currentFocused === 'password' ?
-          <WarningMessage>{formik.errors.password}</WarningMessage> :
+          <Warning>{formik.errors.password}</Warning> :
           null
         }
 
@@ -112,12 +119,14 @@ const SignUp = () => {
           onBlur={handleBlur}
         />
         {formik.touched.verifyPassword && formik.errors.verifyPassword && currentFocused === 'verifyPassword' ?
-          <WarningMessage>{formik.errors.verifyPassword}</WarningMessage> :
+          <Warning>{formik.errors.verifyPassword}</Warning> :
           null
         }
 
-        <SubmitBtn onClick={handleClick}>회원가입</SubmitBtn>
+        <SubmitBtn type='submit' onClick={handleClick}>회원가입</SubmitBtn>
         <LinkMessage to='/sign-in'>회원이신가요? 로그인하세요</LinkMessage>
+        {successMessage ? <Success>{successMessage}</Success> : null}
+        {errorMessage ? <Warning>{errorMessage}</Warning> : null}
       </Form>
     </Wrapper>
   );

@@ -2,7 +2,7 @@ import {observer} from "mobx-react";
 import styled from 'styled-components';
 
 import indexStore from "../../stores/indexStore";
-import Warning from "../styles/WarningMessage";
+import {Warning} from "../styles/ResultMessage";
 
 import InputOperationTarget from './InputOperationTarget';
 import SelectOperationTarget from './SelectOperationTarget';
