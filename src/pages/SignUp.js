@@ -1,90 +1,105 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import  {useFormik} from "formik";
+import {useCallback, useState} from 'react';
+import * as yup from 'yup';
 
-const Wrapper = styled.div`
-  position: relative;
-  top: 15vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import {
+  Form,
+  Input,
+  InputTitle,
+  LinkMessage,
+  PageTitle,
+  SubmitBtn,
+  Wrapper
+} from "../components/styles/Authorization";
+import WarningMessage from "../components/styles/WarningMessage";
+import { maxLen, regExp, warning } from "../lib/validateUserInfo";
 
-const PageTitle = styled.h1`
-  font-weight: bold;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const InputTitle = styled.label`
-  margin-top: 1em;
-`;
-
-const SignInput = styled.input`
-  height: 3em;
-  width: 17em;
-  border: 0;
-  border-radius: 0.75em;
-  box-shadow: 0.2em 0.2em 0.2em #e2e2e2;
-  margin-right: 0.75em;
-  margin-top: 0.5em;
-  font-size: 1em;
-  background-color: #dfe8f3;
-  padding: 0 1em;
-  &:focus {
-    outline: 0.1em solid #2867b2;
-  }
-`;
-
-const SubmitBtn = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 5em;
-  height: 3em;
-  color: white;
-  background-color: #2867b2;
-  border: 0;
-  border-radius: 1em;
-  font-weight: bold;
-  font-size: 1em;
-  margin-top: 2em;
-  cursor: pointer;
-  &:hover {
-    background-color: #002f67;
-    transition: 0.25s;
-  }
-`;
-
-const LinkMessage = styled(NavLink)`
-  margin-top: 1em;
-  font-size: 0.75em;
-  font-weight: bold;
-  cursor: pointer;
-  &:hover {
-    color: #2867b2;
-    text-decoration: underline;
-    transition: 0.25s;
-  }
-`;
 
 const SignUp = () => {
+  const [currentFocused, setCurrentFocused] = useState('');
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      verifyPassword: '',
+    },
+    validationSchema: yup.object({
+      email: yup.string()
+        .required(`${warning.emptyEmail}`)
+        .matches(regExp.email, {message: `${warning.invalidEmail}`})
+        .max(maxLen, `${warning.maxLen}`),
+
+      password: yup.string()
+        .required(`${warning.emptyPassword}`)
+        .matches(regExp.password, {message: `${warning.invalidPassword}`})
+        .max(maxLen, `${warning.maxLen}`),
+
+      verifyPassword: yup.string()
+        .required(`${warning.emptyPassword}`)
+        .matches(regExp.password, {message: `${warning.invalidPassword}`})
+        .max(maxLen, `${warning.maxLen}`)
+        .oneOf([yup.ref('password')], `${warning.verifyPasswordNotEqual}`)
+    }),
+    onSubmit: () => {}
+  });
+
+  const handleChange = useCallback((event) => {
+    formik.handleChange(event);
+  }, []);
+
+  const handleSubmit = useCallback((event) => {
+    event.preventDefault();
+    formik.handleSubmit();
+  }, []);
+
+  const handleBlur = (event) => {
+    const {target: {name}} = event;
+    setCurrentFocused(name);
+    formik.handleBlur(event);
+  };
+
   return (
     <Wrapper>
       <Form>
         <PageTitle>회원가입</PageTitle>
-        <InputTitle>이름</InputTitle>
-        <SignInput type='text' />
+
         <InputTitle>이메일</InputTitle>
-        <SignInput type='email' />
+        <Input
+          type='text'
+          name='email'
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        {formik.touched.email && formik.errors.email && currentFocused === 'email' ?
+          <WarningMessage>{formik.errors.email}</WarningMessage> :
+          null
+        }
+
         <InputTitle>비밀번호</InputTitle>
-        <SignInput type='password' />
-        <SubmitBtn>회원가입</SubmitBtn>
+        <Input
+          type='password'
+          name='password'
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        {formik.touched.password && formik.errors.password && currentFocused === 'password' ?
+          <WarningMessage>{formik.errors.password}</WarningMessage> :
+          null
+        }
+
+        <InputTitle>비밀번호 확인</InputTitle>
+        <Input
+          type='password'
+          name='verifyPassword'
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        {formik.touched.verifyPassword && formik.errors.verifyPassword && currentFocused === 'verifyPassword' ?
+          <WarningMessage>{formik.errors.verifyPassword}</WarningMessage> :
+          null
+        }
+
+        <SubmitBtn type='submit' onSubmit={handleSubmit}>회원가입</SubmitBtn>
         <LinkMessage to='/sign-in'>회원이신가요? 로그인하세요</LinkMessage>
       </Form>
     </Wrapper>
