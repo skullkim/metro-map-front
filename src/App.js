@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import HeaderNav from './components/header/HeaderNav';
 import GlobalStyle from './components/styles/GlobalStyle';
+import EmailVerification from "./pages/EamilVerification";
 import FindPathPage from './pages/FindPathPage';
 import SignUp from './pages/SignUp';
 
@@ -14,6 +15,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={FindPathPage} />
           <Route path='/sign-up' component={SignUp} />
+          <Route path='/signup/email' component={EmailVerification} />
         </Switch>
       </Router>
     </>
