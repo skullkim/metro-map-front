@@ -1,4 +1,8 @@
+import {observer} from "mobx-react";
 import styled from 'styled-components';
+
+import indexStore from "../../stores/indexStore";
+import Warning from "../styles/WarningMessage";
 
 import InputOperationTarget from './InputOperationTarget';
 import SelectOperationTarget from './SelectOperationTarget';
@@ -12,14 +16,19 @@ const OptionsBox = styled.section`
   position: sticky;
 `;
 
+
 const SearchContainer = () => {
+  const {SearchTargetStore: targetStore} = indexStore();
+
   return (
     <OptionsBox>
       <SelectOperationTarget />
       <InputOperationTarget />
+      {targetStore.errorMessage ? <Warning>{targetStore.errorMessage}</Warning> : null}
       <SubmitButton />
     </OptionsBox>
   );
 };
 
-export default SearchContainer;
+export default observer(SearchContainer);
+

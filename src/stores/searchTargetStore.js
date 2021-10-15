@@ -6,6 +6,7 @@ const SearchTargetStore = observable({
   arriveStation: '',
   stopoverStation: '',
   stopoverSelected: false,
+  errorMessage: '',
 
   selectTarget(target) {
     this.target = target;
@@ -25,6 +26,10 @@ const SearchTargetStore = observable({
 
   setStopoverSelected() {
     this.stopoverSelected = !this.stopoverSelected;
+  },
+
+  setErrorMessage(errorMessage) {
+    this.errorMessage = errorMessage;
   }
 
 });

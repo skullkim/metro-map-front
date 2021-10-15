@@ -33,6 +33,7 @@
     "ecmaVersion": 11
   },
   "rules": {
+    "consistent-return": "off",
     "import/no-anonymouse-default-export": "off",
     "import/no-extraneous-dependencies": "off",
     "prettier/prettier": ["off", {"endOfLine": "auto"}],
