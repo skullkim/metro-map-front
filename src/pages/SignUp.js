@@ -125,6 +125,7 @@ const SignUp = () => {
 
         <SubmitBtn type='submit' onClick={handleClick}>회원가입</SubmitBtn>
         <LinkMessage to='/sign-in'>회원이신가요? 로그인하세요</LinkMessage>
+        <LinkMessage to='/signup/reauthorization'>회원인증메일 재발송</LinkMessage>
         {successMessage ? <Success>{successMessage}</Success> : null}
         {errorMessage ? <Warning>{errorMessage}</Warning> : null}
       </Form>
