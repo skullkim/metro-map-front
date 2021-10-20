@@ -34,7 +34,7 @@ const EmailReauthorization = () => {
         })
         .catch(err => {
           const {response: {status, data: {error: {message}}}} = err;
-          if(status === 400) {
+          if(status === 400 || status === 409) {
             setErrorMessage(message);
             return;
           }

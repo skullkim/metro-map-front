@@ -17,7 +17,7 @@ function App() {
         <Switch>
           <Route exact path={ClientPath.findPath} component={FindPathPage} />
           <Route exact path={ClientPath.signUp} component={SignUp} />
-          <Route exact path={ClientPath.emailReauthorization} component={EmailVerification} />
+          <Route exact path={ClientPath.emailVerification} component={EmailVerification} />
           <Route exact path={ClientPath.emailReauthorization} component={EmailReauthorization}/>
         </Switch>
       </Router>
