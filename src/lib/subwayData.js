@@ -1,7 +1,7 @@
 export const STATION_CATEGORY = {
-  START_STATION: 'from',
-  STOPOVER_STATION: 'stopover',
-  ARRIVE_STATION: 'to',
+  START_STATION: 'startStation',
+  STOPOVER_STATION: 'stopoverStation',
+  ARRIVE_STATION: 'arriveStation',
 };
 Object.freeze(STATION_CATEGORY);
 
@@ -26,7 +26,29 @@ export const subwayConfig = {
   },
 };
 
-export default {
+
+export const subwayResultConfig = {
+  height: 225,
+  width: 480,
+  staticGraph: true,
+  overflow: 'scrollbar',
+  automaticRearrangeAfterDropNode: false,
+  node: {
+    fontSize: 10,
+    labelProperty: 'name',
+    size: 110,
+    strokeWidth: 4,
+  },
+  link: {
+    renderLabel: true,
+    semanticStrokeWidth: true,
+    height: 500,
+    fontSize: 25,
+    fontWeight: 'bolder',
+  },
+};
+
+const subwayData = {
   nodes: [
     // 1호선
     { id: '101', name: '101', x: 90, y: 590, labelPosition: 'left' },
@@ -163,8 +185,8 @@ export default {
     { color: '#062f92', type: 'STRAIGHT', source: '101', target: '102' },
     { color: '#062f92', type: 'STRAIGHT', source: '103', target: '102' },
     { color: '#062f92', type: 'STRAIGHT', source: '104', target: '103' },
-    { color: '#062f92', type: 'CURVE_SMOOTH', source: '105', target: '104' },
-    { color: '#062f92', type: 'CURVE_SMOOTH', source: '106', target: '105' },
+    { color: '#062f92', type: 'STRAIGHT', source: '105', target: '104' },
+    { color: '#062f92', type: 'STRAIGHT', source: '106', target: '105' },
     { color: '#062f92', type: 'STRAIGHT', source: '106', target: '107' },
     { color: '#062f92', type: 'STRAIGHT', source: '107', target: '108' },
     { color: '#062f92', type: 'STRAIGHT', source: '108', target: '109' },
@@ -172,24 +194,49 @@ export default {
     { color: '#062f92', type: 'STRAIGHT', source: '110', target: '111' },
     { color: '#062f92', type: 'STRAIGHT', source: '111', target: '112' },
     { color: '#062f92', type: 'STRAIGHT', source: '112', target: '113' },
-    { color: '#062f92', type: 'CURVE_SMOOTH', source: '114', target: '113' },
+    { color: '#062f92', type: 'STRAIGHT', source: '114', target: '113' },
     { color: '#062f92', type: 'STRAIGHT', source: '114', target: '115' },
     { color: '#062f92', type: 'STRAIGHT', source: '115', target: '116' },
     { color: '#062f92', type: 'STRAIGHT', source: '116', target: '117' },
-    { color: '#062f92', type: 'CURVE_SMOOTH', source: '118', target: '117' },
+    { color: '#062f92', type: 'STRAIGHT', source: '118', target: '117' },
     { color: '#062f92', type: 'STRAIGHT', source: '118', target: '119' },
     { color: '#062f92', type: 'STRAIGHT', source: '119', target: '120' },
     { color: '#062f92', type: 'STRAIGHT', source: '120', target: '121' },
     { color: '#062f92', type: 'STRAIGHT', source: '121', target: '122' },
     { color: '#062f92', type: 'STRAIGHT', source: '122', target: '123' },
-    { color: '#062f92', type: 'CURVE_SMOOTH', source: '101', target: '123' },
+    { color: '#062f92', type: 'STRAIGHT', source: '101', target: '123' },
+
+    { color: '#0da742', type: 'STRAIGHT', source: '101', target: '201' },
+    { color: '#062f92', type: 'STRAIGHT', source: '102', target: '101' },
+    { color: '#062f92', type: 'STRAIGHT', source: '102', target: '103' },
+    { color: '#062f92', type: 'STRAIGHT', source: '103', target: '104' },
+    { color: '#062f92', type: 'STRAIGHT', source: '104', target: '105' },
+    { color: '#062f92', type: 'STRAIGHT', source: '105', target: '106' },
+    { color: '#062f92', type: 'STRAIGHT', source: '107', target: '106' },
+    { color: '#062f92', type: 'STRAIGHT', source: '108', target: '107' },
+    { color: '#062f92', type: 'STRAIGHT', source: '109', target: '108' },
+    { color: '#062f92', type: 'STRAIGHT', source: '110', target: '109' },
+    { color: '#062f92', type: 'STRAIGHT', source: '111', target: '110' },
+    { color: '#062f92', type: 'STRAIGHT', source: '112', target: '111' },
+    { color: '#062f92', type: 'STRAIGHT', source: '113', target: '112' },
+    { color: '#062f92', type: 'STRAIGHT', source: '113', target: '114' },
+    { color: '#062f92', type: 'STRAIGHT', source: '115', target: '114' },
+    { color: '#062f92', type: 'STRAIGHT', source: '116', target: '115' },
+    { color: '#062f92', type: 'STRAIGHT', source: '117', target: '116' },
+    { color: '#062f92', type: 'STRAIGHT', source: '117', target: '118' },
+    { color: '#062f92', type: 'STRAIGHT', source: '119', target: '118' },
+    { color: '#062f92', type: 'STRAIGHT', source: '120', target: '119' },
+    { color: '#062f92', type: 'STRAIGHT', source: '121', target: '120' },
+    { color: '#062f92', type: 'STRAIGHT', source: '122', target: '121' },
+    { color: '#062f92', type: 'STRAIGHT', source: '123', target: '122' },
+    { color: '#062f92', type: 'STRAIGHT', source: '123', target: '101' },
 
     // 2호선
     { color: '#0da742', type: 'STRAIGHT', source: '201', target: '202' },
     { color: '#0da742', type: 'STRAIGHT', source: '202', target: '203' },
     { color: '#0da742', type: 'STRAIGHT', source: '203', target: '204' },
-    { color: '#0da742', type: 'CURVE_SMOOTH', source: '204', target: '205' },
-    { color: '#0da742', type: 'CURVE_SMOOTH', source: '205', target: '206' },
+    { color: '#0da742', type: 'STRAIGHT', source: '204', target: '205' },
+    { color: '#0da742', type: 'STRAIGHT', source: '205', target: '206' },
     { color: '#0da742', type: 'STRAIGHT', source: '206', target: '207' },
     { color: '#0da742', type: 'STRAIGHT', source: '207', target: '208' },
     { color: '#0da742', type: 'STRAIGHT', source: '208', target: '209' },
@@ -202,6 +249,24 @@ export default {
     { color: '#0da742', type: 'STRAIGHT', source: '215', target: '216' },
     { color: '#0da742', type: 'STRAIGHT', source: '216', target: '217' },
 
+    { color: '#0da742', type: 'STRAIGHT', source: '202', target: '201' },
+    { color: '#0da742', type: 'STRAIGHT', source: '203', target: '202' },
+    { color: '#0da742', type: 'STRAIGHT', source: '204', target: '203' },
+    { color: '#0da742', type: 'STRAIGHT', source: '205', target: '204' },
+    { color: '#0da742', type: 'STRAIGHT', source: '206', target: '205' },
+    { color: '#0da742', type: 'STRAIGHT', source: '207', target: '206' },
+    { color: '#0da742', type: 'STRAIGHT', source: '208', target: '207' },
+    { color: '#0da742', type: 'STRAIGHT', source: '209', target: '208' },
+    { color: '#0da742', type: 'STRAIGHT', source: '210', target: '209' },
+    { color: '#0da742', type: 'STRAIGHT', source: '211', target: '210' },
+    { color: '#0da742', type: 'STRAIGHT', source: '212', target: '211' },
+    { color: '#0da742', type: 'STRAIGHT', source: '213', target: '212' },
+    { color: '#0da742', type: 'STRAIGHT', source: '214', target: '213' },
+    { color: '#0da742', type: 'STRAIGHT', source: '215', target: '214' },
+    { color: '#0da742', type: 'STRAIGHT', source: '216', target: '215' },
+    { color: '#0da742', type: 'STRAIGHT', source: '217', target: '216' },
+
+
     // 3호선
     { color: '#e98503', type: 'STRAIGHT', source: '207', target: '301' },
     { color: '#e98503', type: 'STRAIGHT', source: '301', target: '302' },
@@ -213,6 +278,18 @@ export default {
     { color: '#e98503', type: 'STRAIGHT', source: '306', target: '307' },
     { color: '#e98503', type: 'STRAIGHT', source: '307', target: '308' },
     { color: '#e98503', type: 'STRAIGHT', source: '308', target: '107' },
+
+    { color: '#e98503', type: 'STRAIGHT', source: '301', target: '207' },
+    { color: '#e98503', type: 'STRAIGHT', source: '302', target: '301' },
+    { color: '#e98503', type: 'STRAIGHT', source: '303', target: '302' },
+    { color: '#e98503', type: 'STRAIGHT', source: '304', target: '303' },
+    { color: '#e98503', type: 'STRAIGHT', source: '123', target: '304' },
+    { color: '#e98503', type: 'STRAIGHT', source: '305', target: '123' },
+    { color: '#e98503', type: 'STRAIGHT', source: '306', target: '305' },
+    { color: '#e98503', type: 'STRAIGHT', source: '307', target: '306' },
+    { color: '#e98503', type: 'STRAIGHT', source: '308', target: '307' },
+    { color: '#e98503', type: 'STRAIGHT', source: '107', target: '308' },
+
 
     // 4호선
     { color: '#08a7e5', type: 'STRAIGHT', source: '104', target: '401' },
@@ -236,6 +313,28 @@ export default {
     { color: '#08a7e5', type: 'STRAIGHT', source: '416', target: '417' },
     { color: '#08a7e5', type: 'STRAIGHT', source: '417', target: '216' },
 
+    { color: '#08a7e5', type: 'STRAIGHT', source: '401', target: '104' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '307', target: '401' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '402', target: '307' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '403', target: '402' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '404', target: '403' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '405', target: '404' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '406', target: '405' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '407', target: '406' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '115', target: '407' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '408', target: '115' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '409', target: '408' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '410', target: '409' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '411', target: '410' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '412', target: '411' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '413', target: '412' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '414', target: '413' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '415', target: '414' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '416', target: '415' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '417', target: '416' },
+    { color: '#08a7e5', type: 'STRAIGHT', source: '216', target: '417' },
+
+
 
     // 5호선
     { color: '#a95094', type: 'STRAIGHT', source: '209', target: '501' },
@@ -248,6 +347,18 @@ export default {
     { color: '#a95094', type: 'STRAIGHT', source: '506', target: '403' },
     { color: '#a95094', type: 'STRAIGHT', source: '403', target: '507' },
     { color: '#a95094', type: 'STRAIGHT', source: '507', target: '109' },
+
+    { color: '#a95094', type: 'STRAIGHT', source: '501', target: '209' },
+    { color: '#a95094', type: 'STRAIGHT', source: '502', target: '501' },
+    { color: '#a95094', type: 'STRAIGHT', source: '503', target: '502' },
+    { color: '#a95094', type: 'STRAIGHT', source: '504', target: '503' },
+    { color: '#a95094', type: 'STRAIGHT', source: '122', target: '504' },
+    { color: '#a95094', type: 'STRAIGHT', source: '505', target: '122' },
+    { color: '#a95094', type: 'STRAIGHT', source: '506', target: '505' },
+    { color: '#a95094', type: 'STRAIGHT', source: '403', target: '506' },
+    { color: '#a95094', type: 'STRAIGHT', source: '507', target: '403' },
+    { color: '#a95094', type: 'STRAIGHT', source: '109', target: '507' },
+
 
 
     // 6호선
@@ -273,11 +384,38 @@ export default {
     { color: '#cf8e19', type: 'STRAIGHT', source: '619', target: '620' },
     { color: '#cf8e19', type: 'STRAIGHT', source: '620', target: '621' },
     { color: '#cf8e19', type: 'STRAIGHT', source: '621', target: '622' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '604', target: '603' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '611', target: '610' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '616', target: '615' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '601', target: '622' },
 
-    { color: '#cf8e19', type: 'CURVE_SMOOTH', source: '604', target: '603' },
-    { color: '#cf8e19', type: 'CURVE_SMOOTH', source: '611', target: '610' },
-    { color: '#cf8e19', type: 'CURVE_SMOOTH', source: '616', target: '615' },
-    { color: '#cf8e19', type: 'CURVE_SMOOTH', source: '601', target: '622' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '602', target: '601' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '121', target: '602' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '603', target: '121' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '605', target: '604' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '606', target: '605' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '116', target: '606' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '607', target: '116' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '608', target: '607' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '609', target: '608' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '412', target: '609' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '610', target: '412' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '612', target: '611' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '613', target: '612' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '614', target: '613' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '615', target: '614' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '417', target: '616' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '617', target: '417' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '618', target: '617' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '619', target: '618' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '620', target: '619' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '621', target: '620' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '622', target: '621' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '603', target: '604' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '610', target: '611' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '615', target: '616' },
+    { color: '#cf8e19', type: 'STRAIGHT', source: '622', target: '601' },
+
 
     // 7호선
     { color: '#657930', type: 'STRAIGHT', source: '202', target: '303' },
@@ -293,6 +431,20 @@ export default {
     { color: '#657930', type: 'STRAIGHT', source: '416', target: '707' },
     { color: '#657930', type: 'STRAIGHT', source: '707', target: '614' },
 
+    { color: '#657930', type: 'STRAIGHT', source: '303', target: '202' },
+    { color: '#657930', type: 'STRAIGHT', source: '503', target: '303' },
+    { color: '#657930', type: 'STRAIGHT', source: '601', target: '503' },
+    { color: '#657930', type: 'STRAIGHT', source: '701', target: '601' },
+    { color: '#657930', type: 'STRAIGHT', source: '702', target: '701' },
+    { color: '#657930', type: 'STRAIGHT', source: '703', target: '702' },
+    { color: '#657930', type: 'STRAIGHT', source: '704', target: '703' },
+    { color: '#657930', type: 'STRAIGHT', source: '705', target: '704' },
+    { color: '#657930', type: 'STRAIGHT', source: '706', target: '705' },
+    { color: '#657930', type: 'STRAIGHT', source: '416', target: '706' },
+    { color: '#657930', type: 'STRAIGHT', source: '707', target: '416' },
+    { color: '#657930', type: 'STRAIGHT', source: '614', target: '707' },
+
+
     // 8호선
     { color: '#e74d6d', type: 'STRAIGHT', source: '113', target: '801' },
     { color: '#e74d6d', type: 'STRAIGHT', source: '801', target: '802' },
@@ -306,6 +458,19 @@ export default {
     { color: '#e74d6d', type: 'STRAIGHT', source: '705', target: '618' },
     { color: '#e74d6d', type: 'STRAIGHT', source: '618', target: '214' },
 
+    { color: '#e74d6d', type: 'STRAIGHT', source: '801', target: '113' },
+    { color: '#e74d6d', type: 'STRAIGHT', source: '802', target: '801' },
+    { color: '#e74d6d', type: 'STRAIGHT', source: '803', target: '802' },
+    { color: '#e74d6d', type: 'STRAIGHT', source: '409', target: '803' },
+    { color: '#e74d6d', type: 'STRAIGHT', source: '608', target: '409' },
+    { color: '#e74d6d', type: 'STRAIGHT', source: '804', target: '608' },
+    { color: '#e74d6d', type: 'STRAIGHT', source: '805', target: '804' },
+    { color: '#e74d6d', type: 'STRAIGHT', source: '806', target: '805' },
+    { color: '#e74d6d', type: 'STRAIGHT', source: '705', target: '806' },
+    { color: '#e74d6d', type: 'STRAIGHT', source: '618', target: '705' },
+    { color: '#e74d6d', type: 'STRAIGHT', source: '214', target: '618' },
+
+
     // 9호선
     { color: '#bd951b', type: 'STRAIGHT', source: '112', target: '901' },
     { color: '#bd951b', type: 'STRAIGHT', source: '901', target: '406' },
@@ -317,7 +482,20 @@ export default {
     { color: '#bd951b', type: 'STRAIGHT', source: '702', target: '904' },
     { color: '#bd951b', type: 'STRAIGHT', source: '904', target: '621' },
     { color: '#bd951b', type: 'STRAIGHT', source: '621', target: '211' },
+
+    { color: '#bd951b', type: 'STRAIGHT', source: '901', target: '112' },
+    { color: '#bd951b', type: 'STRAIGHT', source: '406', target: '901' },
+    { color: '#bd951b', type: 'STRAIGHT', source: '605', target: '406' },
+    { color: '#bd951b', type: 'STRAIGHT', source: '902', target: '605' },
+    { color: '#bd951b', type: 'STRAIGHT', source: '119', target: '902' },
+    { color: '#bd951b', type: 'STRAIGHT', source: '903', target: '119' },
+    { color: '#bd951b', type: 'STRAIGHT', source: '702', target: '903' },
+    { color: '#bd951b', type: 'STRAIGHT', source: '904', target: '702' },
+    { color: '#bd951b', type: 'STRAIGHT', source: '621', target: '904' },
+    { color: '#bd951b', type: 'STRAIGHT', source: '211', target: '621' },
   ],
   focusedNodeId: 'nodeIdToTriggerZoomAnimation',
   initialZoom: 0.1,
 };
+
+export default subwayData;

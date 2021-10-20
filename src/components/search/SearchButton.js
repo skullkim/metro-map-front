@@ -1,41 +1,20 @@
-import axios from "axios";
 import {useObserver} from 'mobx-react';
 
-import {PATH} from '../../lib/dataServerPath';
+import validateTarget from "../../lib/validateStation";
 import indexStore from "../../stores/indexStore";
 import {Button as SearchBtn} from "../styles/SearchPathBtn";
 
 const SearchButton = () => {
-  const {SearchTargetStore: targetStore} = indexStore();
+  const {ModalOpenStore: openModal, SearchTargetStore: targetStore} = indexStore();
 
   const handleClick = (event) => {
     event.preventDefault();
+    targetStore.setErrorMessage(validateTarget(targetStore));
+    if(targetStore.errorMessage) {
+      return;
+    }
+    openModal.setSearchResultModal(true);
 
-    const url = targetStore.stopoverSelected ?
-      `${PATH.MIN_PATH_STOPOVER}${targetStore.target}` :
-      `${PATH.MIN_PATH}${targetStore.target}`;
-
-    const data = targetStore.stopoverSelected ? {
-      from: targetStore.from,
-      stopover: targetStore.stopover,
-      to: targetStore.to,
-    } : {
-      from: targetStore.from,
-      to: targetStore.to,
-    };
-    axios({
-      method: 'GET',
-      url: `${process.env.REACT_APP_SERVER_ORIGIN}${url}`,
-      params: data,
-    })
-      .then((res) => {
-        // eslint-disable-next-line no-console
-        console.log(res);
-      })
-      .catch(err => {
-        // eslint-disable-next-line no-console
-        console.log(err.response);
-      })
   }
 
   return useObserver(() => (

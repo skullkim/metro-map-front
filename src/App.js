@@ -2,8 +2,11 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import HeaderNav from './components/header/HeaderNav';
 import GlobalStyle from './components/styles/GlobalStyle';
-// eslint-disable-next-line import/extensions
-import FindPathPage from './pages/FindPathPage.js';
+import { ClientPath } from "./lib/dataPath";
+import EmailVerification from "./pages/EamilVerification";
+import EmailReauthorization from "./pages/EmailReauthorization";
+import FindPathPage from './pages/FindPathPage';
+import SignUp from './pages/SignUp';
 
 function App() {
   return (
@@ -12,7 +15,10 @@ function App() {
         <GlobalStyle />
         <HeaderNav />
         <Switch>
-          <Route path='/' component={FindPathPage} />
+          <Route exact path={ClientPath.findPath} component={FindPathPage} />
+          <Route exact path={ClientPath.signUp} component={SignUp} />
+          <Route exact path={ClientPath.emailVerification} component={EmailVerification} />
+          <Route exact path={ClientPath.emailReauthorization} component={EmailReauthorization}/>
         </Switch>
       </Router>
     </>

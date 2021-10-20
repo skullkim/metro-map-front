@@ -2,29 +2,34 @@ import {observable} from "mobx";
 
 const SearchTargetStore = observable({
   target: '',
-  from: '',
-  to: '',
-  stopover: '',
+  startStation: '',
+  arriveStation: '',
+  stopoverStation: '',
   stopoverSelected: false,
+  errorMessage: '',
 
   selectTarget(target) {
     this.target = target;
   },
 
-  setFrom(from) {
-    this.from = from;
+  setStartStation(startStation) {
+    this.startStation = startStation;
   },
 
-  setTo(to) {
-    this.to = to;
+  setArriveState(arriveStation) {
+    this.arriveStation = arriveStation;
   },
 
-  setStopover(stopover) {
-    this.stopover = stopover;
+  setStopoverStation(stopoverStation) {
+    this.stopoverStation = stopoverStation;
   },
 
   setStopoverSelected() {
     this.stopoverSelected = !this.stopoverSelected;
+  },
+
+  setErrorMessage(errorMessage) {
+    this.errorMessage = errorMessage;
   }
 
 });
