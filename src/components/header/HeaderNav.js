@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { ClientPath, ImagePath } from "../../lib/dataPath";
@@ -16,6 +16,9 @@ const Logo = styled.img`
   position: absolute;
   top: 15px;
   left: 129px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const NavBar = styled.nav`
@@ -45,9 +48,11 @@ const VerticalLine = styled.div`
 `;
 
 const HeaderNav = () => {
+  const history = useHistory();
+
   return (
     <Header>
-      <Logo src={ImagePath.mainLogo} />
+      <Logo src={ImagePath.mainLogo} onClick={() => history.push(ClientPath.findPath)}/>
       <NavBar>
         <NavItem to={ClientPath.findPath}>길찾기</NavItem>
         <NavItem to='/lost-and-found'>유실물센터</NavItem>
