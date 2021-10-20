@@ -1,4 +1,4 @@
-import { Path } from "./dataServerPath";
+import { ServerPath } from "./dataPath";
 import subwayData from "./subwayData";
 
 export const makePathData = ({stopoverSelected, startStation, stopoverStation, arriveStation}, {cost, distance, time}) => {
@@ -51,8 +51,8 @@ export const makeSubwayPathGraph = (path) => {
 
 export const makeReqUrl = ({stopoverSelected, target}) => {
   return stopoverSelected ?
-    `${Path.minPathStopover}${target}` :
-    `${Path.minPath}${target}`;
+    `${ServerPath.minPathStopover}${target}` :
+    `${ServerPath.minPath}${target}`;
 }
 
 export const makeReqQuery = ({stopoverSelected, startStation, stopoverStation, arriveStation}) => {

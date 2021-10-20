@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import { Success, Warning } from "../components/styles/ResultMessage";
 import { Api } from "../lib/customAxios";
-import {Path} from '../lib/dataServerPath';
+import { ClientPath, ServerPath } from "../lib/dataPath";
 
 const Wrapper = styled.section`
   margin-top: 200px;
@@ -39,7 +39,7 @@ const EmailVerification = () => {
   useEffect(() => {
     Api({
       method: 'GET',
-      url: `${process.env.REACT_APP_SERVER_ORIGIN}${Path.emailVerification}`,
+      url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.emailVerification}`,
       params: {id, key}
     })
       .then(({data: {data: {message}}}) => {
@@ -60,14 +60,14 @@ const EmailVerification = () => {
       {successMessage ?
         <Wrapper>
           <Success>{successMessage}</Success>
-          <RedirectButton to='/signin'>로그인 하기</RedirectButton>
+          <RedirectButton to={ClientPath.signIn}>로그인 하기</RedirectButton>
         </Wrapper> :
         null
       }
       {errorMessage ?
         <Wrapper>
           <Warning>{errorMessage}</Warning>
-          <RedirectButton to='/signup/email/reauthorization'>인증메일 다시 보내기</RedirectButton>
+          <RedirectButton to={ClientPath.emailReauthorization}>인증메일 다시 보내기</RedirectButton>
         </Wrapper> :
         null
       }

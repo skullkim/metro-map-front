@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import HeaderNav from './components/header/HeaderNav';
 import GlobalStyle from './components/styles/GlobalStyle';
+import { ClientPath } from "./lib/dataPath";
 import EmailVerification from "./pages/EamilVerification";
 import EmailReauthorization from "./pages/EmailReauthorization";
 import FindPathPage from './pages/FindPathPage';
@@ -14,10 +15,10 @@ function App() {
         <GlobalStyle />
         <HeaderNav />
         <Switch>
-          <Route exact path='/' component={FindPathPage} />
-          <Route exact path='/sign-up' component={SignUp} />
-          <Route exact path='/signup/email' component={EmailVerification} />
-          <Route exact path='/signup/email/reauthorization' component={EmailReauthorization}/>
+          <Route exact path={ClientPath.findPath} component={FindPathPage} />
+          <Route exact path={ClientPath.signUp} component={SignUp} />
+          <Route exact path={ClientPath.emailReauthorization} component={EmailVerification} />
+          <Route exact path={ClientPath.emailReauthorization} component={EmailReauthorization}/>
         </Switch>
       </Router>
     </>

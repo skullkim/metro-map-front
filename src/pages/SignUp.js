@@ -13,7 +13,7 @@ import {
 } from "../components/styles/Authorization";
 import { Warning, Success } from "../components/styles/ResultMessage";
 import { Api } from "../lib/customAxios";
-import {Path} from '../lib/dataServerPath';
+import { ClientPath, ServerPath } from "../lib/dataPath";
 import { maxLen, regExp, warning } from "../lib/validateUserInfo";
 
 
@@ -50,7 +50,7 @@ const SignUp = () => {
     onSubmit: ({email, password}) => {
       Api({
         method: 'POST',
-        url: `${process.env.REACT_APP_SERVER_ORIGIN}${Path.signUp}`,
+        url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.signUp}`,
         data: {email, password}
       })
         .then(({data: {data: {message}}}) => {
@@ -124,8 +124,8 @@ const SignUp = () => {
         }
 
         <SubmitBtn type='submit' onClick={handleClick}>회원가입</SubmitBtn>
-        <LinkMessage to='/sign-in'>회원이신가요? 로그인하세요</LinkMessage>
-        <LinkMessage to='/signup/email/reauthorization'>회원인증메일 재발송</LinkMessage>
+        <LinkMessage to={ClientPath.signIn}>회원이신가요? 로그인하세요</LinkMessage>
+        <LinkMessage to={ClientPath.emailReauthorization}>회원인증메일 재발송</LinkMessage>
         {successMessage ? <Success>{successMessage}</Success> : null}
         {errorMessage ? <Warning>{errorMessage}</Warning> : null}
       </Form>

@@ -1,6 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { ClientPath, ImagePath } from "../../lib/dataPath";
+
 const Header = styled.header`
   width: 100%;
   height: 85px;
@@ -45,14 +47,14 @@ const VerticalLine = styled.div`
 const HeaderNav = () => {
   return (
     <Header>
-      <Logo src='/logo.svg' />
+      <Logo src={ImagePath.mainLogo} />
       <NavBar>
-        <NavItem to='/'>길찾기</NavItem>
+        <NavItem to={ClientPath.findPath}>길찾기</NavItem>
         <NavItem to='/lost-and-found'>유실물센터</NavItem>
         <NavItem to='/book-mark'>즐겨찾기</NavItem>
         <VerticalLine />
-        <NavItem to='/sign-up'>회원가입</NavItem>
-        <NavItem to='/sign-in'>로그인</NavItem>
+        <NavItem to={ClientPath.signUp}>회원가입</NavItem>
+        <NavItem to={ClientPath.signIn}>로그인</NavItem>
       </NavBar>
     </Header>
   );

@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import {Wrapper, PageTitle, Form, InputTitle, Input, SubmitBtn} from "../components/styles/Authorization";
 import { Success, Warning } from "../components/styles/ResultMessage";
 import { Api } from "../lib/customAxios";
-import { Path } from "../lib/dataServerPath";
+import { ServerPath } from "../lib/dataPath";
 import { maxLen, regExp, warning } from "../lib/validateUserInfo";
 
 const EmailReauthorization = () => {
@@ -26,7 +26,7 @@ const EmailReauthorization = () => {
     onSubmit: ({email}) => {
       Api({
         method: 'POST',
-        url: `${process.env.REACT_APP_SERVER_ORIGIN}${Path.emailReauthorization}`,
+        url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.emailReauthorization}`,
         data: {email}
       })
         .then(({data: {data: {message}}}) => {
