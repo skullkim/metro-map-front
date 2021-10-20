@@ -1,7 +1,9 @@
+import ModalOpenStore from "./modalOpenStore";
 import SearchTargetStore from "./searchTargetStore";
 
 const indexStore = () => ({
   SearchTargetStore,
+  ModalOpenStore,
 });
 
 export default indexStore;
