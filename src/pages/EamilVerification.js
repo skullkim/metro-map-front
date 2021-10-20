@@ -67,7 +67,7 @@ const EmailVerification = () => {
       {errorMessage ?
         <Wrapper>
           <Warning>{errorMessage}</Warning>
-          <RedirectButton to='/signup/reauthorization'>인증메일 다시 보내기</RedirectButton>
+          <RedirectButton to='/signup/email/reauthorization'>인증메일 다시 보내기</RedirectButton>
         </Wrapper> :
         null
       }
