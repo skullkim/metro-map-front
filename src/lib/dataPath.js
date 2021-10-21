@@ -3,7 +3,8 @@ export const ServerPath = {
   minPathStopover: '/path/stopover/',
   signUp: '/authentication/signup',
   emailVerification: '/authentication/signup/email',
-  emailReauthorization: '/authentication/signup/email/reauthorization'
+  emailReauthorization: '/authentication/signup/email/reauthorization',
+  signIn: '/authentication/signin',
 };
 Object.freeze(ServerPath);
 
