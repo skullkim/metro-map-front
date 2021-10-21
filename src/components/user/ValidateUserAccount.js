@@ -1,4 +1,5 @@
 import  {useFormik} from "formik";
+import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import {useCallback, useState} from 'react';
 import { useHistory } from 'react-router-dom';
@@ -8,6 +9,7 @@ import { getAuthenticateUrl } from '../../lib/authenticateData';
 import { Api } from '../../lib/customAxios';
 import { setUserInfo } from '../../lib/localStorage';
 import { maxLen, regExp, warning } from '../../lib/validateUserInfo';
+import indexStore from '../../stores/indexStore';
 import { Form, Input, InputTitle, LinkMessage, PageTitle, SubmitBtn, Wrapper } from '../styles/Authorization';
 import { Success, Warning } from '../styles/ResultMessage';
 
@@ -19,6 +21,7 @@ const ValidateUserAccount = ({authType}) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const history = useHistory();
+  const {Login} = indexStore();
 
   const formik = useFormik({
     initialValues: {
@@ -60,7 +63,8 @@ const ValidateUserAccount = ({authType}) => {
           else {
             const {data: {data: {user_id: userId, accessToken}}} = response;
             setUserInfo(userId, accessToken);
-            history.push('/');
+            Login.setUserId(userId);
+            history.push(`/`);
           }
         })
         .catch(err => {
@@ -162,4 +166,4 @@ ValidateUserAccount.propTypes = {
   authType: PropTypes.objectOf(PropTypes.string).isRequired,
 }
 
-export default ValidateUserAccount;
+export default observer(ValidateUserAccount);

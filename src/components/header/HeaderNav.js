@@ -1,7 +1,11 @@
+import {observer} from 'mobx-react';
+import { useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { ClientPath, ImagePath } from "../../lib/dataPath";
+import { getUserInfo } from '../../lib/localStorage';
+import indexStore from '../../stores/indexStore';
 
 const Header = styled.header`
   width: 100%;
@@ -48,7 +52,9 @@ const VerticalLine = styled.div`
 `;
 
 const HeaderNav = () => {
+  const [userInfo] = useState(getUserInfo());
   const history = useHistory();
+  const {Login} = indexStore();
 
   return (
     <Header>
@@ -58,11 +64,19 @@ const HeaderNav = () => {
         <NavItem to='/lost-and-found'>유실물센터</NavItem>
         <NavItem to='/book-mark'>즐겨찾기</NavItem>
         <VerticalLine />
-        <NavItem to={ClientPath.signUp}>회원가입</NavItem>
-        <NavItem to={ClientPath.signIn}>로그인</NavItem>
+        {!Login.userId && !userInfo.userId ?
+          <>
+            <NavItem to={ClientPath.signUp}>회원가입</NavItem>
+            <NavItem to={ClientPath.signIn}>로그인</NavItem>
+          </> :
+          <>
+            <NavItem to={ClientPath.myPage}>마이페이지</NavItem>
+            <NavItem to={ClientPath.logOut}>로그아웃</NavItem>
+          </>
+        }
       </NavBar>
     </Header>
   );
 };
 
-export default HeaderNav;
+export default observer(HeaderNav);

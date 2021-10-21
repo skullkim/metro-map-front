@@ -14,6 +14,8 @@ export const ClientPath = {
   signIn: '/signin',
   emailVerification: '/signup/email',
   emailReauthorization: '/signup/email/reauthorization',
+  myPage: '/user/',
+  logOut: '/logout',
 }
 Object.freeze(ClientPath);
 
