@@ -57,10 +57,12 @@ const SignUp = () => {
           setSuccessMessage(message);
         })
         .catch(err => {
-          const {response: {status, data: {error: {message}}}} = err;
-          if(status === 400) {
-            setErrorMessage(message);
-            return;
+          if(err.response) {
+            const {response: {status, data: {error: {message}}}} = err;
+            if(status === 400) {
+              setErrorMessage(message);
+              return;
+            }
           }
           return err;
         })

@@ -6,6 +6,7 @@ import { ClientPath } from "./lib/dataPath";
 import EmailVerification from "./pages/EamilVerification";
 import EmailReauthorization from "./pages/EmailReauthorization";
 import FindPathPage from './pages/FindPathPage';
+import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route exact path={ClientPath.signUp} component={SignUp} />
           <Route exact path={ClientPath.emailVerification} component={EmailVerification} />
           <Route exact path={ClientPath.emailReauthorization} component={EmailReauthorization}/>
+          <Route path={ClientPath.signIn} component={SignIn}/>
         </Switch>
       </Router>
     </>
