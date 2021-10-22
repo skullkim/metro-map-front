@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { ClientPath, ImagePath } from "../../lib/dataPath";
 import { getUserInfo } from '../../lib/localStorage';
 import indexStore from '../../stores/indexStore';
+import Logout from '../user/Logout';
 
 const Header = styled.header`
   width: 100%;
@@ -75,7 +76,7 @@ const HeaderNav = () => {
           </> :
           <>
             <NavItem to={ClientPath.myPage}>마이페이지</NavItem>
-            <NavItem to={ClientPath.logOut}>로그아웃</NavItem>
+            <Logout />
           </>
         }
       </NavBar>
