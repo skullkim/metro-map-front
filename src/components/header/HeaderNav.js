@@ -1,10 +1,8 @@
 import {observer} from 'mobx-react';
-import { useEffect, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { ClientPath, ImagePath } from "../../lib/dataPath";
-import { getUserInfo } from '../../lib/localStorage';
 import indexStore from '../../stores/indexStore';
 import Logout from '../user/Logout';
 
@@ -53,13 +51,8 @@ const VerticalLine = styled.div`
 `;
 
 const HeaderNav = () => {
-  const [userInfo, setUserInfo] = useState('');
   const history = useHistory();
   const {Login} = indexStore();
-
-  useEffect(() => {
-    setUserInfo(getUserInfo());
-  }, [Login.userId])
 
   return (
     <Header>
@@ -69,7 +62,7 @@ const HeaderNav = () => {
         <NavItem to='/lost-and-found'>유실물센터</NavItem>
         <NavItem to='/book-mark'>즐겨찾기</NavItem>
         <VerticalLine />
-        {!Login.userId && !userInfo?
+        {!Login.userId ?
           <>
             <NavItem to={ClientPath.signUp}>회원가입</NavItem>
             <NavItem to={ClientPath.signIn}>로그인</NavItem>

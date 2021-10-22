@@ -5,6 +5,7 @@ export const ServerPath = {
   emailVerification: '/authentication/signup/email',
   emailReauthorization: '/authentication/signup/email/reauthorization',
   signIn: '/authentication/signin',
+  logOut: '/authentication/logout',
 };
 Object.freeze(ServerPath);
 

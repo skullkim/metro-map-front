@@ -7,3 +7,7 @@ export const setUserInfo = (userId, accessToken) => {
     userId, accessToken
   }));
 }
+
+export const removeUserInfo = () => {
+  localStorage.removeItem(`${process.env.REACT_APP_USER_INFO}`);
+}
