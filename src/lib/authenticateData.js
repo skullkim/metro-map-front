@@ -1,8 +1,15 @@
 import { ClientPath, ServerPath } from './dataPath';
 
 export const authType = {
+  signUp: 'signUp',
+  emailReauthorization: 'email',
+  signIn: 'signIn',
+};
+Object.freeze(authType);
+
+export const authData = {
   signUp: {
-    type: 'signUp',
+    type: authType.signUp,
     title: '회원가입',
     LinkMessage1: '회원이신가요? 로그인하세요',
     LinkMessage2: '회원인증메일 발송',
@@ -11,7 +18,7 @@ export const authType = {
     submitBtn: '회원가입',
   },
   emailReauthorization: {
-    type: 'email',
+    type: authType.emailReauthorization,
     title: '인증 이메일 재발송',
     LinkMessage1: '',
     LinkMessage2: '',
@@ -20,7 +27,7 @@ export const authType = {
     submitBtn: '회원인증메일 재발송',
   },
   signIn: {
-    type: 'signIn',
+    type: authType.signIn,
     title: '로그인',
     LinkMessage1: '회원이 아니신가요? 가입하세요',
     LinkMessage2: '회원인증메일 발송',
@@ -32,11 +39,11 @@ export const authType = {
 
 export const getAuthenticateUrl = (authenticateType) => {
   switch(authenticateType) {
-    case 'signUp':
+    case authType.signUp:
       return `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.signUp}`;
-    case 'email':
+    case authType.emailReauthorization:
       return `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.emailReauthorization}`;
-    case 'signIn':
+    case authType.signIn:
       return `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.signIn}`;
     default:
       throw new Error('invalid authenticateType');

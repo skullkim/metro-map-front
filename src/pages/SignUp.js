@@ -20,10 +20,10 @@
 
 
 import ValidateUserAccount from '../components/user/ValidateUserAccount';
-import { authType } from '../lib/authenticateData';
+import { authData } from '../lib/authenticateData';
 
 const SignUp = () => {
-  return <ValidateUserAccount authType={authType.signUp} />
+  return <ValidateUserAccount authData={authData.signUp} />
 };
 
 export default SignUp;

@@ -5,7 +5,7 @@ import {useCallback, useState} from 'react';
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 
-import { getAuthenticateUrl } from '../../lib/authenticateData';
+import { authType, getAuthenticateUrl } from '../../lib/authenticateData';
 import { Api } from '../../lib/customAxios';
 import { setUserInfo } from '../../lib/localStorage';
 import { maxLen, regExp, warning } from '../../lib/validateUserInfo';
@@ -15,8 +15,8 @@ import { Success, Warning } from '../styles/ResultMessage';
 
 
 
-const ValidateUserAccount = ({authType}) => {
-  const {type, title, LinkMessage1, LinkMessage2, LinkMessage1Path, LinkMessage2Path, submitBtn} = authType;
+const ValidateUserAccount = ({authData}) => {
+  const {type, title, LinkMessage1, LinkMessage2, LinkMessage1Path, LinkMessage2Path, submitBtn} = authData;
   const [currentFocused, setCurrentFocused] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -35,12 +35,12 @@ const ValidateUserAccount = ({authType}) => {
         .matches(regExp.email, {message: `${warning.invalidEmail}`})
         .max(maxLen, `${warning.maxLen}`),
 
-      password: type !== 'email' ? yup.string()
+      password: type !== authType.emailReauthorization ? yup.string()
         .required(`${warning.emptyPassword}`)
         .matches(regExp.password, {message: `${warning.invalidPassword}`})
         .max(maxLen, `${warning.maxLen}`) : '',
 
-      verifyPassword: type === 'signUp' ? yup.string()
+      verifyPassword: type === authType.signUp ? yup.string()
         .required(`${warning.emptyPassword}`)
         .matches(regExp.password, {message: `${warning.invalidPassword}`})
         .max(maxLen, `${warning.maxLen}`)
@@ -48,7 +48,7 @@ const ValidateUserAccount = ({authType}) => {
     }),
 
     onSubmit: ({email, password}) => {
-      const data = type === 'email' ? {email} : {email, password};
+      const data = type === authType.emailReauthorization ? {email} : {email, password};
       const url = getAuthenticateUrl(type);
       Api({
         method: 'POST',
@@ -56,7 +56,7 @@ const ValidateUserAccount = ({authType}) => {
         data,
       })
         .then((response) => {
-          if(type !== 'signIn') {
+          if(type !== authType.signIn) {
             const {data: {data: {message}}} = response;
             setSuccessMessage(message);
           }
@@ -71,8 +71,8 @@ const ValidateUserAccount = ({authType}) => {
           if(err.response) {
             const {response: {status, data: {error: {message}}}} = err;
             if(status === 400 ||
-                (type === 'email' && status === 409) ||
-                (type === 'signIn' && status === 401)) {
+                (type === authType.emailReauthorization && status === 409) ||
+                (type === authType.signIn && status === 401)) {
               setErrorMessage(message);
               return;
             }
@@ -114,7 +114,7 @@ const ValidateUserAccount = ({authType}) => {
           null
         }
 
-        {type !== 'email' ?
+        {type !== authType.emailReauthorization ?
           <>
             <InputTitle>비밀번호</InputTitle>
             <Input
@@ -130,7 +130,7 @@ const ValidateUserAccount = ({authType}) => {
           </>
           : null}
 
-        {type === 'signUp' ?
+        {type === authType.signUp ?
           <>
             <InputTitle>비밀번호 확인</InputTitle>
             <Input
@@ -148,7 +148,7 @@ const ValidateUserAccount = ({authType}) => {
 
         <SubmitBtn type='submit' onClick={handleClick}>{submitBtn}</SubmitBtn>
 
-        {type !== 'email' ?
+        {type !== authType.emailReauthorization ?
           <>
             <LinkMessage to={LinkMessage1Path}>{LinkMessage1}</LinkMessage>
             <LinkMessage to={LinkMessage2Path}>{LinkMessage2}</LinkMessage>
@@ -163,7 +163,7 @@ const ValidateUserAccount = ({authType}) => {
 };
 
 ValidateUserAccount.propTypes = {
-  authType: PropTypes.objectOf(PropTypes.string).isRequired,
+  authData: PropTypes.objectOf(PropTypes.string).isRequired,
 }
 
 export default observer(ValidateUserAccount);

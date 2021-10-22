@@ -1,5 +1,5 @@
 import {observer} from 'mobx-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -52,9 +52,13 @@ const VerticalLine = styled.div`
 `;
 
 const HeaderNav = () => {
-  const [userInfo] = useState(getUserInfo());
+  const [userInfo, setUserInfo] = useState('');
   const history = useHistory();
   const {Login} = indexStore();
+
+  useEffect(() => {
+    setUserInfo(getUserInfo());
+  }, [Login.userId])
 
   return (
     <Header>
@@ -64,7 +68,7 @@ const HeaderNav = () => {
         <NavItem to='/lost-and-found'>유실물센터</NavItem>
         <NavItem to='/book-mark'>즐겨찾기</NavItem>
         <VerticalLine />
-        {!Login.userId && !userInfo.userId ?
+        {!Login.userId && !userInfo?
           <>
             <NavItem to={ClientPath.signUp}>회원가입</NavItem>
             <NavItem to={ClientPath.signIn}>로그인</NavItem>
