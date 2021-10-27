@@ -1,8 +1,8 @@
-import axios from 'axios';
 import {useEffect, useState} from 'react';
 import { Graph } from "react-d3-graph";
 import styled, { css } from "styled-components";
 
+import { Api } from '../../../lib/customAxios';
 import { makePathData, makeSubwayPathGraph, makeReqQuery, makeReqUrl } from "../../../lib/makeRequest";
 import { subwayResultConfig } from "../../../lib/subwayData";
 import indexStore from "../../../stores/indexStore";
@@ -48,7 +48,7 @@ const SearchResultData = () => {
     const url = makeReqUrl(targetStore);
     const data = makeReqQuery(targetStore);
 
-    axios({
+    Api({
       method: 'GET',
       url: `${process.env.REACT_APP_SERVER_ORIGIN}${url}`,
       params: data,
@@ -57,10 +57,7 @@ const SearchResultData = () => {
         setSearchResult(makePathData(targetStore, resultData));
         setSearchedPath(makeSubwayPathGraph(resultData.path));
       })
-      .catch(err => {
-        // eslint-disable-next-line no-console
-        console.log(err.response);
-      })
+      .catch(err => err);
   }, []);
 
   return (
