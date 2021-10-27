@@ -6,6 +6,7 @@ export const ServerPath = {
   emailReauthorization: '/authentication/signup/email/reauthorization',
   signIn: '/authentication/signin',
   logOut: '/authentication/logout',
+  reissuingAccessToken: '/authentication/refresh-token',
 };
 Object.freeze(ServerPath);
 
