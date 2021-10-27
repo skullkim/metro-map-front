@@ -1,4 +1,4 @@
-import {useObserver} from 'mobx-react';
+import { observer } from 'mobx-react';
 import styled, {css} from "styled-components";
 
 import indexStore from "../../stores/indexStore";
@@ -18,14 +18,14 @@ const SelectStopoverButton = () => {
     targetStore.setStopoverSelected();
   }
 
-  return useObserver(() => (
+  return (
     <SelectStopover
       onClick={handleChange}
       useStopover={targetStore.stopoverSelected}
     >
       경유지
     </SelectStopover>
-  ))
+  );
 }
 
-export default SelectStopoverButton;
+export default observer(SelectStopoverButton);

@@ -1,4 +1,4 @@
-import {useObserver} from 'mobx-react';
+import { observer } from 'mobx-react';
 import styled from 'styled-components';
 
 import {STATION_CATEGORY} from "../../lib/subwayData";
@@ -47,7 +47,7 @@ const InputOperationTarget = () => {
     }
   }
 
-  return useObserver(() => (
+  return (
     <InputBox>
       <InputLabel>
         출발
@@ -79,7 +79,7 @@ const InputOperationTarget = () => {
         />
       </InputLabel>
     </InputBox>
-  ));
+  );
 };
 
-export default InputOperationTarget;
+export default observer(InputOperationTarget);

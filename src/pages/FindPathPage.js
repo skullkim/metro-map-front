@@ -1,4 +1,4 @@
-import {useObserver} from 'mobx-react';
+import { observer } from 'mobx-react';
 
 import SubwayMap from '../components/map/SubwayMap';
 import SearchResultModal from "../components/modal/searchResultModal/SearchResultModal";
@@ -8,13 +8,13 @@ import indexStore from "../stores/indexStore";
 const FindPathPage = () => {
   const {ModalOpenStore: openModal} = indexStore();
 
-  return useObserver(() => (
+  return (
     <>
       <SearchContainer />
       <SubwayMap />
       {openModal.searchResultModal && <SearchResultModal />}
     </>
-  ));
+  );
 };
 
-export default FindPathPage;
+export default observer(FindPathPage);
