@@ -3,9 +3,17 @@ import styled from 'styled-components';
 
 import subwayData, { subwayConfig } from '../../lib/subwayData';
 
+const Wrapper = styled.div`
+  width: 100%;
+  height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const MapContainer = styled.div`
   width: 1020px;
-  height: 430px;
+  height: 800px;
   overflow-x: scroll;
   overflow-y: scroll;
   margin-top: ${props => props.mapMarginTop};
@@ -23,11 +31,11 @@ const MapContainer = styled.div`
 
 const SubwayMap = () => {
   return (
-    <>
+    <Wrapper>
       <MapContainer margin-top='3%' margin-left='10.5%'>
         <Graph id='graph-id' data={subwayData} config={subwayConfig} />
       </MapContainer>
-    </>
+    </Wrapper>
   );
 };
 
