@@ -7,8 +7,10 @@ const ModalBox = styled.section`
   height: 460px;
   width: 551px;
   position: absolute;
-  top: 25%;
-  left: 35%;
+  top: 50%;
+  left: 50%;
+  margin-left: -275.5px;
+  margin-top: -230px;
   display: flex;
   flex-direction: column;
   align-items: center;

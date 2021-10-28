@@ -1,9 +1,11 @@
 import {observer} from 'mobx-react';
+import {useCallback} from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { ClientPath, ImagePath } from "../../lib/dataPath";
 import indexStore from '../../stores/indexStore';
+import SearchHistoryModal from '../modal/searchHistoryModal/SearchHistoryModal';
 import Logout from '../user/Logout';
 
 const Header = styled.header`
@@ -26,7 +28,7 @@ const Logo = styled.img`
 
 const NavBar = styled.nav`
   height: 18px;
-  width: 490px;
+  width: 550px;
   position: absolute;
   top: 34px;
   right: 76px;
@@ -50,9 +52,24 @@ const VerticalLine = styled.div`
   margin-left: 2px;
 `;
 
+const OpenSearchHistory = styled.button`
+  margin-top: 0;
+  margin-right: 25px;
+  font-size: 18px;
+  font-weight: bold;
+  word-break: keep-all;
+  padding: 0;
+  border: 0;
+`;
+
 const HeaderNav = () => {
   const history = useHistory();
-  const {Login} = indexStore();
+  const {Login, ModalOpenStore: openSearchHistoryModal} = indexStore();
+
+  const handleClick = useCallback((event) => {
+    event.preventDefault();
+    openSearchHistoryModal.setSearchHistoryModal(true);
+  }, []);
 
   return (
     <Header>
@@ -61,6 +78,12 @@ const HeaderNav = () => {
         <NavItem to={ClientPath.findPath}>길찾기</NavItem>
         <NavItem to='/lost-and-found'>유실물센터</NavItem>
         <NavItem to='/book-mark'>즐겨찾기</NavItem>
+        <OpenSearchHistory
+          type='submit'
+          onClick={handleClick}
+        >
+          검색기록
+        </OpenSearchHistory>
         <VerticalLine />
         {!Login.userId ?
           <>
@@ -73,6 +96,7 @@ const HeaderNav = () => {
           </>
         }
       </NavBar>
+      {openSearchHistoryModal.searchHistoryModal && <SearchHistoryModal />}
     </Header>
   );
 };
