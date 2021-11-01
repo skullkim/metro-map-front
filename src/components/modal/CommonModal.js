@@ -11,12 +11,11 @@ const ModalBox = styled.section`
   left: 50%;
   margin-left: -275.5px;
   margin-top: -230px;
+  border-radius: 15px;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  border-radius: 15px;
-  background-color: white;
 `;
 
 const ModalOverlay = styled.div`
@@ -34,13 +33,15 @@ const ModalTitle = styled.b`
   font-size: 30px;
 `;
 
+const DataTitle = styled.b`
+  font-size: 18px;
+`;
+
 const CommonModalBox = ({children}) => {
   return (
     <Portal>
       <ModalOverlay>
-        <ModalBox>
-          {children}
-        </ModalBox>
+        {children}
       </ModalOverlay>
     </Portal>
   );
@@ -50,4 +51,4 @@ CommonModalBox.propTypes = {
   children: PropTypes.element.isRequired,
 }
 
-export {ModalTitle, CommonModalBox};
+export {ModalBox, ModalTitle, DataTitle, CommonModalBox};

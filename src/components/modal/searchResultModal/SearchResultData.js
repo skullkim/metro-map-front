@@ -6,6 +6,7 @@ import { Api } from '../../../lib/customAxios';
 import { makePathData, makeSubwayPathGraph, makeReqQuery, makeReqUrl } from "../../../lib/makeRequest";
 import { subwayResultConfig } from "../../../lib/subwayData";
 import indexStore from "../../../stores/indexStore";
+import { DataTitle } from '../CommonModal';
 
 const ResultBox = styled.section`
   height: 256px;
@@ -31,9 +32,6 @@ const DataBox = styled.div`
   `};
 `;
 
-const DataTitle = styled.b`
-  font-size: 18px;
-`;
 
 const Data = styled(DataTitle)``;
 
