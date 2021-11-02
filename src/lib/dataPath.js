@@ -22,6 +22,6 @@ export const ClientPath = {
 Object.freeze(ClientPath);
 
 export const ImagePath = {
-  mainLogo: '/logo.svg',
+  mainLogo: '/img/logo.svg',
 };
 Object.freeze(ImagePath);

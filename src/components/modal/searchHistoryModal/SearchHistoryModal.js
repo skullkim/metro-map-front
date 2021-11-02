@@ -18,20 +18,28 @@ const ModalTitleBox = styled.section`
 const StartArriveTitle = styled(DataTitle)`
   margin-top: 30px;
   align-self: center;
+  font-size: 20px;
 `;
 
 const HistoryBox = styled.section`
   height: 200px;
   width: 200px;
   position: relative;
-  top: 40px;
+  top: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
   
   ${DataTitle} {
-    margin-top: 10px;
+    margin-top: 15px;
+    margin-right: 10px;
   }
+`;
+
+const DataBox = styled.div`
+  width: 150px;
+  display: flex;
+  justify-content: center;
 `;
 
 const CloseButton = styled.section`
@@ -48,13 +56,34 @@ const SearchHistoryModal = () => {
           <StartArriveTitle>출발역 / 도착역</StartArriveTitle>
         </ModalTitleBox>
         <HistoryBox>
-          <DataTitle>120--&gt;806</DataTitle>
-          <DataTitle>120--&gt;806</DataTitle>
-          <DataTitle>120--&gt;806</DataTitle>
-          <DataTitle>120--&gt;806</DataTitle>
-          <DataTitle>120--&gt;806</DataTitle>
-          <DataTitle>120--&gt;806</DataTitle>
-          <DataTitle>120--&gt;806</DataTitle>
+          <DataBox>
+            <DataTitle>120--&gt;806</DataTitle>
+            <img src='img/bookmark.svg' alt='bookmark' />
+          </DataBox>
+          <DataBox>
+            <DataTitle>120--&gt;806</DataTitle>
+            <img src='img/unbookmark.svg' alt='bookmark' />
+          </DataBox>
+          <DataBox>
+            <DataTitle>120--&gt;806</DataTitle>
+            <img src='img/bookmark.svg' alt='bookmark' />
+          </DataBox>
+          <DataBox>
+            <DataTitle>120--&gt;806</DataTitle>
+            <img src='img/bookmark.svg' alt='bookmark' />
+          </DataBox>
+          <DataBox>
+            <DataTitle>120--&gt;806</DataTitle>
+            <img src='img/bookmark.svg' alt='bookmark' />
+          </DataBox>
+          <DataBox>
+            <DataTitle>120--&gt;806</DataTitle>
+            <img src='img/bookmark.svg' alt='bookmark' />
+          </DataBox>
+          <DataBox>
+            <DataTitle>120--&gt;806</DataTitle>
+            <img src='img/bookmark.svg' alt='bookmark' />
+          </DataBox>
         </HistoryBox>
         <CloseButton>
           <ModalCloseButton />
