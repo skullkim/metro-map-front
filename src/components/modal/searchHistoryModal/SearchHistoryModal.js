@@ -80,9 +80,20 @@ const SearchHistoryModal = () => {
       ModalOpenStore.setSearchResultModal(true);
     }
     else {
-
       // eslint-disable-next-line no-console
       console.log(className, pathInfo);
+      TokenApi({
+        method: 'PUT',
+        url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.searchHistoryBookmark}/${pathInfo.id}`,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        data: {
+          pathInfo,
+        }
+      })
+        .then(res => res)
+        .catch(err => err);
     }
   }, [])
 
