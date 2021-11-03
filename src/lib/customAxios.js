@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-import { getUserInfo } from './localStorage';
-// eslint-disable-next-line import/no-cycle
-import reissuingAccessToken from './reissuanceToken';
+import { ServerPath } from './dataPath';
+import { getUserInfo, removeUserInfo, setUserInfo } from './localStorage';
 
 export const Api = axios.create({
   baseURL: `${process.env.REACT_APP_SERVER_ORIGIN}`,
@@ -33,27 +32,24 @@ TokenApi.interceptors.response.use(
   res => res,
   async (err) => {
     const originalRequest = err.config;
-    const {response: {status}, _retry: retry} = originalRequest;
 
-    if(status === 403 && !retry) {
+    // eslint-disable-next-line no-underscore-dangle
+    if(err.response.status === 403 && !originalRequest._retry) {
       // eslint-disable-next-line no-underscore-dangle
       originalRequest._retry = true;
-      try {
-        await reissuingAccessToken();
 
-        setTimeout(() => {
-          const {accessToken} = getUserInfo();
+      const {userId} = getUserInfo();
+
+      return Api({
+        method: "POST",
+        url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.reissuingAccessToken}`,
+      })
+        .then(({data: {data: {accessToken}}}) => {
+          removeUserInfo();
+          setUserInfo(userId, accessToken);
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;
           return axios(originalRequest);
-        }, 1);
-      }
-      catch(error) {
-        if(error.response && err.response.data) {
-          return Promise.reject(err.response.data);
-        }
-
-        return Promise.reject(error);
-      }
+        })
     }
 
     return Promise.reject(err);

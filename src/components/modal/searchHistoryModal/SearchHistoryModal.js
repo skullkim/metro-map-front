@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react';
 import {useEffect, useState} from 'react';
 import styled from 'styled-components';
 
@@ -5,6 +6,7 @@ import TokenApi from '../../../lib/customAxios';
 import { ServerPath } from '../../../lib/dataPath';
 import { getUserInfo } from '../../../lib/localStorage';
 import { SearchStationOption } from '../../../lib/subwayData';
+import indexStore from '../../../stores/indexStore';
 import { ModalBox, CommonModalBox, ModalTitle } from '../CommonModal';
 import ModalCloseButton from '../ModalCloseButton';
 
@@ -20,7 +22,7 @@ const ModalTitleBox = styled.section`
   }
 `;
 
-const StartArriveTitle = styled.th`
+const SearchHistoryListTitle = styled.th`
   align-self: center;
   font-size: 20px;
   font-weight: bold;
@@ -54,6 +56,8 @@ const CloseButton = styled.section`
 const SearchHistoryModal = () => {
   const [searchHistory, setSearchHistory] = useState([]);
   const {userId, accessToken} = getUserInfo();
+  // eslint-disable-next-line no-unused-vars
+  const {SearchTargetStore} = indexStore();
 
   useEffect(() => {
     TokenApi({
@@ -69,6 +73,17 @@ const SearchHistoryModal = () => {
       .catch(err => err);
   }, []);
 
+  const handleClick = ({target: {className}}, pathInfo) => {
+    if(className !== 'bookmark') {
+      SearchTargetStore.setTargetInfo(pathInfo);
+    }
+    else {
+
+      // eslint-disable-next-line no-console
+      console.log(className, pathInfo);
+    }
+  }
+
   return (
     <CommonModalBox>
       <ModalBox>
@@ -78,17 +93,18 @@ const SearchHistoryModal = () => {
         <HistoryTable bold='1'>
           <thead>
             <tr>
-              <StartArriveTitle>최소비용</StartArriveTitle>
-              <StartArriveTitle>출발역 / 도착역</StartArriveTitle>
-              <StartArriveTitle>경유지</StartArriveTitle>
-              <StartArriveTitle>즐겨찾기</StartArriveTitle>
+              <SearchHistoryListTitle>최소비용</SearchHistoryListTitle>
+              <SearchHistoryListTitle>출발역 / 도착역</SearchHistoryListTitle>
+              <SearchHistoryListTitle>경유지</SearchHistoryListTitle>
+              <SearchHistoryListTitle>즐겨찾기</SearchHistoryListTitle>
             </tr>
           </thead>
           <tbody>
             {searchHistory.length ? searchHistory.map(({id, from, to, stopover, target, bookmark}) => {
               const bookmarkLogoUrl = `img/${bookmark ? 'bookmark.svg' : 'unbookmark.svg'}`;
+              const pathInfo = {id, from, to, stopover, target};
               return (
-                <TableRow key={id}>
+                <TableRow key={id} onClick={(event) => handleClick(event, pathInfo)}>
                   <TableData>
                     {SearchStationOption[target]}
                   </TableData>
@@ -98,11 +114,11 @@ const SearchHistoryModal = () => {
                   <TableData>
                     {stopover || 'X'}
                   </TableData>
-                  <TableData>
-                    <img src={bookmarkLogoUrl} alt='bookmark' />
+                  <TableData className='bookmark'>
+                    <img src={bookmarkLogoUrl} alt='bookmark' className='bookmark' />
                   </TableData>
                 </TableRow>
-              )
+              );
             }) : null}
           </tbody>
         </HistoryTable>
@@ -114,4 +130,4 @@ const SearchHistoryModal = () => {
   )
 }
 
-export default SearchHistoryModal;
+export default observer(SearchHistoryModal);
