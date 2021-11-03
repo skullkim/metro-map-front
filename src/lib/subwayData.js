@@ -5,6 +5,13 @@ export const STATION_CATEGORY = {
 };
 Object.freeze(STATION_CATEGORY);
 
+export const SearchStationOption = {
+  time: '시간',
+  cost: '비용',
+  distance: '거리',
+};
+Object.freeze(SearchStationOption);
+
 export const subwayConfig = {
   height: 700,
   width: 1000,

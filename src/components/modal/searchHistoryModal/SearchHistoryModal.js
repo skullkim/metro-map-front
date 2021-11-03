@@ -1,5 +1,10 @@
+import {useEffect, useState} from 'react';
 import styled from 'styled-components';
 
+import TokenApi from '../../../lib/customAxios';
+import { ServerPath } from '../../../lib/dataPath';
+import { getUserInfo } from '../../../lib/localStorage';
+import { SearchStationOption } from '../../../lib/subwayData';
 import { ModalBox, CommonModalBox, ModalTitle } from '../CommonModal';
 import ModalCloseButton from '../ModalCloseButton';
 
@@ -47,6 +52,23 @@ const CloseButton = styled.section`
 `;
 
 const SearchHistoryModal = () => {
+  const [searchHistory, setSearchHistory] = useState([]);
+  const {userId, accessToken} = getUserInfo();
+
+  useEffect(() => {
+    TokenApi({
+      method: 'GET',
+      url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.searchHistory}/${userId}`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      }
+    })
+      .then(({data: {data: {search_history: userSearchHistory}}}) => {
+        setSearchHistory(userSearchHistory);
+      })
+      .catch(err => err);
+  }, []);
+
   return (
     <CommonModalBox>
       <ModalBox>
@@ -63,90 +85,25 @@ const SearchHistoryModal = () => {
             </tr>
           </thead>
           <tbody>
-            <TableRow>
-              <TableData>
-                시간
-              </TableData>
-              <TableData>
-                120--&gt;806
-              </TableData>
-              <TableData>
-                102
-              </TableData>
-              <TableData>
-                <img src='img/bookmark.svg' alt='bookmark' />
-              </TableData>
-            </TableRow>
-            <TableRow>
-              <TableData>
-                시간
-              </TableData>
-              <TableData>
-                120--&gt;806
-              </TableData>
-              <TableData>
-                102
-              </TableData>
-              <TableData>
-                <img src='img/bookmark.svg' alt='bookmark' />
-              </TableData>
-            </TableRow>
-            <TableRow>
-              <TableData>
-                시간
-              </TableData>
-              <TableData>
-                120--&gt;806
-              </TableData>
-              <TableData>
-                102
-              </TableData>
-              <TableData>
-                <img src='img/bookmark.svg' alt='bookmark' />
-              </TableData>
-            </TableRow>
-            <TableRow>
-              <TableData>
-                시간
-              </TableData>
-              <TableData>
-                120--&gt;806
-              </TableData>
-              <TableData>
-                102
-              </TableData>
-              <TableData>
-                <img src='img/bookmark.svg' alt='bookmark' />
-              </TableData>
-            </TableRow>
-            <TableRow>
-              <TableData>
-                시간
-              </TableData>
-              <TableData>
-                120--&gt;806
-              </TableData>
-              <TableData>
-                102
-              </TableData>
-              <TableData>
-                <img src='img/bookmark.svg' alt='bookmark' />
-              </TableData>
-            </TableRow>
-            <TableRow>
-              <TableData>
-                시간
-              </TableData>
-              <TableData>
-                120--&gt;806
-              </TableData>
-              <TableData>
-                X
-              </TableData>
-              <TableData>
-                <img src='img/unbookmark.svg' alt='bookmark' />
-              </TableData>
-            </TableRow>
+            {searchHistory.length ? searchHistory.map(({id, from, to, stopover, target, bookmark}) => {
+              const bookmarkLogoUrl = `img/${bookmark ? 'bookmark.svg' : 'unbookmark.svg'}`;
+              return (
+                <TableRow key={id}>
+                  <TableData>
+                    {SearchStationOption[target]}
+                  </TableData>
+                  <TableData>
+                    {from}--&gt;{to}
+                  </TableData>
+                  <TableData>
+                    {stopover || 'X'}
+                  </TableData>
+                  <TableData>
+                    <img src={bookmarkLogoUrl} alt='bookmark' />
+                  </TableData>
+                </TableRow>
+              )
+            }) : null}
           </tbody>
         </HistoryTable>
         <CloseButton>

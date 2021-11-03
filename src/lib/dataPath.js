@@ -7,6 +7,7 @@ export const ServerPath = {
   signIn: '/authentication/signin',
   logOut: '/authentication/logout',
   reissuingAccessToken: '/authentication/refresh-token',
+  searchHistory: '/search-history/user',
 };
 Object.freeze(ServerPath);
 
