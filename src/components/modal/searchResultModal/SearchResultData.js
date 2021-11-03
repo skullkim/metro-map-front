@@ -2,7 +2,8 @@ import {useEffect, useState} from 'react';
 import { Graph } from "react-d3-graph";
 import styled, { css } from "styled-components";
 
-import { Api } from '../../../lib/customAxios';
+import TokenApi from '../../../lib/customAxios';
+import { getUserInfo } from '../../../lib/localStorage';
 import { makePathData, makeSubwayPathGraph, makeReqQuery, makeReqUrl } from "../../../lib/makeRequest";
 import { subwayResultConfig } from "../../../lib/subwayData";
 import indexStore from "../../../stores/indexStore";
@@ -45,10 +46,14 @@ const SearchResultData = () => {
   useEffect(() => {
     const url = makeReqUrl(targetStore);
     const data = makeReqQuery(targetStore);
+    const {accessToken} = getUserInfo() ?? '';
 
-    Api({
+    TokenApi({
       method: 'GET',
       url: `${process.env.REACT_APP_SERVER_ORIGIN}${url}`,
+      headers: {
+        Authorization: `${accessToken ? `Bearer ${accessToken}` : ''}`,
+      },
       params: data,
     })
       .then(({data: {data: resultData}}) => {
