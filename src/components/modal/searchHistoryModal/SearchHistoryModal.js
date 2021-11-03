@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useCallback} from 'react';
 import styled from 'styled-components';
 
 import TokenApi from '../../../lib/customAxios';
@@ -57,7 +57,7 @@ const SearchHistoryModal = () => {
   const [searchHistory, setSearchHistory] = useState([]);
   const {userId, accessToken} = getUserInfo();
   // eslint-disable-next-line no-unused-vars
-  const {SearchTargetStore} = indexStore();
+  const {SearchTargetStore, ModalOpenStore} = indexStore();
 
   useEffect(() => {
     TokenApi({
@@ -73,16 +73,18 @@ const SearchHistoryModal = () => {
       .catch(err => err);
   }, []);
 
-  const handleClick = ({target: {className}}, pathInfo) => {
-    if(className !== 'bookmark') {
+  const handleClick = useCallback(({target: {className}}, pathInfo) => {
+    if(className !== 'bookmark' && pathInfo) {
       SearchTargetStore.setTargetInfo(pathInfo);
+      ModalOpenStore.setSearchHistoryModal(false);
+      ModalOpenStore.setSearchResultModal(true);
     }
     else {
 
       // eslint-disable-next-line no-console
       console.log(className, pathInfo);
     }
-  }
+  }, [])
 
   return (
     <CommonModalBox>

@@ -9,13 +9,11 @@ const SearchTargetStore = observable({
   errorMessage: '',
 
   setTargetInfo(pathInfo) {
-    this.setTargetInfo(pathInfo.target);
-    this.setArriveState(pathInfo.from);
-    this.setArriveState(pathInfo.to);
-    if(pathInfo.stopover) {
-      this.setStopoverSelected();
-      this.stopoverStation(pathInfo.stopover);
-    }
+    this.target = pathInfo.target;
+    this.startStation = pathInfo.from;
+    this.arriveStation = pathInfo.to;
+    this.stopoverStation = pathInfo.stopover;
+    this.stopoverSelected = !!pathInfo.stopover;
   },
 
   selectTarget(target) {
