@@ -1,9 +1,10 @@
 import { observer } from 'mobx-react';
 import {useEffect, useState, useCallback} from 'react';
+import {Redirect} from 'react-router-dom';
 import styled from 'styled-components';
 
 import TokenApi from '../../../lib/customAxios';
-import { ServerPath } from '../../../lib/dataPath';
+import { ClientPath, ServerPath } from '../../../lib/dataPath';
 import { getUserInfo } from '../../../lib/localStorage';
 import { SearchStationOption } from '../../../lib/subwayData';
 import indexStore from '../../../stores/indexStore';
@@ -56,15 +57,20 @@ const CloseButton = styled.section`
 const SearchHistoryModal = () => {
   const [searchHistory, setSearchHistory] = useState([]);
   const [updateBookMark, setUpdateBookMark] = useState(false);
-  const {userId, accessToken} = getUserInfo();
+  const userInfo = getUserInfo();
   const {SearchTargetStore, ModalOpenStore} = indexStore();
 
   useEffect(() => {
+    if(!userInfo) {
+      ModalOpenStore.setSearchHistoryModal(false);
+      return;
+    }
+
     TokenApi({
       method: 'GET',
-      url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.searchHistory}/${userId}`,
+      url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.searchHistory}/${userInfo.userId}`,
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${userInfo.accessToken}`,
       }
     })
       .then(({data: {data: {search_history: userSearchHistory}}}) => {
@@ -84,7 +90,7 @@ const SearchHistoryModal = () => {
         method: 'PUT',
         url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.searchHistoryBookmark}/${pathInfo.id}`,
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${userInfo.accessToken}`,
         },
         data: {
           pathInfo,
@@ -96,49 +102,55 @@ const SearchHistoryModal = () => {
   }, [updateBookMark])
 
   return (
-    <CommonModalBox>
-      <ModalBox>
-        <ModalTitleBox>
-          <ModalTitle>최근 검색 내역</ModalTitle>
-        </ModalTitleBox>
-        <HistoryTable bold='1'>
-          <thead>
-            <tr>
-              <SearchHistoryListTitle>최소비용</SearchHistoryListTitle>
-              <SearchHistoryListTitle>출발역 / 도착역</SearchHistoryListTitle>
-              <SearchHistoryListTitle>경유지</SearchHistoryListTitle>
-              <SearchHistoryListTitle>즐겨찾기</SearchHistoryListTitle>
-            </tr>
-          </thead>
-          <tbody>
-            {searchHistory.length ? searchHistory.map(({id, from, to, stopover, target, bookmark}) => {
-              const bookmarkLogoUrl = `img/${bookmark ? 'bookmark.svg' : 'unbookmark.svg'}`;
-              const pathInfo = {id, from, to, stopover, target};
-              return (
-                <TableRow key={id} onClick={(event) => handleClick(event, pathInfo)}>
-                  <TableData>
-                    {SearchStationOption[target]}
-                  </TableData>
-                  <TableData>
-                    {from}--&gt;{to}
-                  </TableData>
-                  <TableData>
-                    {stopover || 'X'}
-                  </TableData>
-                  <TableData className='bookmark'>
-                    <img src={bookmarkLogoUrl} alt='bookmark' className='bookmark' />
-                  </TableData>
-                </TableRow>
-              );
-            }) : null}
-          </tbody>
-        </HistoryTable>
-        <CloseButton>
-          <ModalCloseButton />
-        </CloseButton>
-      </ModalBox>
-    </CommonModalBox>
-  )
+    <>
+      {userInfo ?
+        <CommonModalBox>
+          <ModalBox>
+            <ModalTitleBox>
+              <ModalTitle>최근 검색 내역</ModalTitle>
+            </ModalTitleBox>
+            <HistoryTable bold='1'>
+              <thead>
+                <tr>
+                  <SearchHistoryListTitle>최소비용</SearchHistoryListTitle>
+                  <SearchHistoryListTitle>출발역 / 도착역</SearchHistoryListTitle>
+                  <SearchHistoryListTitle>경유지</SearchHistoryListTitle>
+                  <SearchHistoryListTitle>즐겨찾기</SearchHistoryListTitle>
+                </tr>
+              </thead>
+              <tbody>
+                {searchHistory.length ? searchHistory.map(({id, from, to, stopover, target, bookmark}) => {
+                  const bookmarkLogoUrl = `img/${bookmark ? 'bookmark.svg' : 'unbookmark.svg'}`;
+                  const pathInfo = {id, from, to, stopover, target};
+                  return (
+                    <TableRow key={id} onClick={(event) => handleClick(event, pathInfo)}>
+                      <TableData>
+                        {SearchStationOption[target]}
+                      </TableData>
+                      <TableData>
+                        {from}--&gt;{to}
+                      </TableData>
+                      <TableData>
+                        {stopover || 'X'}
+                      </TableData>
+                      <TableData className='bookmark'>
+                        <img src={bookmarkLogoUrl} alt='bookmark' className='bookmark' />
+                      </TableData>
+                    </TableRow>
+                  );
+                }) : null}
+              </tbody>
+            </HistoryTable>
+            <CloseButton>
+              <ModalCloseButton />
+            </CloseButton>
+          </ModalBox>
+        </CommonModalBox>
+        :
+        <Redirect to={ClientPath.signIn}/>
+      }
+    </>
+  );
 }
 
 export default observer(SearchHistoryModal);
