@@ -55,8 +55,8 @@ const CloseButton = styled.section`
 
 const SearchHistoryModal = () => {
   const [searchHistory, setSearchHistory] = useState([]);
+  const [updateBookMark, setUpdateBookMark] = useState(false);
   const {userId, accessToken} = getUserInfo();
-  // eslint-disable-next-line no-unused-vars
   const {SearchTargetStore, ModalOpenStore} = indexStore();
 
   useEffect(() => {
@@ -71,7 +71,7 @@ const SearchHistoryModal = () => {
         setSearchHistory(userSearchHistory);
       })
       .catch(err => err);
-  }, []);
+  }, [updateBookMark]);
 
   const handleClick = useCallback(({target: {className}}, pathInfo) => {
     if(className !== 'bookmark' && pathInfo) {
@@ -80,8 +80,6 @@ const SearchHistoryModal = () => {
       ModalOpenStore.setSearchResultModal(true);
     }
     else {
-      // eslint-disable-next-line no-console
-      console.log(className, pathInfo);
       TokenApi({
         method: 'PUT',
         url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.searchHistoryBookmark}/${pathInfo.id}`,
@@ -92,10 +90,10 @@ const SearchHistoryModal = () => {
           pathInfo,
         }
       })
-        .then(res => res)
+        .then(() => setUpdateBookMark(!updateBookMark))
         .catch(err => err);
     }
-  }, [])
+  }, [updateBookMark])
 
   return (
     <CommonModalBox>
