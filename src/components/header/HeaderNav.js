@@ -1,9 +1,10 @@
 import {observer} from 'mobx-react';
-import {useCallback} from 'react';
+import {useCallback, useState} from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { ClientPath, ImagePath } from "../../lib/dataPath";
+import { getUserInfo } from '../../lib/localStorage';
 import indexStore from '../../stores/indexStore';
 import SearchHistoryModal from '../modal/searchHistoryModal/SearchHistoryModal';
 import Logout from '../user/Logout';
@@ -65,6 +66,11 @@ const OpenSearchHistory = styled.button`
 const HeaderNav = () => {
   const history = useHistory();
   const {Login, ModalOpenStore: openSearchHistoryModal} = indexStore();
+  const userInfo = getUserInfo();
+  const [bookmarkPath] = useState(`${userInfo ? 
+    `${ClientPath.bookmark}/${userInfo.userId}` : 
+    ClientPath.signIn
+  }`);
 
   const handleClick = useCallback((event) => {
     event.preventDefault();
@@ -77,7 +83,7 @@ const HeaderNav = () => {
       <NavBar>
         <NavItem to={ClientPath.findPath}>길찾기</NavItem>
         <NavItem to='/lost-and-found'>유실물센터</NavItem>
-        <NavItem to='/book-mark'>즐겨찾기</NavItem>
+        <NavItem to={bookmarkPath}>즐겨찾기</NavItem>
         <OpenSearchHistory
           type='submit'
           onClick={handleClick}
