@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-import { ModalBox, CommonModalBox, ModalTitle } from '../CommonModal';
+import PageTitle from '../../styles/PageTitle';
+import { ModalBox, CommonModalBox } from '../CommonModal';
 import ModalCloseButton from "../ModalCloseButton";
 
 import SearchResultData from "./SearchResultData";
@@ -13,7 +14,7 @@ const SearchResultModal = () => {
   return (
     <CommonModalBox>
       <SearchResultModalBox>
-        <ModalTitle>검색 결과</ModalTitle>
+        <PageTitle>검색 결과</PageTitle>
         <SearchResultData />
         <ModalCloseButton />
       </SearchResultModalBox>

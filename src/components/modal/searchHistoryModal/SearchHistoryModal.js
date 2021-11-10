@@ -7,8 +7,9 @@ import TokenApi from '../../../lib/customAxios';
 import { ClientPath, ServerPath } from '../../../lib/dataPath';
 import { getUserInfo } from '../../../lib/localStorage';
 import indexStore from '../../../stores/indexStore';
+import PageTitle from '../../styles/PageTitle';
 import PathTable from '../../user/PathTable';
-import { ModalBox, CommonModalBox, ModalTitle } from '../CommonModal';
+import { ModalBox, CommonModalBox } from '../CommonModal';
 import ModalCloseButton from '../ModalCloseButton';
 
 const ModalTitleBox = styled.section`
@@ -18,7 +19,7 @@ const ModalTitleBox = styled.section`
   position: relative;
   top: 20px;
   
-  ${ModalTitle} {
+  ${PageTitle} {
     align-self: center;
   }
 `;
@@ -81,7 +82,7 @@ const SearchHistoryModal = () => {
         <CommonModalBox>
           <ModalBox>
             <ModalTitleBox>
-              <ModalTitle>최근 검색 내역</ModalTitle>
+              <PageTitle>최근 검색 내역</PageTitle>
             </ModalTitleBox>
             <PathTable pathLists={searchHistory} handleClick={handleClick} />
             <CloseButton>

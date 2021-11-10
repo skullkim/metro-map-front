@@ -29,10 +29,6 @@ const ModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
 `;
 
-const ModalTitle = styled.b`
-  font-size: 30px;
-`;
-
 const DataTitle = styled.b`
   font-size: 18px;
 `;
@@ -51,4 +47,4 @@ CommonModalBox.propTypes = {
   children: PropTypes.element.isRequired,
 }
 
-export {ModalBox, ModalTitle, DataTitle, CommonModalBox};
+export {ModalBox, DataTitle, CommonModalBox};
