@@ -8,7 +8,8 @@ export const ServerPath = {
   logOut: '/authentication/logout',
   reissuingAccessToken: '/authentication/refresh-token',
   searchHistory: '/search-history/user',
-  searchHistoryBookmark: '/search-history/bookmark'
+  searchHistoryBookmark: '/search-history/bookmark',
+  getUserBookMark: '/bookmark/user',
 };
 Object.freeze(ServerPath);
 
