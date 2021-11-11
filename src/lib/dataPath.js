@@ -27,7 +27,10 @@ export const ClientPath = {
   emailReauthorization: '/signup/email/reauthorization',
   myPage: '/user/',
   logOut: '/logout',
-  bookmark: '/bookmark'
+  bookmark: '/bookmark',
+  lostAndFound: '/lost-and-found',
+  storeBox: '/store-box',
+  userComplain: '/complain',
 }
 Object.freeze(ClientPath);
 

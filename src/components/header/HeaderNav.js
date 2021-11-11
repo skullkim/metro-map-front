@@ -33,7 +33,7 @@ const NavBar = styled.nav`
   width: 550px;
   position: absolute;
   top: 34px;
-  right: 76px;
+  right: 270px;
   display: flex;
   align-items: center;
 `;
@@ -89,7 +89,9 @@ const HeaderNav = () => {
       <Logo src={ImagePath.mainLogo} onClick={() => history.push(ClientPath.findPath)}/>
       <NavBar>
         <NavItem to={ClientPath.findPath}>길찾기</NavItem>
-        <NavItem to='/lost-and-found'>유실물센터</NavItem>
+        <NavItem to={ClientPath.storeBox}>물품보관함</NavItem>
+        <NavItem to={ClientPath.lostAndFound}>유실물센터</NavItem>
+        <NavItem to={ClientPath.userComplain}>민원</NavItem>
         <NavItem to={bookmarkPath}>즐겨찾기</NavItem>
         <OpenSearchHistory
           type='submit'
