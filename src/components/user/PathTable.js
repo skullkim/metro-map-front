@@ -1,43 +1,17 @@
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 import { SearchStationOption } from '../../lib/subwayData';
-
-const PathListTitle = styled.th`
-  align-self: center;
-  font-size: 20px;
-  font-weight: bold;
-`;
-
-const PathListTable = styled.table`
-  height: 300px;
-  width: 400px;
-  position: relative;
-  top: 30px;
-`;
-
-
-const TableData = styled.td`
-  height: 10px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 20px
-`;
-
-const TableRow = styled.tr`
-  height: 10px;
-`;
-
+import { ListTable, ListTitle, TableData, TableRow } from '../styles/Table';
 
 const PathTable = ({pathLists, handleClick}) => {
   return (
-    <PathListTable>
+    <ListTable>
       <thead>
         <tr>
-          <PathListTitle>최소비용</PathListTitle>
-          <PathListTitle>출발역 / 도착역</PathListTitle>
-          <PathListTitle>경유지</PathListTitle>
-          <PathListTitle>즐겨찾기</PathListTitle>
+          <ListTitle>최소비용</ListTitle>
+          <ListTitle>출발역 / 도착역</ListTitle>
+          <ListTitle>경유지</ListTitle>
+          <ListTitle>즐겨찾기</ListTitle>
         </tr>
       </thead>
       <tbody>
@@ -62,7 +36,7 @@ const PathTable = ({pathLists, handleClick}) => {
           );
         }) : null}
       </tbody>
-    </PathListTable>
+    </ListTable>
   );
 }
 
