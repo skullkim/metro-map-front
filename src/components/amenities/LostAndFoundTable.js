@@ -1,10 +1,11 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 
 import { Api } from '../../lib/customAxios';
 import { ServerPath } from '../../lib/dataPath';
 import { ListTable, ListTitle, TableData, TableRow } from '../styles/Table';
 
 const LostAndFoundTable = () => {
+  const [lostAndFoundList, setLostAndFoundList] = useState([]);
 
   useEffect(() => {
     Api({
@@ -12,8 +13,7 @@ const LostAndFoundTable = () => {
       url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.getLostAndFoundLost}`,
     })
       .then(({data: {data}}) => {
-        // eslint-disable-next-line no-console
-        console.log(data);
+        setLostAndFoundList(data);
       })
       .catch(err => err);
   })
@@ -28,11 +28,16 @@ const LostAndFoundTable = () => {
         </tr>
       </thead>
       <tbody>
-        <TableRow>
-          <TableData>105</TableData>
-          <TableData>12-345-6789</TableData>
-          <TableData>09:00~18:00</TableData>
-        </TableRow>
+        {lostAndFoundList.length ?
+          lostAndFoundList.map(({id, station, callNumber, operatingHour}) => (
+            <TableRow key={id}>
+              <TableData>{station}</TableData>
+              <TableData>{callNumber}</TableData>
+              <TableData>{operatingHour}</TableData>
+            </TableRow>
+          )) : null
+        }
+        
       </tbody>
     </ListTable>
   );
