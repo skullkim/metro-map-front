@@ -38,7 +38,13 @@ const NavBar = styled.nav`
   align-items: center;
 `;
 
-const NavItem = styled(NavLink)`
+const NavItem = styled(NavLink).attrs({
+  exact: true,
+  activeStyle: {
+    color: '#2867B2',
+    textDecoration: 'underline'
+  }
+})`
   margin-top: 0;
   margin-right: 25px;
   font-size: 18px;
