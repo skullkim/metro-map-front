@@ -1,15 +1,25 @@
+import { observer } from 'mobx-react';
 import {useEffect, useState} from 'react';
+import styled from 'styled-components';
 
 import { Wrapper } from '../components/styles/Authorization';
 import PageTitle from '../components/styles/PageTitle';
+import PathTable from '../components/user/PathTable';
 import TokenApi from '../lib/customAxios';
 import { ServerPath } from '../lib/dataPath';
 import { getUserInfo } from '../lib/localStorage';
+import indexStore from '../stores/indexStore';
+
+const BookmarkBox = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const Bookmark = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [bookmark, setBookmark] = useState([]);
+  const [bookmarks, setBookmarks] = useState([]);
   const userInfo = getUserInfo();
+  const {SearchTargetStore, ModalOpenStore} = indexStore();
 
   useEffect(() => {
     if(!userInfo) return;
@@ -22,16 +32,26 @@ const Bookmark = () => {
       }
     })
       .then(({data: {data}}) => {
-        setBookmark(data);
+        setBookmarks(data);
       })
       .catch(err => err);
   }, []);
 
+  const handleClick = ({target: {className}}, pathInfo) => {
+    if(className !== 'bookmark' && pathInfo) {
+      SearchTargetStore.setTargetInfo(pathInfo);
+      ModalOpenStore.setSearchResultModal(true);
+    }
+  }
+
   return (
     <Wrapper>
-      <PageTitle>즐겨찾기 목록</PageTitle>
+      <BookmarkBox>
+        <PageTitle>즐겨찾기 목록</PageTitle>
+        <PathTable pathLists={bookmarks} handleClick={handleClick} />
+      </BookmarkBox>
     </Wrapper>
   );
 };
 
-export default Bookmark;
+export default observer(Bookmark);

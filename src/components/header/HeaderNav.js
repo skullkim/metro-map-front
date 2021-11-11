@@ -7,6 +7,7 @@ import { ClientPath, ImagePath } from "../../lib/dataPath";
 import { getUserInfo } from '../../lib/localStorage';
 import indexStore from '../../stores/indexStore';
 import SearchHistoryModal from '../modal/searchHistoryModal/SearchHistoryModal';
+import SearchResultModal from '../modal/searchResultModal/SearchResultModal';
 import Logout from '../user/Logout';
 
 const Header = styled.header`
@@ -65,7 +66,7 @@ const OpenSearchHistory = styled.button`
 
 const HeaderNav = () => {
   const history = useHistory();
-  const {Login, ModalOpenStore: openSearchHistoryModal} = indexStore();
+  const {Login, ModalOpenStore: openModal} = indexStore();
   const userInfo = getUserInfo();
   const [bookmarkPath] = useState(`${userInfo ? 
     `${ClientPath.bookmark}/${userInfo.userId}` : 
@@ -74,7 +75,7 @@ const HeaderNav = () => {
 
   const handleClick = useCallback((event) => {
     event.preventDefault();
-    openSearchHistoryModal.setSearchHistoryModal(true);
+    openModal.setSearchHistoryModal(true);
   }, []);
 
   return (
@@ -102,7 +103,8 @@ const HeaderNav = () => {
           </>
         }
       </NavBar>
-      {openSearchHistoryModal.searchHistoryModal && <SearchHistoryModal />}
+      {openModal.searchHistoryModal && <SearchHistoryModal />}
+      {openModal.searchResultModal && <SearchResultModal />}
     </Header>
   );
 };
