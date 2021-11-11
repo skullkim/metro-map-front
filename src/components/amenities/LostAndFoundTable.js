@@ -1,8 +1,14 @@
 import {useEffect, useState} from 'react';
+import styled from 'styled-components';
 
 import { Api } from '../../lib/customAxios';
 import { ServerPath } from '../../lib/dataPath';
 import { ListTable, ListTitle, TableData, TableRow } from '../styles/Table';
+
+const LostAndFoundListTable = styled(ListTable)`
+  height: 450px;
+  width: 400px;
+`;
 
 const LostAndFoundTable = () => {
   const [lostAndFoundList, setLostAndFoundList] = useState([]);
@@ -19,7 +25,7 @@ const LostAndFoundTable = () => {
   })
 
   return (
-    <ListTable>
+    <LostAndFoundListTable>
       <thead>
         <tr>
           <ListTitle>역</ListTitle>
@@ -39,7 +45,7 @@ const LostAndFoundTable = () => {
         }
         
       </tbody>
-    </ListTable>
+    </LostAndFoundListTable>
   );
 }
 
