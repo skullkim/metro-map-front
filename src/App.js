@@ -7,6 +7,7 @@ import Bookmark from './pages/Bookmark';
 import EmailVerification from "./pages/EamilVerification";
 import EmailReauthorization from "./pages/EmailReauthorization";
 import FindPathPage from './pages/FindPathPage';
+import LostAndFound from './pages/LostAndFound';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 
@@ -23,6 +24,7 @@ function App() {
           <Route exact path={ClientPath.emailReauthorization} component={EmailReauthorization}/>
           <Route path={ClientPath.signIn} component={SignIn}/>
           <Route path={ClientPath.bookmark} component={Bookmark} />
+          <Route path={ClientPath.lostAndFound} component={LostAndFound} />
         </Switch>
       </Router>
     </>
