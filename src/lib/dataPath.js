@@ -10,8 +10,14 @@ export const ServerPath = {
   searchHistory: '/search-history/user',
   searchHistoryBookmark: '/search-history/bookmark',
   getUserBookMark: '/bookmark/user',
+  deleteUserBookMarkBaseUrl: '/bookmark',
+  deleteUserBookMarkUrl: '/user',
 };
 Object.freeze(ServerPath);
+
+export const getDeleteUserBookMarkUrl = (bookmarkId, userId) => {
+  return `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.deleteUserBookMarkBaseUrl}/${bookmarkId}${ServerPath.deleteUserBookMarkUrl}/${userId}`;
+}
 
 export const ClientPath = {
   findPath: '/',

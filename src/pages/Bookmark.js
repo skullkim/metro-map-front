@@ -1,12 +1,12 @@
 import { observer } from 'mobx-react';
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useCallback} from 'react';
 import styled from 'styled-components';
 
 import { Wrapper } from '../components/styles/Authorization';
 import PageTitle from '../components/styles/PageTitle';
 import PathTable from '../components/user/PathTable';
 import TokenApi from '../lib/customAxios';
-import { ServerPath } from '../lib/dataPath';
+import { getDeleteUserBookMarkUrl, ServerPath } from '../lib/dataPath';
 import { getUserInfo } from '../lib/localStorage';
 import indexStore from '../stores/indexStore';
 
@@ -18,6 +18,7 @@ const BookmarkBox = styled.section`
 
 const Bookmark = () => {
   const [bookmarks, setBookmarks] = useState([]);
+  const [bookmarkDeleted, setBookmarkDeleted] = useState(false);
   const userInfo = getUserInfo();
   const {SearchTargetStore, ModalOpenStore} = indexStore();
 
@@ -35,14 +36,30 @@ const Bookmark = () => {
         setBookmarks(data);
       })
       .catch(err => err);
-  }, []);
+  }, [bookmarkDeleted]);
 
-  const handleClick = ({target: {className}}, pathInfo) => {
+  const handleClick = useCallback(({target: {className}}, pathInfo) => {
     if(className !== 'bookmark' && pathInfo) {
       SearchTargetStore.setTargetInfo(pathInfo);
       ModalOpenStore.setSearchResultModal(true);
     }
-  }
+    else {
+      TokenApi({
+        method: 'DELETE',
+        url: getDeleteUserBookMarkUrl(pathInfo.id, userInfo.userId),
+        headers: {
+          Authorization: `Bearer ${userInfo.accessToken}`,
+        },
+        data: {
+          pathInfo
+        }
+      })
+        .then(() => {
+          setBookmarkDeleted(!bookmarkDeleted);
+        })
+        .catch(err => err);
+    }
+  }, [bookmarkDeleted]);
 
   return (
     <Wrapper>
