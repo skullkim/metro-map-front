@@ -6,7 +6,6 @@ import { ListTable, ListTitle, TableData, TableRow } from '../styles/Table';
 
 
 const StoreBoxTable = () => {
-  // eslint-disable-next-line no-unused-vars
   const [storeBoxList, setStoreBoxList] = useState([]);
 
   useEffect(() => {
@@ -28,9 +27,13 @@ const StoreBoxTable = () => {
         </tr>
       </thead>
       <tbody>
-        <TableRow>
-          <TableData>203</TableData>
-        </TableRow>
+        {storeBoxList.length ? (
+          storeBoxList.map(({id, station}) => (
+            <TableRow key={id}>
+              <TableData>{station}</TableData>
+            </TableRow>
+          ))
+        ) : null}
       </tbody>
     </ListTable>
   )

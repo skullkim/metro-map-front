@@ -8,6 +8,8 @@ const StoreBoxBox = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  top: -100px;
 `;
 
 const StoreBox = () => {
