@@ -11,6 +11,7 @@ import LostAndFound from './pages/LostAndFound';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import StoreBox from './pages/StoreBox';
+import UserComplain from './pages/userComplain';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path={ClientPath.bookmark} component={Bookmark} />
           <Route path={ClientPath.lostAndFound} component={LostAndFound} />
           <Route path={ClientPath.storeBox} component={StoreBox} />
+          <Route path={ClientPath.userComplain} component={UserComplain} />
         </Switch>
       </Router>
     </>
