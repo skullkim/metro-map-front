@@ -13,6 +13,7 @@ export const ServerPath = {
   deleteUserBookMarkBaseUrl: '/bookmark',
   deleteUserBookMarkUrl: '/user',
   getLostAndFoundLost: '/amenities/lost-and-found',
+  getStoreBoxList: '/amenities/store-box',
 };
 Object.freeze(ServerPath);
 
