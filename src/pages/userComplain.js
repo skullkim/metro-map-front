@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import styled, {css} from 'styled-components';
 
 import { SubmitBtn, Wrapper } from '../components/styles/Authorization';
@@ -34,6 +35,10 @@ const ComplainContext = styled.textarea`
   margin-top: 15px;
 `;
 
+const ComplainContextLength = styled.p`
+  align-self: flex-end;
+`;
+
 const SubmitButton = styled(SubmitBtn)`
   width: 482px;
   font-size: 20px;
@@ -41,6 +46,20 @@ const SubmitButton = styled(SubmitBtn)`
 `;
 
 const UserComplain = () => {
+  const [complainContextLen, setComplainContextLen] = useState(0);
+
+  const handleChange = ({target: {name, value}}) => {
+    switch (name) {
+      case 'complainContext':
+        if(value.length >= 301) break;
+        setComplainContextLen(value.length);
+        break;
+      default:
+        throw new Error('invalid name in UserComplain handleChange')
+
+    }
+  }
+
   return (
     <Wrapper>
       <UserComplainBox>
@@ -58,7 +77,8 @@ const UserComplain = () => {
           <option value='8'>8호선</option>
           <option value='9'>9호선</option>
         </SelectSubwayLine>
-        <ComplainContext />
+        <ComplainContext name='complainContext' onChange={handleChange} maxLength='300' />
+        <ComplainContextLength>{complainContextLen}/300</ComplainContextLength>
         <SubmitButton>민원 접수하기</SubmitButton>
       </UserComplainBox>
     </Wrapper>
