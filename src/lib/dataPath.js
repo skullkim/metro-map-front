@@ -14,6 +14,7 @@ export const ServerPath = {
   deleteUserBookMarkUrl: '/user',
   getLostAndFoundLost: '/amenities/lost-and-found',
   getStoreBoxList: '/amenities/store-box',
+  sendUserComplain: '/amenities/user-complain',
 };
 Object.freeze(ServerPath);
 
