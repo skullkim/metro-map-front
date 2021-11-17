@@ -1,23 +1,17 @@
 import {useFormik} from 'formik';
 import {useState} from 'react';
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
 import * as yup from 'yup';
 
-import { SubmitBtn, Wrapper } from '../components/styles/Authorization';
+import { Wrapper } from '../components/styles/Authorization';
 import PageTitle from '../components/styles/PageTitle';
 import { Success, Warning } from '../components/styles/ResultMessage';
+import { FormInputStyle, InputBox, SubmitButton } from '../components/styles/UserComplainMyPageInput';
 import { Api } from '../lib/customAxios';
 import { ServerPath } from '../lib/dataPath';
 import { userComplainName, complainContextMaxLen, complainSentSuccessfully } from '../lib/formDataInfo';
 import { maxComplainContextLen, maxLen, minLen, regExp, warning } from '../lib/validateUserInfo';
 
-const ComplainInfoInputStyle = css`
-  height: 58px;
-  border: 3px solid #2867B2;
-  border-radius: 10px;
-  margin-top: 15px;
-  font-size: 20px;
-`;
 
 const UserComplainBox = styled.section`
   display: flex;
@@ -25,13 +19,9 @@ const UserComplainBox = styled.section`
   align-items: center;
 `;
 
-const InputEmail = styled.input`
-  width: 473px;
-  ${ComplainInfoInputStyle}
-`
 const SelectSubwayLine = styled.select`
   width: 482px;
-  ${ComplainInfoInputStyle}
+  ${FormInputStyle}
 `;
 
 const ComplainContext = styled.textarea`
@@ -44,12 +34,6 @@ const ComplainContext = styled.textarea`
 
 const ComplainContextLength = styled.p`
   align-self: flex-end;
-`;
-
-const SubmitButton = styled(SubmitBtn)`
-  width: 482px;
-  font-size: 20px;
-  margin-top: 30px;
 `;
 
 const UserComplain = () => {
@@ -131,7 +115,7 @@ const UserComplain = () => {
     <Wrapper>
       <UserComplainBox>
         <PageTitle>소중한 의견을 남겨주세요</PageTitle>
-        <InputEmail
+        <InputBox
           type='text'
           name={userComplainName.email}
           onBlur={handleBlur}
