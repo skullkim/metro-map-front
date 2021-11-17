@@ -8,6 +8,7 @@ import EmailVerification from "./pages/EamilVerification";
 import EmailReauthorization from "./pages/EmailReauthorization";
 import FindPathPage from './pages/FindPathPage';
 import LostAndFound from './pages/LostAndFound';
+import MyPage from './pages/MyPage';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import StoreBox from './pages/StoreBox';
@@ -29,6 +30,7 @@ function App() {
           <Route path={ClientPath.lostAndFound} component={LostAndFound} />
           <Route path={ClientPath.storeBox} component={StoreBox} />
           <Route path={ClientPath.userComplain} component={UserComplain} />
+          <Route path={ClientPath.myPage} component={MyPage} />
         </Switch>
       </Router>
     </>

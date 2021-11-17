@@ -106,7 +106,7 @@ const HeaderNav = () => {
             <NavItem to={ClientPath.signIn}>로그인</NavItem>
           </> :
           <>
-            <NavItem to={ClientPath.myPage}>마이페이지</NavItem>
+            <NavItem to={ClientPath.myPage + userInfo.userId}>마이페이지</NavItem>
             <Logout />
           </>
         }
