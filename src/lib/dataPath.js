@@ -15,11 +15,18 @@ export const ServerPath = {
   getLostAndFoundLost: '/amenities/lost-and-found',
   getStoreBoxList: '/amenities/store-box',
   sendUserComplain: '/amenities/user-complain',
+
+  getUserEmailBaseUrl: '/user',
+  getUserEmailUrl: '/email',
 };
 Object.freeze(ServerPath);
 
 export const getDeleteUserBookMarkUrl = (bookmarkId, userId) => {
   return `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.deleteUserBookMarkBaseUrl}/${bookmarkId}${ServerPath.deleteUserBookMarkUrl}/${userId}`;
+}
+
+export const getUserEmailUrl = (userId) => {
+  return `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.getUserEmailBaseUrl}/${userId}${ServerPath.getUserEmailUrl}`;
 }
 
 export const ClientPath = {
