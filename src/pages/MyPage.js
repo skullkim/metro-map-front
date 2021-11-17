@@ -1,12 +1,16 @@
+import { useFormik } from 'formik';
 import {useEffect, useState} from 'react';
 import styled from 'styled-components';
+import * as yup from 'yup';
 
 import { Wrapper } from '../components/styles/Authorization';
 import PageTitle from '../components/styles/PageTitle';
+import { Warning } from '../components/styles/ResultMessage';
 import { InputBox, SubmitButton } from '../components/styles/UserComplainMyPageInput';
 import TokenApi from '../lib/customAxios';
 import { getUserEmailUrl } from '../lib/dataPath';
 import { getUserInfo } from '../lib/localStorage';
+import { maxLen, regExp, warning } from '../lib/validateUserInfo';
 
 const MyPageBox = styled.section`
   display: flex;
@@ -17,6 +21,7 @@ const MyPageBox = styled.section`
 const MyPage = () => {
   const userInfo = getUserInfo();
   const [userEmail, setUserEmail] = useState('');
+  const [currentFocused, setCurrentFocused] = useState('');
 
   useEffect(() => {
     TokenApi({
@@ -32,6 +37,40 @@ const MyPage = () => {
       .catch(err => err);
   }, []);
 
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      previousPassword: '',
+      newPassword: '',
+      verifyNewPassword: '',
+    },
+    validationSchema: yup.object({
+      email: yup.string()
+        .matches(regExp.email, {message: `${warning.invalidEmail}`})
+        .max(maxLen, `${warning.maxLen}`),
+      previousPassword: yup.string()
+        .matches(regExp.password, {message: `${warning.invalidPassword}`})
+        .max(maxLen, `${warning.maxLen}`),
+      newPassword: yup.string()
+        .matches(regExp.password, {message: `${warning.invalidPassword}`})
+        .max(maxLen, `${warning.maxLen}`),
+      verifyNewPassword: yup.string()
+        .matches(regExp.password, {message: `${warning.invalidPassword}`})
+        .max(maxLen, `${warning.maxLen}`)
+        .oneOf([yup.ref('newPassword')], `${warning.verifyNewPasswordNotEqual}`)
+    }),
+    onSubmit: () => {}
+  });
+
+  const handleChange = (event) => {
+    formik.handleChange(event);
+  }
+
+  const handleBlur = (event) => {
+    const {target: {name}} = event;
+    setCurrentFocused(name);
+    formik.handleBlur(event);
+  }
 
   return (
     <Wrapper>
@@ -39,10 +78,50 @@ const MyPage = () => {
         <PageTitle>나의 정보 수정</PageTitle>
         {userEmail ?
           <>
-            <InputBox type='text' placeholder={userEmail} />
-            <InputBox type='password' placeholder='기존 비밀번호'/>
-            <InputBox type='password' placeholder='새로운 비밀번호'/>
-            <InputBox type='password' placeholder='비밀번호 확인'/>
+            <InputBox
+              type='text'
+              name='email'
+              placeholder={userEmail}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {formik.touched.email && formik.errors.email && currentFocused === 'email' ?
+              <Warning>{formik.errors.email}</Warning> :
+              null
+            }
+            <InputBox
+              type='password'
+              name='previousPassword'
+              placeholder='기존 비밀번호'
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {formik.touched.previousPassword && formik.errors.previousPassword && currentFocused === 'previousPassword' ?
+              <Warning>{formik.errors.previousPassword}</Warning> :
+              null
+            }
+            <InputBox
+              type='password'
+              name='newPassword'
+              placeholder='새로운 비밀번호'
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {formik.touched.newPassword && formik.errors.newPassword && currentFocused === 'newPassword' ?
+              <Warning>{formik.errors.newPassword}</Warning> :
+              null
+            }
+            <InputBox
+              type='password'
+              name='verifyNewPassword'
+              placeholder='비밀번호 확인'
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {formik.touched.verifyNewPassword && formik.errors.verifyNewPassword && currentFocused === 'verifyNewPassword' ?
+              <Warning>{formik.errors.verifyNewPassword}</Warning> :
+              null
+            }
             <SubmitButton>나의 정보 수정하기</SubmitButton>
           </> : null
         }

@@ -8,6 +8,7 @@ export const warning = {
   invalidPassword: '비밀번호는 8자리 이상, 특수문자, 숫자, 알파벳을 포함해야 합니다',
   emptyPassword: '비밇번호를 입력해 주세요',
   verifyPasswordNotEqual: '비밀번호와 일치하지 않습니다',
+  verifyNewPasswordNotEqual: '새로운 비밀번호와 일치하지 않습니다',
   maxLen: `${maxLen}이하여야 합니다`,
   emptySubwayLine: '지하철 호선을 선택해 주세요',
   invalidSubwayLine: '지하철 호선이 잘못되었습니다',
