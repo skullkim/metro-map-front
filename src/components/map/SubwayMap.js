@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import {useState} from 'react';
+import {useState, useRef} from 'react';
 import { Graph } from 'react-d3-graph';
 import styled from 'styled-components';
 
@@ -35,30 +35,41 @@ const MapContainer = styled.div`
 
 const SubwayMap = () => {
   const {ModalOpenStore} = indexStore();
+  const clickNodeRef = useRef();
   const [searchPathModalPosition, setSearchPathModalPosition] = useState({
-    xPosition: 0, yPosition: 0
+    xPosition: 0, yPosition: 0, stationName: ''
   });
 
-  const handleClick = (stationId) => {
-    const {x: xPosition, y: yPosition} = subwayData.nodes.filter(({id}) => stationId === id)[0];
+  const handleNodeClick = (stationName) => {
+    setSearchPathModalPosition({...searchPathModalPosition, stationName});
+  }
+
+  const handleClick = (event) => {
+    const {x: xPosition, y: yPosition} = event.target.getBoundingClientRect();
 
     ModalOpenStore.setSearchPathModal(true);
 
-    setSearchPathModalPosition({xPosition, yPosition});
+    setSearchPathModalPosition({...searchPathModalPosition, xPosition, yPosition });
   }
 
   return (
     <Wrapper>
-      <MapContainer margin-top='3%' margin-left='10.5%'>
-        <Graph id='graph-id' data={subwayData} config={subwayConfig} onClickNode={handleClick}/>
-        {ModalOpenStore.searchPathModal ?
-          <SearchPathModal
-            xPosition={searchPathModalPosition.xPosition}
-            yPosition={searchPathModalPosition.yPosition}
-          /> :
-          null
-        }
+      <MapContainer ref={clickNodeRef} argin-top='3%' margin-left='10.5%' onClick={handleClick}>
+        <Graph
+          id='graph-id'
+          ref={clickNodeRef}
+          data={subwayData}
+          config={subwayConfig}
+          onClickNode={handleNodeClick}
+        />
       </MapContainer>
+      {ModalOpenStore.searchPathModal && searchPathModalPosition.xPosition && searchPathModalPosition.yPosition?
+        <SearchPathModal
+          xPosition={searchPathModalPosition.xPosition}
+          yPosition={searchPathModalPosition.yPosition}
+        /> :
+        null
+      }
     </Wrapper>
   );
 };
