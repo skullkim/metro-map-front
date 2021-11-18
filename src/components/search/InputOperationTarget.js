@@ -55,6 +55,7 @@ const InputOperationTarget = () => {
           type='text'
           name={STATION_CATEGORY.START_STATION}
           maxLength='3'
+          value={targetStore.startStation}
           onChange={handleChange}
         />
       </InputLabel>
@@ -65,6 +66,7 @@ const InputOperationTarget = () => {
             type='text'
             name={STATION_CATEGORY.STOPOVER_STATION}
             maxLength='3'
+            value={targetStore.stopoverStation}
             onChange={handleChange}
           />
         </InputLabel>
@@ -75,6 +77,7 @@ const InputOperationTarget = () => {
           type='text'
           name={STATION_CATEGORY.ARRIVE_STATION}
           maxLength='3'
+          value={targetStore.arriveStation}
           onChange={handleChange}
         />
       </InputLabel>

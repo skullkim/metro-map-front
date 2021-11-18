@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 
 import { ImagePath } from '../../../lib/dataPath';
 import { STATION_CATEGORY } from '../../../lib/subwayData';
+import indexStore from '../../../stores/indexStore';
 import Portal from '../Portal';
 
 const SearchPathBox = styled.div`
@@ -67,9 +68,32 @@ const StationButton = styled.button`
   border: 1px solid #2867B2;
   background-color: #2867B226;
   font-weight: 600; 
+  
+  &:hover {
+    cursor: grab;
+  }
 `;
 
 const SearchPathModal = ({xPosition, yPosition, stationName, closeModal}) => {
+  const {SearchTargetStore} = indexStore();
+
+  const handleClick = ({target: {name}}) => {
+    switch (name) {
+      case STATION_CATEGORY.START_STATION:
+        SearchTargetStore.setStartStation(stationName);
+        break;
+      case STATION_CATEGORY.STOPOVER_STATION:
+        SearchTargetStore.setStopoverSelected(true);
+        SearchTargetStore.setStopoverStation(stationName);
+        break;
+      case STATION_CATEGORY.ARRIVE_STATION:
+        SearchTargetStore.setArriveState(stationName);
+        break;
+      default:
+        throw new Error('invalid station category in search path modal');
+    }
+  }
+
   return (
     <Portal>
       <SearchPathBox xPosition={xPosition - 75} yPosition={yPosition - 65}>
@@ -83,9 +107,24 @@ const SearchPathModal = ({xPosition, yPosition, stationName, closeModal}) => {
           />
         </ModalHeader>
         <SelectStationBox>
-          <StationButton name={STATION_CATEGORY.START_STATION}>출발</StationButton>
-          <StationButton name={STATION_CATEGORY.STOPOVER_STATION}>경유</StationButton>
-          <StationButton name={STATION_CATEGORY.ARRIVE_STATION}>도착</StationButton>
+          <StationButton
+            name={STATION_CATEGORY.START_STATION}
+            onClick={handleClick}
+          >
+            출발
+          </StationButton>
+          <StationButton
+            name={STATION_CATEGORY.STOPOVER_STATION}
+            onClick={handleClick}
+          >
+            경유
+          </StationButton>
+          <StationButton
+            name={STATION_CATEGORY.ARRIVE_STATION}
+            onClick={handleClick}
+          >
+            도착
+          </StationButton>
         </SelectStationBox>
       </SearchPathBox>
     </Portal>
