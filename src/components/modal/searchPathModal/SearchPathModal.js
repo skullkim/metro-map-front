@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import { ImagePath } from '../../../lib/dataPath';
+import { STATION_CATEGORY } from '../../../lib/subwayData';
 import Portal from '../Portal';
 
 const SearchPathBox = styled.div`
   width: 165.6px;
-  height: 61.1px;
+  height: 50px;
+  background-color: white;
   border: 3px solid #2867B2;
   position: absolute;
   ${({xPosition, yPosition}) => css`
@@ -22,7 +24,7 @@ const SearchPathBox = styled.div`
     border-top: 10px solid #2867B2;
     content:"";
     position:absolute;
-    top: 62px;
+    top: 53px;
     left: 75px;
   }
 `;
@@ -52,10 +54,25 @@ const CloseModalButton = styled.img`
   }
 `;
 
+const SelectStationBox = styled.div`
+  height: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StationButton = styled.button`
+  width: 47px;
+  height: 20px;
+  border: 1px solid #2867B2;
+  background-color: #2867B226;
+  font-weight: 600; 
+`;
+
 const SearchPathModal = ({xPosition, yPosition, stationName, closeModal}) => {
   return (
     <Portal>
-      <SearchPathBox xPosition={xPosition - 75} yPosition={yPosition - 70}>
+      <SearchPathBox xPosition={xPosition - 75} yPosition={yPosition - 65}>
         <ModalHeader>
           <StationName>{stationName}</StationName>
           <CloseModalButton
@@ -65,6 +82,11 @@ const SearchPathModal = ({xPosition, yPosition, stationName, closeModal}) => {
             onClick={closeModal}
           />
         </ModalHeader>
+        <SelectStationBox>
+          <StationButton name={STATION_CATEGORY.START_STATION}>출발</StationButton>
+          <StationButton name={STATION_CATEGORY.STOPOVER_STATION}>경유</StationButton>
+          <StationButton name={STATION_CATEGORY.ARRIVE_STATION}>도착</StationButton>
+        </SelectStationBox>
       </SearchPathBox>
     </Portal>
   );
