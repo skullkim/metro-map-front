@@ -51,5 +51,6 @@ Object.freeze(ClientPath);
 
 export const ImagePath = {
   mainLogo: '/img/logo.svg',
+  closeSearchPathModal: '/img/closeSearchPathModal.svg',
 };
 Object.freeze(ImagePath);

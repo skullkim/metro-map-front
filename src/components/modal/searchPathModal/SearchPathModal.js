@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-// import {MdChatBubbleOutline} from 'react-icons/md';
 import styled, { css } from 'styled-components';
 
+import { ImagePath } from '../../../lib/dataPath';
 import Portal from '../Portal';
 
 const SearchPathBox = styled.div`
@@ -26,10 +26,40 @@ const SearchPathBox = styled.div`
   }
 `;
 
-const SearchPathModal = ({xPosition, yPosition}) => {
+const ModalHeader = styled.div`
+  width: 165.5px;
+  height: 16px;
+  background-color: #2867B2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const StationName = styled.b`
+  font-size: 10px;
+  color: white;
+  margin-left: 3px;
+`;
+
+const CloseModalButton = styled.img`
+  height: 12px;
+  width: 12px;
+  margin-right: 3px;
+  
+  &:hover {
+    cursor: grab;
+  }
+`;
+
+const SearchPathModal = ({xPosition, yPosition, stationName}) => {
   return (
     <Portal>
-      <SearchPathBox xPosition={xPosition - 75} yPosition={yPosition - 70} />
+      <SearchPathBox xPosition={xPosition - 75} yPosition={yPosition - 70}>
+        <ModalHeader>
+          <StationName>{stationName}</StationName>
+          <CloseModalButton src={ImagePath.closeSearchPathModal} alt='close search path modal' />
+        </ModalHeader>
+      </SearchPathBox>
     </Portal>
   );
 }
@@ -37,6 +67,7 @@ const SearchPathModal = ({xPosition, yPosition}) => {
 SearchPathModal.propTypes = {
   xPosition: PropTypes.number.isRequired,
   yPosition: PropTypes.number.isRequired,
+  stationName: PropTypes.string.isRequired,
 }
 
 export default SearchPathModal;

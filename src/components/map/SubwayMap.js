@@ -67,6 +67,7 @@ const SubwayMap = () => {
         <SearchPathModal
           xPosition={searchPathModalPosition.xPosition}
           yPosition={searchPathModalPosition.yPosition}
+          stationName={searchPathModalPosition.stationName}
         /> :
         null
       }
