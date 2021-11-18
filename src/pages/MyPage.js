@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 import {useEffect, useState} from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import * as yup from 'yup';
 
@@ -8,9 +9,10 @@ import PageTitle from '../components/styles/PageTitle';
 import { Warning } from '../components/styles/ResultMessage';
 import { InputBox, SubmitButton } from '../components/styles/UserComplainMyPageInput';
 import TokenApi from '../lib/customAxios';
-import { getUserEmailUrl } from '../lib/dataPath';
-import { getUserInfo } from '../lib/localStorage';
+import { ClientPath, getChangeUserInformationUrl, getUserEmailUrl } from '../lib/dataPath';
+import { getUserInfo, removeUserInfo } from '../lib/localStorage';
 import { maxLen, regExp, warning } from '../lib/validateUserInfo';
+import indexStore from '../stores/indexStore';
 
 const MyPageBox = styled.section`
   display: flex;
@@ -20,6 +22,8 @@ const MyPageBox = styled.section`
 
 const MyPage = () => {
   const userInfo = getUserInfo();
+  const {Login} = indexStore();
+  const history = useHistory();
   const [userEmail, setUserEmail] = useState('');
   const [currentFocused, setCurrentFocused] = useState('');
 
@@ -59,7 +63,24 @@ const MyPage = () => {
         .max(maxLen, `${warning.maxLen}`)
         .oneOf([yup.ref('newPassword')], `${warning.verifyNewPasswordNotEqual}`)
     }),
-    onSubmit: () => {}
+    onSubmit: ({email, previousPassword, newPassword}) => {
+      TokenApi({
+        method: 'PUT',
+        url: `${getChangeUserInformationUrl()}`,
+        headers: {
+          Authorization: `Bearer ${userInfo.accessToken}`,
+        },
+        data: {
+          email, previousPassword, newPassword
+        }
+      })
+        .catch(err => err)
+        .finally(() => {
+          removeUserInfo();
+          Login.setUserId('');
+          history.push(ClientPath.findPath);
+        });
+    }
   });
 
   const handleChange = (event) => {
@@ -70,6 +91,11 @@ const MyPage = () => {
     const {target: {name}} = event;
     setCurrentFocused(name);
     formik.handleBlur(event);
+  }
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    formik.handleSubmit();
   }
 
   return (
@@ -122,7 +148,9 @@ const MyPage = () => {
               <Warning>{formik.errors.verifyNewPassword}</Warning> :
               null
             }
-            <SubmitButton>나의 정보 수정하기</SubmitButton>
+            <SubmitButton type='submit' onClick={handleClick}>
+              나의 정보 수정하기
+            </SubmitButton>
           </> : null
         }
       </MyPageBox>

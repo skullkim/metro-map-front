@@ -16,8 +16,9 @@ export const ServerPath = {
   getStoreBoxList: '/amenities/store-box',
   sendUserComplain: '/amenities/user-complain',
 
-  getUserEmailBaseUrl: '/user',
+  userBaseUrl: '/user',
   getUserEmailUrl: '/email',
+  changeUserInformation: '/user-information'
 };
 Object.freeze(ServerPath);
 
@@ -26,7 +27,11 @@ export const getDeleteUserBookMarkUrl = (bookmarkId, userId) => {
 }
 
 export const getUserEmailUrl = (userId) => {
-  return `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.getUserEmailBaseUrl}/${userId}${ServerPath.getUserEmailUrl}`;
+  return `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.userBaseUrl}/${userId}${ServerPath.getUserEmailUrl}`;
+}
+
+export const getChangeUserInformationUrl = (userId) => {
+  return `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.userBaseUrl}/${userId}${ServerPath.changeUserInformation}`;
 }
 
 export const ClientPath = {
