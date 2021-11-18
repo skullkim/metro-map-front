@@ -52,6 +52,10 @@ const SubwayMap = () => {
     setSearchPathModalPosition({...searchPathModalPosition, xPosition, yPosition });
   }
 
+  const closeModal = () => {
+    ModalOpenStore.setSearchPathModal(false);
+  }
+
   return (
     <Wrapper>
       <MapContainer ref={clickNodeRef} argin-top='3%' margin-left='10.5%' onClick={handleClick}>
@@ -68,6 +72,7 @@ const SubwayMap = () => {
           xPosition={searchPathModalPosition.xPosition}
           yPosition={searchPathModalPosition.yPosition}
           stationName={searchPathModalPosition.stationName}
+          closeModal={closeModal}
         /> :
         null
       }

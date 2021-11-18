@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
@@ -51,13 +52,18 @@ const CloseModalButton = styled.img`
   }
 `;
 
-const SearchPathModal = ({xPosition, yPosition, stationName}) => {
+const SearchPathModal = ({xPosition, yPosition, stationName, closeModal}) => {
   return (
     <Portal>
       <SearchPathBox xPosition={xPosition - 75} yPosition={yPosition - 70}>
         <ModalHeader>
           <StationName>{stationName}</StationName>
-          <CloseModalButton src={ImagePath.closeSearchPathModal} alt='close search path modal' />
+          <CloseModalButton
+            src={ImagePath.closeSearchPathModal}
+            alt='close search path modal'
+            className='closeButton'
+            onClick={closeModal}
+          />
         </ModalHeader>
       </SearchPathBox>
     </Portal>
@@ -68,6 +74,7 @@ SearchPathModal.propTypes = {
   xPosition: PropTypes.number.isRequired,
   yPosition: PropTypes.number.isRequired,
   stationName: PropTypes.string.isRequired,
+  closeModal: PropTypes.func.isRequired,
 }
 
-export default SearchPathModal;
+export default observer(SearchPathModal);
