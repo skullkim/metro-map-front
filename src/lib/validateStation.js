@@ -92,7 +92,10 @@ const validateTarget = ({
     involveChar(arriveStation, StationKr.ArriveStation) ||
     (stopoverSelected ? involveChar(stopoverStation, StationKr.StopoverStation) : '');
 
-  return existPathTarget || emptyStation || sameStation || incorrectStationName;
+  return (existPathTarget ||
+    emptyStation ||
+    sameStation ||
+    incorrectStationName);
 }
 
 export default validateTarget;
