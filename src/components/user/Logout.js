@@ -15,6 +15,10 @@ const LogoutBtn = styled.button`
   word-break: keep-all;
   padding: 0;
   border: 0;
+  
+  &:hover {
+    cursor: grab;
+  }
 `;
 
 const Logout = () => {
