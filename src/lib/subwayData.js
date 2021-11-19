@@ -16,7 +16,7 @@ export const subwayConfig = {
   height: 700,
   width: 1000,
   staticGraph: true,
-  overflow: 'scrollbar',
+  overflow: 'hidden',
   automaticRearrangeAfterDropNode: false,
   node: {
     fontSize: 15,
@@ -38,7 +38,7 @@ export const subwayResultConfig = {
   height: 225,
   width: 480,
   staticGraph: true,
-  overflow: 'scrollbar',
+  overflow: 'hidden',
   automaticRearrangeAfterDropNode: false,
   node: {
     fontSize: 10,

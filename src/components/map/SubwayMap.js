@@ -35,7 +35,7 @@ const MapContainer = styled.div`
 
 const SubwayMap = () => {
   const {ModalOpenStore} = indexStore();
-  const clickNodeRef = useRef();
+  const subwayMapRef = useRef();
   const [searchPathModalPosition, setSearchPathModalPosition] = useState({
     xPosition: 0, yPosition: 0, stationName: ''
   });
@@ -58,10 +58,10 @@ const SubwayMap = () => {
 
   return (
     <Wrapper>
-      <MapContainer ref={clickNodeRef} argin-top='3%' margin-left='10.5%' onClick={handleClick}>
+      <MapContainer ref={subwayMapRef} argin-top='3%' margin-left='10.5%' onClick={handleClick}>
         <Graph
           id='graph-id'
-          ref={clickNodeRef}
+          ref={subwayMapRef}
           data={subwayData}
           config={subwayConfig}
           onClickNode={handleNodeClick}
