@@ -83,7 +83,9 @@ const SearchPathModal = ({xPosition, yPosition, stationName, closeModal}) => {
         SearchTargetStore.setStartStation(stationName);
         break;
       case StationCategory.StopoverStation:
-        SearchTargetStore.setStopoverSelected(true);
+        if(!SearchTargetStore.stopoverSelected) {
+          SearchTargetStore.setStopoverSelected(true);
+        }
         SearchTargetStore.setStopoverStation(stationName);
         break;
       case StationCategory.ArriveStation:
