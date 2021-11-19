@@ -1,22 +1,15 @@
 import { observer } from 'mobx-react';
 import {useEffect, useState, useCallback} from 'react';
 import {Redirect} from 'react-router-dom';
-import styled from 'styled-components';
 
 import { Wrapper } from '../components/styles/Authorization';
-import PageTitle from '../components/styles/PageTitle';
+import {PageTitle, PageBox} from '../components/styles/CommonPageStyle';
 import PathTable from '../components/user/PathTable';
 import { getAuthenticationHeader } from '../lib/authenticateData';
 import TokenApi from '../lib/customAxios';
 import { ClientPath, getDeleteUserBookMarkUrl, ServerPath } from '../lib/dataPath';
 import { getUserInfo } from '../lib/localStorage';
 import indexStore from '../stores/indexStore';
-
-const BookmarkBox = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 
 const Bookmark = () => {
   const [bookmarks, setBookmarks] = useState([]);
@@ -66,10 +59,10 @@ const Bookmark = () => {
   return (
     <Wrapper>
       {userInfo ?
-        <BookmarkBox>
+        <PageBox>
           <PageTitle>즐겨찾기 목록</PageTitle>
           <PathTable pathLists={bookmarks} handleClick={handleClick} />
-        </BookmarkBox> :
+        </PageBox> :
         <Redirect to={ClientPath.SignIn} />
       }
     </Wrapper>

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import PageTitle from '../../styles/PageTitle';
+import {PageTitle} from '../../styles/CommonPageStyle';
 import { ModalBox, CommonModalBox } from '../CommonModal';
 import ModalCloseButton from "../ModalCloseButton";
 

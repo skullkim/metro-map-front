@@ -7,7 +7,7 @@ import TokenApi from '../../../lib/customAxios';
 import { ClientPath, ServerPath } from '../../../lib/dataPath';
 import { getUserInfo } from '../../../lib/localStorage';
 import indexStore from '../../../stores/indexStore';
-import PageTitle from '../../styles/PageTitle';
+import {PageTitle} from '../../styles/CommonPageStyle';
 import PathTable from '../../user/PathTable';
 import { ModalBox, CommonModalBox } from '../CommonModal';
 import ModalCloseButton from '../ModalCloseButton';

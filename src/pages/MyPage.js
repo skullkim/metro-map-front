@@ -1,11 +1,10 @@
 import { useFormik } from 'formik';
 import {useEffect, useState} from 'react';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
 import * as yup from 'yup';
 
 import { Wrapper } from '../components/styles/Authorization';
-import PageTitle from '../components/styles/PageTitle';
+import {PageTitle, PageBox} from '../components/styles/CommonPageStyle';
 import { Warning } from '../components/styles/ResultMessage';
 import { InputBox, SubmitButton } from '../components/styles/UserComplainMyPageInput';
 import { getAuthenticationHeader } from '../lib/authenticateData';
@@ -14,12 +13,6 @@ import { ClientPath, getChangeUserInformationUrl, getUserEmailUrl } from '../lib
 import { getUserInfo, removeUserInfo } from '../lib/localStorage';
 import { maxLen, RegExp, WarningMessage } from '../lib/validateUserInfo';
 import indexStore from '../stores/indexStore';
-
-const MyPageBox = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 
 const MyPage = () => {
   const userInfo = getUserInfo();
@@ -101,7 +94,7 @@ const MyPage = () => {
 
   return (
     <Wrapper>
-      <MyPageBox>
+      <PageBox>
         <PageTitle>나의 정보 수정</PageTitle>
         {userEmail ?
           <>
@@ -162,7 +155,7 @@ const MyPage = () => {
             </SubmitButton>
           </> : null
         }
-      </MyPageBox>
+      </PageBox>
     </Wrapper>
   );
 }

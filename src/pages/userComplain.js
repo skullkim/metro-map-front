@@ -4,20 +4,13 @@ import styled from 'styled-components';
 import * as yup from 'yup';
 
 import { Wrapper } from '../components/styles/Authorization';
-import PageTitle from '../components/styles/PageTitle';
+import {PageTitle, PageBox} from '../components/styles/CommonPageStyle';
 import { Success, Warning } from '../components/styles/ResultMessage';
 import { FormInputStyle, InputBox, SubmitButton } from '../components/styles/UserComplainMyPageInput';
 import { Api } from '../lib/customAxios';
 import { ServerPath } from '../lib/dataPath';
 import { UserComplainName, complainContextMaxLen, complainSentSuccessfully } from '../lib/formDataInfo';
 import { maxComplainContextLen, maxLen, minLen, RegExp, WarningMessage } from '../lib/validateUserInfo';
-
-
-const UserComplainBox = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 
 const SelectSubwayLine = styled.select`
   width: 482px;
@@ -113,7 +106,7 @@ const UserComplain = () => {
 
   return (
     <Wrapper>
-      <UserComplainBox>
+      <PageBox>
         <PageTitle>소중한 의견을 남겨주세요</PageTitle>
         <InputBox
           type='text'
@@ -172,7 +165,7 @@ const UserComplain = () => {
         </SubmitButton>
         {successMessage ? <Success>{successMessage}</Success> : null}
         {failMessage ? <Warning>{failMessage}</Warning> : null}
-      </UserComplainBox>
+      </PageBox>
     </Wrapper>
   );
 }

@@ -1,22 +1,16 @@
-import styled from 'styled-components';
 
 import LostAndFoundTable from '../components/amenities/LostAndFoundTable';
 import { Wrapper } from '../components/styles/Authorization';
-import PageTitle from '../components/styles/PageTitle';
+import { PageTitle, PageBox } from '../components/styles/CommonPageStyle';
 
-const LostAndFoundBox = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 
 const LostAndFound = () => {
   return (
     <Wrapper>
-      <LostAndFoundBox>
+      <PageBox>
         <PageTitle>유실물센터 목록</PageTitle>
         <LostAndFoundTable />
-      </LostAndFoundBox>
+      </PageBox>
     </Wrapper>
   );
 }
