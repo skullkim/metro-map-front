@@ -22,7 +22,7 @@ const LostAndFoundTable = () => {
         setLostAndFoundList(data);
       })
       .catch(err => err);
-  })
+  }, []);
 
   return (
     <LostAndFoundListTable>
