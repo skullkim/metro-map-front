@@ -11,7 +11,7 @@ import { InputBox, SubmitButton } from '../components/styles/UserComplainMyPageI
 import TokenApi from '../lib/customAxios';
 import { ClientPath, getChangeUserInformationUrl, getUserEmailUrl } from '../lib/dataPath';
 import { getUserInfo, removeUserInfo } from '../lib/localStorage';
-import { maxLen, regExp, warning } from '../lib/validateUserInfo';
+import { maxLen, RegExp, WarningMessage } from '../lib/validateUserInfo';
 import indexStore from '../stores/indexStore';
 
 const MyPageBox = styled.section`
@@ -50,18 +50,18 @@ const MyPage = () => {
     },
     validationSchema: yup.object({
       email: yup.string()
-        .matches(regExp.email, {message: `${warning.invalidEmail}`})
-        .max(maxLen, `${warning.maxLen}`),
+        .matches(RegExp.Email, {message: `${WarningMessage.InvalidEmail}`})
+        .max(maxLen, `${WarningMessage.MaxLen}`),
       previousPassword: yup.string()
-        .matches(regExp.password, {message: `${warning.invalidPassword}`})
-        .max(maxLen, `${warning.maxLen}`),
+        .matches(RegExp.Password, {message: `${WarningMessage.InvalidPassword}`})
+        .max(maxLen, `${WarningMessage.MaxLen}`),
       newPassword: yup.string()
-        .matches(regExp.password, {message: `${warning.invalidPassword}`})
-        .max(maxLen, `${warning.maxLen}`),
+        .matches(RegExp.Password, {message: `${WarningMessage.InvalidPassword}`})
+        .max(maxLen, `${WarningMessage.MaxLen}`),
       verifyNewPassword: yup.string()
-        .matches(regExp.password, {message: `${warning.invalidPassword}`})
-        .max(maxLen, `${warning.maxLen}`)
-        .oneOf([yup.ref('newPassword')], `${warning.verifyNewPasswordNotEqual}`)
+        .matches(RegExp.Password, {message: `${WarningMessage.InvalidPassword}`})
+        .max(maxLen, `${WarningMessage.MaxLen}`)
+        .oneOf([yup.ref('newPassword')], `${WarningMessage.VerifyNewPasswordNotEqual}`)
     }),
     onSubmit: ({email, previousPassword, newPassword}) => {
       TokenApi({

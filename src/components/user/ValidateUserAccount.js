@@ -5,10 +5,10 @@ import {useCallback, useState} from 'react';
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 
-import { authType, getAuthenticateUrl } from '../../lib/authenticateData';
+import { AuthType, getAuthenticateUrl } from '../../lib/authenticateData';
 import { Api } from '../../lib/customAxios';
 import { setUserInfo } from '../../lib/localStorage';
-import { maxLen, regExp, warning } from '../../lib/validateUserInfo';
+import { maxLen, RegExp, WarningMessage } from '../../lib/validateUserInfo';
 import indexStore from '../../stores/indexStore';
 import { Form, Input, InputTitle, LinkMessage, PageTitle, SubmitBtn, Wrapper } from '../styles/Authorization';
 import { Success, Warning } from '../styles/ResultMessage';
@@ -31,24 +31,24 @@ const ValidateUserAccount = ({authData}) => {
     },
     validationSchema: yup.object({
       email: yup.string()
-        .required(`${warning.emptyEmail}`)
-        .matches(regExp.email, {message: `${warning.invalidEmail}`})
-        .max(maxLen, `${warning.maxLen}`),
+        .required(`${WarningMessage.EmptyEmail}`)
+        .matches(RegExp.Email, {message: `${WarningMessage.InvalidEmail}`})
+        .max(maxLen, `${WarningMessage.MaxLen}`),
 
-      password: type !== authType.emailReauthorization ? yup.string()
-        .required(`${warning.emptyPassword}`)
-        .matches(regExp.password, {message: `${warning.invalidPassword}`})
-        .max(maxLen, `${warning.maxLen}`) : '',
+      password: type !== AuthType.EmailReauthorization ? yup.string()
+        .required(`${WarningMessage.EmptyPassword}`)
+        .matches(RegExp.Password, {message: `${WarningMessage.InvalidPassword}`})
+        .max(maxLen, `${WarningMessage.MaxLen}`) : '',
 
-      verifyPassword: type === authType.signUp ? yup.string()
-        .required(`${warning.emptyPassword}`)
-        .matches(regExp.password, {message: `${warning.invalidPassword}`})
-        .max(maxLen, `${warning.maxLen}`)
-        .oneOf([yup.ref('password')], `${warning.verifyPasswordNotEqual}`) : '',
+      verifyPassword: type === AuthType.SignUp ? yup.string()
+        .required(`${WarningMessage.EmptyPassword}`)
+        .matches(RegExp.Password, {message: `${WarningMessage.InvalidPassword}`})
+        .max(maxLen, `${WarningMessage.MaxLen}`)
+        .oneOf([yup.ref('password')], `${WarningMessage.VerifyPasswordNotEqual}`) : '',
     }),
 
     onSubmit: ({email, password}) => {
-      const data = type === authType.emailReauthorization ? {email} : {email, password};
+      const data = type === AuthType.EmailReauthorization ? {email} : {email, password};
       const url = getAuthenticateUrl(type);
       Api({
         method: 'POST',
@@ -56,7 +56,7 @@ const ValidateUserAccount = ({authData}) => {
         data,
       })
         .then((response) => {
-          if(type !== authType.signIn) {
+          if(type !== AuthType.SignIn) {
             const {data: {data: {message}}} = response;
             setSuccessMessage(message);
           }
@@ -71,8 +71,8 @@ const ValidateUserAccount = ({authData}) => {
           if(err.response) {
             const {response: {status, data: {error: {message}}}} = err;
             if(status === 400 ||
-                (type === authType.emailReauthorization && status === 409) ||
-                (type === authType.signIn && status === 401)) {
+                (type === AuthType.EmailReauthorization && status === 409) ||
+                (type === AuthType.SignIn && status === 401)) {
               setErrorMessage(message);
               return;
             }
@@ -114,7 +114,7 @@ const ValidateUserAccount = ({authData}) => {
           null
         }
 
-        {type !== authType.emailReauthorization ?
+        {type !== AuthType.EmailReauthorization ?
           <>
             <InputTitle>비밀번호</InputTitle>
             <Input
@@ -130,7 +130,7 @@ const ValidateUserAccount = ({authData}) => {
           </>
           : null}
 
-        {type === authType.signUp ?
+        {type === AuthType.SignUp ?
           <>
             <InputTitle>비밀번호 확인</InputTitle>
             <Input
@@ -148,7 +148,7 @@ const ValidateUserAccount = ({authData}) => {
 
         <SubmitBtn type='submit' onClick={handleClick}>{submitBtn}</SubmitBtn>
 
-        {type !== authType.emailReauthorization ?
+        {type !== AuthType.EmailReauthorization ?
           <>
             <LinkMessage to={LinkMessage1Path}>{LinkMessage1}</LinkMessage>
             <LinkMessage to={LinkMessage2Path}>{LinkMessage2}</LinkMessage>

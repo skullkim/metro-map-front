@@ -10,7 +10,7 @@ import { FormInputStyle, InputBox, SubmitButton } from '../components/styles/Use
 import { Api } from '../lib/customAxios';
 import { ServerPath } from '../lib/dataPath';
 import { UserComplainName, complainContextMaxLen, complainSentSuccessfully } from '../lib/formDataInfo';
-import { maxComplainContextLen, maxLen, minLen, regExp, warning } from '../lib/validateUserInfo';
+import { maxComplainContextLen, maxLen, minLen, RegExp, WarningMessage } from '../lib/validateUserInfo';
 
 
 const UserComplainBox = styled.section`
@@ -51,22 +51,22 @@ const UserComplain = () => {
     },
     validationSchema: yup.object({
       email: yup.string()
-        .required(`${warning.emptyEmail}`)
-        .matches(regExp.email, {message: `${warning.invalidEmail}`})
-        .max(maxLen, `${warning.maxLen}`),
+        .required(`${WarningMessage.EmptyEmail}`)
+        .matches(RegExp.Email, {message: `${WarningMessage.InvalidEmail}`})
+        .max(maxLen, `${WarningMessage.MaxLen}`),
 
       subwayLine: yup.string()
-        .required(`${warning.emptySubwayLine}`)
-        .matches(regExp.subwayLine, {message: `${warning.invalidSubwayLine}`}),
+        .required(`${WarningMessage.EmptySubwayLine}`)
+        .matches(RegExp.SubwayLine, {message: `${WarningMessage.InvalidSubwayLine}`}),
 
       complainContext: yup.string()
-        .required(`${warning.emptyComplainContext}`)
-        .min(minLen, {message: `${warning.complainContextIsTooShort}`})
-        .max(maxComplainContextLen, {message: `${warning.complainContextIsTooLong}`})
+        .required(`${WarningMessage.EmptyComplainContext}`)
+        .min(minLen, {message: `${WarningMessage.ComplainContextIsTooShort}`})
+        .max(maxComplainContextLen, {message: `${WarningMessage.ComplainContextIsTooLong}`})
     }),
     onSubmit: ({email, subwayLine, complainContext: userComplainContext}) => {
       if(userComplainContext.length <= 10) {
-        setComplainContextError(warning.complainContextIsTooShort);
+        setComplainContextError(WarningMessage.ComplainContextIsTooShort);
       }
       Api({
         method: 'POST',
