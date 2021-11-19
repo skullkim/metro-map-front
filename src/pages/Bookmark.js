@@ -28,7 +28,7 @@ const Bookmark = () => {
 
     TokenApi({
       method: 'GET',
-      url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.getUserBookMark}/${userInfo.userId}`,
+      url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.GetUserBookMark}/${userInfo.userId}`,
       headers: {
         Authorization: `Bearer ${userInfo.accessToken}`,
       }

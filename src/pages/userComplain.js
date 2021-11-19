@@ -70,7 +70,7 @@ const UserComplain = () => {
       }
       Api({
         method: 'POST',
-        url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.sendUserComplain}`,
+        url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.SendUserComplain}`,
         data: {
           email,
           subwayLine,

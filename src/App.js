@@ -21,16 +21,16 @@ function App() {
         <GlobalStyle />
         <HeaderNav />
         <Switch>
-          <Route exact path={ClientPath.findPath} component={FindPathPage} />
-          <Route exact path={ClientPath.signUp} component={SignUp} />
-          <Route exact path={ClientPath.emailVerification} component={EmailVerification} />
-          <Route exact path={ClientPath.emailReauthorization} component={EmailReauthorization}/>
-          <Route path={ClientPath.signIn} component={SignIn}/>
-          <Route path={ClientPath.bookmark} component={Bookmark} />
-          <Route path={ClientPath.lostAndFound} component={LostAndFound} />
-          <Route path={ClientPath.storeBox} component={StoreBox} />
-          <Route path={ClientPath.userComplain} component={UserComplain} />
-          <Route path={ClientPath.myPage} component={MyPage} />
+          <Route exact path={ClientPath.FindPath} component={FindPathPage} />
+          <Route exact path={ClientPath.SignUp} component={SignUp} />
+          <Route exact path={ClientPath.EmailVerification} component={EmailVerification} />
+          <Route exact path={ClientPath.EmailReauthorization} component={EmailReauthorization}/>
+          <Route path={ClientPath.SignIn} component={SignIn}/>
+          <Route path={ClientPath.Bookmark} component={Bookmark} />
+          <Route path={ClientPath.LostAndFound} component={LostAndFound} />
+          <Route path={ClientPath.StoreBox} component={StoreBox} />
+          <Route path={ClientPath.UserComplain} component={UserComplain} />
+          <Route path={ClientPath.MyPage} component={MyPage} />
         </Switch>
       </Router>
     </>

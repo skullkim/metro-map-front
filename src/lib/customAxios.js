@@ -42,7 +42,7 @@ TokenApi.interceptors.response.use(
 
       return Api({
         method: "POST",
-        url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.reissuingAccessToken}`,
+        url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.ReissuingAccessToken}`,
       })
         .then(({data: {data: {accessToken}}}) => {
           removeUserInfo();

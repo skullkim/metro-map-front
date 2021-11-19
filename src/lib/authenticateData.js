@@ -13,8 +13,8 @@ export const authData = {
     title: '회원가입',
     LinkMessage1: '회원이신가요? 로그인하세요',
     LinkMessage2: '회원인증메일 발송',
-    LinkMessage1Path: ClientPath.signIn,
-    LinkMessage2Path: ClientPath.emailReauthorization,
+    LinkMessage1Path: ClientPath.SignIn,
+    LinkMessage2Path: ClientPath.EmailReauthorization,
     submitBtn: '회원가입',
   },
   emailReauthorization: {
@@ -31,8 +31,8 @@ export const authData = {
     title: '로그인',
     LinkMessage1: '회원이 아니신가요? 가입하세요',
     LinkMessage2: '회원인증메일 발송',
-    LinkMessage1Path: ClientPath.signUp,
-    LinkMessage2Path: ClientPath.emailReauthorization,
+    LinkMessage1Path: ClientPath.SignUp,
+    LinkMessage2Path: ClientPath.EmailReauthorization,
     submitBtn: '로그인'
   }
 }
@@ -40,11 +40,11 @@ export const authData = {
 export const getAuthenticateUrl = (authenticateType) => {
   switch(authenticateType) {
     case authType.signUp:
-      return `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.signUp}`;
+      return `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.SignUp}`;
     case authType.emailReauthorization:
-      return `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.emailReauthorization}`;
+      return `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.EmailReauthorization}`;
     case authType.signIn:
-      return `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.signIn}`;
+      return `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.SignIn}`;
     default:
       throw new Error('invalid authenticateType');
   }

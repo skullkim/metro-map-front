@@ -29,7 +29,7 @@ const Logout = () => {
     event.preventDefault();
     TokenApi({
       method: 'POST',
-      url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.logOut}`,
+      url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.LogOut}`,
       headers: {
         Authorization: `Bearer ${getUserInfo().accessToken}`,
       }

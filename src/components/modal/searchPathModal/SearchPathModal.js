@@ -100,7 +100,7 @@ const SearchPathModal = ({xPosition, yPosition, stationName, closeModal}) => {
         <ModalHeader>
           <StationName>{stationName}</StationName>
           <CloseModalButton
-            src={ImagePath.closeSearchPathModal}
+            src={ImagePath.CloseSearchPathModal}
             alt='close search path modal'
             className='closeButton'
             onClick={closeModal}

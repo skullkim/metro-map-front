@@ -39,7 +39,7 @@ const EmailVerification = () => {
   useEffect(() => {
     Api({
       method: 'GET',
-      url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.emailVerification}`,
+      url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.EmailVerification}`,
       params: {id, key}
     })
       .then(({data: {data: {message}}}) => {
@@ -60,14 +60,14 @@ const EmailVerification = () => {
       {successMessage ?
         <Wrapper>
           <Success>{successMessage}</Success>
-          <RedirectButton to={ClientPath.signIn}>로그인 하기</RedirectButton>
+          <RedirectButton to={ClientPath.SignIn}>로그인 하기</RedirectButton>
         </Wrapper> :
         null
       }
       {errorMessage ?
         <Wrapper>
           <Warning>{errorMessage}</Warning>
-          <RedirectButton to={ClientPath.emailReauthorization}>인증메일 다시 보내기</RedirectButton>
+          <RedirectButton to={ClientPath.EmailReauthorization}>인증메일 다시 보내기</RedirectButton>
         </Wrapper> :
         null
       }

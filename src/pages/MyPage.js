@@ -78,7 +78,7 @@ const MyPage = () => {
         .finally(() => {
           removeUserInfo();
           Login.setUserId('');
-          history.push(ClientPath.findPath);
+          history.push(ClientPath.FindPath);
         });
     }
   });

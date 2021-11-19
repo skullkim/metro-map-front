@@ -16,7 +16,7 @@ const LostAndFoundTable = () => {
   useEffect(() => {
     Api({
       method: 'GET',
-      url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.getLostAndFoundLost}`,
+      url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.GetLostAndFoundLost}`,
     })
       .then(({data: {data}}) => {
         setLostAndFoundList(data);

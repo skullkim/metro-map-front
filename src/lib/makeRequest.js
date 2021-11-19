@@ -51,8 +51,8 @@ export const makeSubwayPathGraph = (path) => {
 
 export const makeReqUrl = ({stopoverSelected, target}) => {
   return stopoverSelected ?
-    `${ServerPath.minPathStopover}${target}` :
-    `${ServerPath.minPath}${target}`;
+    `${ServerPath.MinPathStopover}${target}` :
+    `${ServerPath.MinPath}${target}`;
 }
 
 export const makeReqQuery = ({stopoverSelected, startStation, stopoverStation, arriveStation}) => {

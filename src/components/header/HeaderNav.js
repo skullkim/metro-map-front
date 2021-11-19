@@ -82,20 +82,20 @@ const HeaderNav = () => {
   const handleClick = useCallback((event) => {
     event.preventDefault();
     if(!userInfo) {
-      return history.push(ClientPath.signIn);
+      return history.push(ClientPath.SignIn);
     }
     openModal.setSearchHistoryModal(true);
   }, []);
 
   return (
     <Header>
-      <Logo src={ImagePath.mainLogo} onClick={() => history.push(ClientPath.findPath)}/>
+      <Logo src={ImagePath.MainLogo} onClick={() => history.push(ClientPath.FindPath)}/>
       <NavBar>
-        <NavItem to={ClientPath.findPath}>길찾기</NavItem>
-        <NavItem to={ClientPath.storeBox}>물품보관함</NavItem>
-        <NavItem to={ClientPath.lostAndFound}>유실물센터</NavItem>
-        <NavItem to={ClientPath.userComplain}>민원</NavItem>
-        <NavItem to={ClientPath.bookmark}>즐겨찾기</NavItem>
+        <NavItem to={ClientPath.FindPath}>길찾기</NavItem>
+        <NavItem to={ClientPath.StoreBox}>물품보관함</NavItem>
+        <NavItem to={ClientPath.LostAndFound}>유실물센터</NavItem>
+        <NavItem to={ClientPath.UserComplain}>민원</NavItem>
+        <NavItem to={ClientPath.Bookmark}>즐겨찾기</NavItem>
         <OpenSearchHistory
           type='submit'
           onClick={handleClick}
@@ -105,11 +105,11 @@ const HeaderNav = () => {
         <VerticalLine />
         {!Login.userId ?
           <>
-            <NavItem to={ClientPath.signUp}>회원가입</NavItem>
-            <NavItem to={ClientPath.signIn}>로그인</NavItem>
+            <NavItem to={ClientPath.SignUp}>회원가입</NavItem>
+            <NavItem to={ClientPath.SignIn}>로그인</NavItem>
           </> :
           <>
-            <NavItem to={ClientPath.myPage + userInfo.userId}>마이페이지</NavItem>
+            <NavItem to={ClientPath.MyPage + userInfo.userId}>마이페이지</NavItem>
             <Logout />
           </>
         }

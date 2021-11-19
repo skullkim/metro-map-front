@@ -43,7 +43,7 @@ const SearchHistoryModal = () => {
 
     TokenApi({
       method: 'GET',
-      url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.searchHistory}/${userInfo.userId}`,
+      url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.SearchHistory}/${userInfo.userId}`,
       headers: {
         Authorization: `Bearer ${userInfo.accessToken}`,
       }
@@ -63,7 +63,7 @@ const SearchHistoryModal = () => {
     else {
       TokenApi({
         method: 'PUT',
-        url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.searchHistoryBookmark}/${pathInfo.id}`,
+        url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.SearchHistoryBookmark}/${pathInfo.id}`,
         headers: {
           Authorization: `Bearer ${userInfo.accessToken}`,
         },
@@ -91,7 +91,7 @@ const SearchHistoryModal = () => {
           </ModalBox>
         </CommonModalBox>
         :
-        <Redirect to={ClientPath.signIn}/>
+        <Redirect to={ClientPath.SignIn}/>
       }
     </>
   );

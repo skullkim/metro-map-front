@@ -11,7 +11,7 @@ const StoreBoxTable = () => {
   useEffect(() => {
     Api({
       method: 'GET',
-      url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.getStoreBoxList}`,
+      url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.GetStoreBoxList}`,
     })
       .then(({data: {data}}) => {
         setStoreBoxList(data);
