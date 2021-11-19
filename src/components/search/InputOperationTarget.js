@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import styled from 'styled-components';
 
-import {STATION_CATEGORY} from "../../lib/subwayData";
+import {StationCategory} from "../../lib/subwayData";
 import indexStore from "../../stores/indexStore";
 
 const InputBox = styled.div`
@@ -33,13 +33,13 @@ const InputOperationTarget = () => {
 
   const handleChange = ({target: {name, value}}) => {
     switch (name) {
-      case STATION_CATEGORY.START_STATION:
+      case StationCategory.StartStation:
         targetStore.setStartStation(value);
         break;
-      case STATION_CATEGORY.STOPOVER_STATION:
+      case StationCategory.StopoverStation:
         targetStore.setStopoverStation(value);
         break;
-      case STATION_CATEGORY.ARRIVE_STATION:
+      case StationCategory.ArriveStation:
         targetStore.setArriveState(value);
         break;
       default:
@@ -53,7 +53,7 @@ const InputOperationTarget = () => {
         출발
         <InputStation
           type='text'
-          name={STATION_CATEGORY.START_STATION}
+          name={StationCategory.StartStation}
           maxLength='3'
           value={targetStore.startStation}
           onChange={handleChange}
@@ -64,7 +64,7 @@ const InputOperationTarget = () => {
           경유지
           <InputStation
             type='text'
-            name={STATION_CATEGORY.STOPOVER_STATION}
+            name={StationCategory.StopoverStation}
             maxLength='3'
             value={targetStore.stopoverStation}
             onChange={handleChange}
@@ -75,7 +75,7 @@ const InputOperationTarget = () => {
         도착
         <InputStation
           type='text'
-          name={STATION_CATEGORY.ARRIVE_STATION}
+          name={StationCategory.ArriveStation}
           maxLength='3'
           value={targetStore.arriveStation}
           onChange={handleChange}

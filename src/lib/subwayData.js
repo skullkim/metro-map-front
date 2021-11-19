@@ -1,9 +1,9 @@
-export const STATION_CATEGORY = {
-  START_STATION: 'startStation',
-  STOPOVER_STATION: 'stopoverStation',
-  ARRIVE_STATION: 'arriveStation',
+export const StationCategory = {
+  StartStation: 'startStation',
+  StopoverStation: 'stopoverStation',
+  ArriveStation: 'arriveStation',
 };
-Object.freeze(STATION_CATEGORY);
+Object.freeze(StationCategory);
 
 export const SearchStationOption = {
   time: '시간',

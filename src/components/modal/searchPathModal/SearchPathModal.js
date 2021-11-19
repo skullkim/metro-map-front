@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import { ImagePath } from '../../../lib/dataPath';
-import { STATION_CATEGORY } from '../../../lib/subwayData';
+import { StationCategory } from '../../../lib/subwayData';
 import indexStore from '../../../stores/indexStore';
 import Portal from '../Portal';
 
@@ -79,14 +79,14 @@ const SearchPathModal = ({xPosition, yPosition, stationName, closeModal}) => {
 
   const handleClick = ({target: {name}}) => {
     switch (name) {
-      case STATION_CATEGORY.START_STATION:
+      case StationCategory.StartStation:
         SearchTargetStore.setStartStation(stationName);
         break;
-      case STATION_CATEGORY.STOPOVER_STATION:
+      case StationCategory.StopoverStation:
         SearchTargetStore.setStopoverSelected(true);
         SearchTargetStore.setStopoverStation(stationName);
         break;
-      case STATION_CATEGORY.ARRIVE_STATION:
+      case StationCategory.ArriveStation:
         SearchTargetStore.setArriveState(stationName);
         break;
       default:
@@ -108,19 +108,19 @@ const SearchPathModal = ({xPosition, yPosition, stationName, closeModal}) => {
         </ModalHeader>
         <SelectStationBox>
           <StationButton
-            name={STATION_CATEGORY.START_STATION}
+            name={StationCategory.StartStation}
             onClick={handleClick}
           >
             출발
           </StationButton>
           <StationButton
-            name={STATION_CATEGORY.STOPOVER_STATION}
+            name={StationCategory.StopoverStation}
             onClick={handleClick}
           >
             경유
           </StationButton>
           <StationButton
-            name={STATION_CATEGORY.ARRIVE_STATION}
+            name={StationCategory.ArriveStation}
             onClick={handleClick}
           >
             도착
