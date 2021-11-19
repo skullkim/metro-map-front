@@ -23,4 +23,8 @@ export const TableData = styled.td`
 
 export const TableRow = styled.tr`
   height: 10px;
+  
+  &:hover {
+    cursor: grab;
+  }
 `;
