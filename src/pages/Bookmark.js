@@ -1,12 +1,13 @@
 import { observer } from 'mobx-react';
 import {useEffect, useState, useCallback} from 'react';
+import {Redirect} from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Wrapper } from '../components/styles/Authorization';
 import PageTitle from '../components/styles/PageTitle';
 import PathTable from '../components/user/PathTable';
 import TokenApi from '../lib/customAxios';
-import { getDeleteUserBookMarkUrl, ServerPath } from '../lib/dataPath';
+import { ClientPath, getDeleteUserBookMarkUrl, ServerPath } from '../lib/dataPath';
 import { getUserInfo } from '../lib/localStorage';
 import indexStore from '../stores/indexStore';
 
@@ -63,10 +64,13 @@ const Bookmark = () => {
 
   return (
     <Wrapper>
-      <BookmarkBox>
-        <PageTitle>즐겨찾기 목록</PageTitle>
-        <PathTable pathLists={bookmarks} handleClick={handleClick} />
-      </BookmarkBox>
+      {userInfo ?
+        <BookmarkBox>
+          <PageTitle>즐겨찾기 목록</PageTitle>
+          <PathTable pathLists={bookmarks} handleClick={handleClick} />
+        </BookmarkBox> :
+        <Redirect to={ClientPath.signIn} />
+      }
     </Wrapper>
   );
 };
