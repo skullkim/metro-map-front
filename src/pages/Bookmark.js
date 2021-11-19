@@ -69,7 +69,7 @@ const Bookmark = () => {
           <PageTitle>즐겨찾기 목록</PageTitle>
           <PathTable pathLists={bookmarks} handleClick={handleClick} />
         </BookmarkBox> :
-        <Redirect to={ClientPath.signIn} />
+        <Redirect to={ClientPath.SignIn} />
       }
     </Wrapper>
   );

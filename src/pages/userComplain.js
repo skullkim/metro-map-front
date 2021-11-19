@@ -9,7 +9,7 @@ import { Success, Warning } from '../components/styles/ResultMessage';
 import { FormInputStyle, InputBox, SubmitButton } from '../components/styles/UserComplainMyPageInput';
 import { Api } from '../lib/customAxios';
 import { ServerPath } from '../lib/dataPath';
-import { userComplainName, complainContextMaxLen, complainSentSuccessfully } from '../lib/formDataInfo';
+import { UserComplainName, complainContextMaxLen, complainSentSuccessfully } from '../lib/formDataInfo';
 import { maxComplainContextLen, maxLen, minLen, regExp, warning } from '../lib/validateUserInfo';
 
 
@@ -92,7 +92,7 @@ const UserComplain = () => {
 
   const handleChange = (event) => {
     const {target: {name, value}} = event;
-    if(name === userComplainName.complainContext) {
+    if(name === UserComplainName.ComplainContext) {
       if(value.length >= 301) return;
       setComplainContextLen(value.length);
     }
@@ -117,19 +117,19 @@ const UserComplain = () => {
         <PageTitle>소중한 의견을 남겨주세요</PageTitle>
         <InputBox
           type='text'
-          name={userComplainName.email}
+          name={UserComplainName.Email}
           onBlur={handleBlur}
           onChange={handleChange}
           placeholder='이메일을 입력해 주세요'
         />
         {formik.touched.email &&
           formik.errors.email &&
-          currentFocused === userComplainName.email ?
+          currentFocused === UserComplainName.Email ?
           <Warning>{formik.errors.email}</Warning> :
           null
         }
         <SelectSubwayLine
-          name={userComplainName.subwayLine}
+          name={UserComplainName.SubwayLine}
           onChange={handleChange}
           onBlur={handleBlur}
         >
@@ -147,12 +147,12 @@ const UserComplain = () => {
         {formik.touched.subwayLine &&
           formik.errors.subwayLine &&
           !formik.values.subwayLine &&
-          currentFocused === userComplainName.subwayLine ?
+          currentFocused === UserComplainName.SubwayLine ?
           <Warning>{formik.errors.subwayLine}</Warning> :
           null
         }
         <ComplainContext
-          name={userComplainName.complainContext}
+          name={UserComplainName.ComplainContext}
           onChange={handleChange}
           onBlur={handleBlur}
           maxLength= {complainContextMaxLen}
@@ -160,7 +160,7 @@ const UserComplain = () => {
         <ComplainContextLength>{complainContextLen}/300</ComplainContextLength>
         {formik.touched.complainContext &&
           formik.errors.subwayLine &&
-          currentFocused === userComplainName.complainContext ?
+          currentFocused === UserComplainName.ComplainContext ?
           <Warning>{complainContextError}</Warning> :
           null
         }

@@ -1,10 +1,10 @@
-export const userComplainName = {
-  email: 'email',
-  subwayLine: 'subwayLine',
-  complainContext: 'complainContext',
-  submitButton: 'complainSubmit',
+export const UserComplainName = {
+  Email: 'email',
+  SubwayLine: 'subwayLine',
+  ComplainContext: 'complainContext',
+  SubmitButton: 'complainSubmit',
 };
-Object.freeze(userComplainName);
+Object.freeze(UserComplainName);
 
 export const complainContextMaxLen = 300;
 
