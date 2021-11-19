@@ -38,6 +38,15 @@ const SearchTargetStore = observable({
 
   setErrorMessage(errorMessage) {
     this.errorMessage = errorMessage;
+  },
+
+  clearSearchTarget() {
+    this.target = '';
+    this.startStation = '';
+    this.stopoverStation = '';
+    this.arriveStation = '';
+    this.stopoverSelected = '';
+    this.errorMessage = '';
   }
 
 });
