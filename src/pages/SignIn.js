@@ -1,8 +1,8 @@
 import ValidateUserAccount from '../components/user/ValidateUserAccount';
 import { authData } from '../lib/authenticateData';
 
-const SignUp = () => {
-  return <ValidateUserAccount authData={authData.signUp} />
+const SignIn = () => {
+  return <ValidateUserAccount authData={authData.signIn}/>
 };
 
-export default SignUp;
+export default SignIn;

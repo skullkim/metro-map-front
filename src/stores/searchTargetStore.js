@@ -8,6 +8,14 @@ const SearchTargetStore = observable({
   stopoverSelected: false,
   errorMessage: '',
 
+  setTargetInfo(pathInfo) {
+    this.target = pathInfo.target;
+    this.startStation = pathInfo.from;
+    this.arriveStation = pathInfo.to;
+    this.stopoverStation = pathInfo.stopover;
+    this.stopoverSelected = !!pathInfo.stopover;
+  },
+
   selectTarget(target) {
     this.target = target;
   },
@@ -30,6 +38,15 @@ const SearchTargetStore = observable({
 
   setErrorMessage(errorMessage) {
     this.errorMessage = errorMessage;
+  },
+
+  clearSearchTarget() {
+    this.target = '';
+    this.startStation = '';
+    this.stopoverStation = '';
+    this.arriveStation = '';
+    this.stopoverSelected = '';
+    this.errorMessage = '';
   }
 
 });

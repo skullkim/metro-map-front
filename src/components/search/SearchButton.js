@@ -1,4 +1,4 @@
-import {useObserver} from 'mobx-react';
+import { observer } from 'mobx-react';
 
 import validateTarget from "../../lib/validateStation";
 import indexStore from "../../stores/indexStore";
@@ -17,9 +17,9 @@ const SearchButton = () => {
 
   }
 
-  return useObserver(() => (
+  return (
     <SearchBtn onClick={handleClick}>검색</SearchBtn>
-  ))
+  );
 }
 
-export default SearchButton;
+export default observer(SearchButton);

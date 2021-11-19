@@ -1,11 +1,14 @@
-import axios from 'axios';
 import {useEffect, useState} from 'react';
 import { Graph } from "react-d3-graph";
 import styled, { css } from "styled-components";
 
+import { getAuthenticationHeader } from '../../../lib/authenticateData';
+import TokenApi from '../../../lib/customAxios';
+import { getUserInfo } from '../../../lib/localStorage';
 import { makePathData, makeSubwayPathGraph, makeReqQuery, makeReqUrl } from "../../../lib/makeRequest";
 import { subwayResultConfig } from "../../../lib/subwayData";
 import indexStore from "../../../stores/indexStore";
+import { DataTitle } from '../CommonModal';
 
 const ResultBox = styled.section`
   height: 256px;
@@ -31,9 +34,6 @@ const DataBox = styled.div`
   `};
 `;
 
-const DataTitle = styled.b`
-  font-size: 18px;
-`;
 
 const Data = styled(DataTitle)``;
 
@@ -47,20 +47,21 @@ const SearchResultData = () => {
   useEffect(() => {
     const url = makeReqUrl(targetStore);
     const data = makeReqQuery(targetStore);
+    const {accessToken} = getUserInfo() ?? '';
 
-    axios({
+    TokenApi({
       method: 'GET',
       url: `${process.env.REACT_APP_SERVER_ORIGIN}${url}`,
+      headers: {
+        Authorization: `${accessToken ? getAuthenticationHeader(accessToken) : ''}`,
+      },
       params: data,
     })
       .then(({data: {data: resultData}}) => {
         setSearchResult(makePathData(targetStore, resultData));
         setSearchedPath(makeSubwayPathGraph(resultData.path));
       })
-      .catch(err => {
-        // eslint-disable-next-line no-console
-        console.log(err.response);
-      })
+      .catch(err => err);
   }, []);
 
   return (

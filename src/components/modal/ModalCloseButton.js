@@ -20,6 +20,7 @@ const ModalCloseButton = () => {
   const handleClick = (event) => {
     event.preventDefault();
     closeModal.setSearchResultModal(false);
+    closeModal.setSearchHistoryModal(false);
   }
 
   return (

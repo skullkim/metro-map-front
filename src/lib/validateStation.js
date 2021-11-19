@@ -1,14 +1,15 @@
 const StationKr = {
-  START_STATION: '출발점',
-  STOPOVER_STATION: '경유지',
-  ARRIVE_STATION: '도착지',
+  StartStation: '출발점',
+  StopoverStation: '경유지',
+  ArriveStation: '도착지',
 }
-const PathTarget = {
-  TIME: 'time',
-  DISTANCE: 'distance',
-  COST: 'cost',
-};
 Object.freeze(StationKr);
+
+const PathTarget = {
+  Time: 'time',
+  Distance: 'distance',
+  Cost: 'cost',
+};
 Object.freeze(PathTarget);
 
 const checkEmpty = (station, stationName) => {
@@ -45,44 +46,56 @@ const isSameStation = (
 };
 
 
-const validateTarget = ({target, startStation, arriveStation, stopoverStation, stopoverSelected}) => {
+const validateTarget = ({
+  target,
+  startStation,
+  arriveStation,
+  stopoverStation,
+  stopoverSelected
+}) => {
   const existPathTarget = checkPathTarget(target);
 
   const emptyStation =
-    checkEmpty(startStation, StationKr.START_STATION) ||
-    checkEmpty(arriveStation, StationKr.ARRIVE_STATION) ||
-    (stopoverSelected ? checkEmpty(stopoverStation, StationKr.STOPOVER_STATION) : '');
+    checkEmpty(startStation, StationKr.StartStation) ||
+    checkEmpty(arriveStation, StationKr.ArriveStation) ||
+    (stopoverSelected ?
+      checkEmpty(stopoverStation, StationKr.StopoverStation) :
+      ''
+    );
 
   const sameStation =
     isSameStation(
       startStation,
       arriveStation,
-      StationKr.START_STATION,
-      StationKr.ARRIVE_STATION
+      StationKr.StartStation,
+      StationKr.ArriveStation
     ) || (
       stopoverSelected ?
         isSameStation(
           startStation,
           stopoverStation,
-          StationKr.START_STATION,
-          StationKr.STOPOVER_STATION,
+          StationKr.StartStation,
+          StationKr.StopoverStation,
         ) : ''
     ) || (
       stopoverSelected ? 
         isSameStation(
           stopoverStation,
           arriveStation,
-          StationKr.STOPOVER_STATION,
-          StationKr.ARRIVE_STATION,
+          StationKr.StopoverStation,
+          StationKr.ArriveStation,
         ) : ''
     );
 
   const incorrectStationName =
-    involveChar(startStation, StationKr.START_STATION) ||
-    involveChar(arriveStation, StationKr.ARRIVE_STATION) ||
-    (stopoverSelected ? involveChar(stopoverStation, StationKr.STOPOVER_STATION) : '');
+    involveChar(startStation, StationKr.StartStation) ||
+    involveChar(arriveStation, StationKr.ArriveStation) ||
+    (stopoverSelected ? involveChar(stopoverStation, StationKr.StopoverStation) : '');
 
-  return existPathTarget || emptyStation || sameStation || incorrectStationName;
+  return (existPathTarget ||
+    emptyStation ||
+    sameStation ||
+    incorrectStationName);
 }
 
 export default validateTarget;
