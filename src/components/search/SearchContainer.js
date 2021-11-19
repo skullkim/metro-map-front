@@ -24,7 +24,10 @@ const SearchContainer = () => {
     <OptionsBox>
       <SelectOperationTarget />
       <InputOperationTarget />
-      {targetStore.errorMessage ? <Warning>{targetStore.errorMessage}</Warning> : null}
+      {targetStore.errorMessage ?
+        <Warning>{targetStore.errorMessage}</Warning> :
+        null
+      }
       <SubmitButton />
     </OptionsBox>
   );

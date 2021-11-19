@@ -49,7 +49,9 @@ const SubwayMap = () => {
 
     ModalOpenStore.setSearchPathModal(true);
 
-    setSearchPathModalPosition({...searchPathModalPosition, xPosition, yPosition });
+    setSearchPathModalPosition({
+      ...searchPathModalPosition, xPosition, yPosition
+    });
   }
 
   const closeModal = () => {
@@ -58,7 +60,12 @@ const SubwayMap = () => {
 
   return (
     <Wrapper>
-      <MapContainer ref={subwayMapRef} argin-top='3%' margin-left='10.5%' onClick={handleClick}>
+      <MapContainer
+        ref={subwayMapRef}
+        argin-top='3%'
+        margin-left='10.5%'
+        onClick={handleClick}
+      >
         <Graph
           id='graph-id'
           ref={subwayMapRef}
@@ -67,7 +74,9 @@ const SubwayMap = () => {
           onClickNode={handleNodeClick}
         />
       </MapContainer>
-      {ModalOpenStore.searchPathModal && searchPathModalPosition.xPosition && searchPathModalPosition.yPosition?
+      {ModalOpenStore.searchPathModal &&
+        searchPathModalPosition.xPosition &&
+        searchPathModalPosition.yPosition?
         <SearchPathModal
           xPosition={searchPathModalPosition.xPosition}
           yPosition={searchPathModalPosition.yPosition}

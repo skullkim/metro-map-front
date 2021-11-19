@@ -112,7 +112,9 @@ const MyPage = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {formik.touched.email && formik.errors.email && currentFocused === 'email' ?
+            {formik.touched.email &&
+              formik.errors.email &&
+              currentFocused === 'email' ?
               <Warning>{formik.errors.email}</Warning> :
               null
             }
@@ -123,7 +125,9 @@ const MyPage = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {formik.touched.previousPassword && formik.errors.previousPassword && currentFocused === 'previousPassword' ?
+            {formik.touched.previousPassword &&
+              formik.errors.previousPassword &&
+              currentFocused === 'previousPassword' ?
               <Warning>{formik.errors.previousPassword}</Warning> :
               null
             }
@@ -134,7 +138,9 @@ const MyPage = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {formik.touched.newPassword && formik.errors.newPassword && currentFocused === 'newPassword' ?
+            {formik.touched.newPassword &&
+              formik.errors.newPassword &&
+              currentFocused === 'newPassword' ?
               <Warning>{formik.errors.newPassword}</Warning> :
               null
             }
@@ -145,7 +151,9 @@ const MyPage = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {formik.touched.verifyNewPassword && formik.errors.verifyNewPassword && currentFocused === 'verifyNewPassword' ?
+            {formik.touched.verifyNewPassword &&
+              formik.errors.verifyNewPassword &&
+              currentFocused === 'verifyNewPassword' ?
               <Warning>{formik.errors.verifyNewPassword}</Warning> :
               null
             }

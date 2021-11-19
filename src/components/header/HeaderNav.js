@@ -89,7 +89,10 @@ const HeaderNav = () => {
 
   return (
     <Header>
-      <Logo src={ImagePath.MainLogo} onClick={() => history.push(ClientPath.FindPath)}/>
+      <Logo
+        src={ImagePath.MainLogo}
+        onClick={() => history.push(ClientPath.FindPath)}
+      />
       <NavBar>
         <NavItem to={ClientPath.FindPath}>길찾기</NavItem>
         <NavItem to={ClientPath.StoreBox}>물품보관함</NavItem>

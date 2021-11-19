@@ -31,9 +31,21 @@ const SelectOperationTarget = () => {
   return (
     <SelectBox>
       <SelectStopoverButton />
-      <TargetButton onClick={handleClick} target={targetStore.target} name='distance'>최단거리</TargetButton>
-      <TargetButton onClick={handleClick} target={targetStore.target} name='time'>최소시간</TargetButton>
-      <TargetButton onClick={handleClick} target={targetStore.target} name='cost'>최소비용</TargetButton>
+      <TargetButton
+        onClick={handleClick}
+        target={targetStore.target}
+        name='distance'
+      >최단거리</TargetButton>
+      <TargetButton
+        onClick={handleClick}
+        target={targetStore.target}
+        name='time'
+      >최소시간</TargetButton>
+      <TargetButton
+        onClick={handleClick}
+        target={targetStore.target}
+        name='cost'
+      >최소비용</TargetButton>
     </SelectBox>
   );
 };

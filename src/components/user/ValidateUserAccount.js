@@ -48,7 +48,9 @@ const ValidateUserAccount = ({authData}) => {
     }),
 
     onSubmit: ({email, password}) => {
-      const data = type === AuthType.EmailReauthorization ? {email} : {email, password};
+      const data = type === AuthType.EmailReauthorization ?
+        {email} :
+        {email, password};
       const url = getAuthenticateUrl(type);
 
       Api({
@@ -110,7 +112,9 @@ const ValidateUserAccount = ({authData}) => {
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        {formik.touched.email && formik.errors.email && currentFocused === 'email' ?
+        {formik.touched.email &&
+          formik.errors.email &&
+          currentFocused === 'email' ?
           <Warning>{formik.errors.email}</Warning> :
           null
         }
@@ -124,7 +128,9 @@ const ValidateUserAccount = ({authData}) => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {formik.touched.password && formik.errors.password && currentFocused === 'password' ?
+            {formik.touched.password &&
+              formik.errors.password &&
+              currentFocused === 'password' ?
               <Warning>{formik.errors.password}</Warning> :
               null
             }
@@ -140,7 +146,9 @@ const ValidateUserAccount = ({authData}) => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {formik.touched.verifyPassword && formik.errors.verifyPassword && currentFocused === 'verifyPassword' ?
+            {formik.touched.verifyPassword &&
+              formik.errors.verifyPassword &&
+              currentFocused === 'verifyPassword' ?
               <Warning>{formik.errors.verifyPassword}</Warning> :
               null
             }

@@ -23,8 +23,16 @@ function App() {
         <Switch>
           <Route exact path={ClientPath.FindPath} component={FindPathPage} />
           <Route exact path={ClientPath.SignUp} component={SignUp} />
-          <Route exact path={ClientPath.EmailVerification} component={EmailVerification} />
-          <Route exact path={ClientPath.EmailReauthorization} component={EmailReauthorization}/>
+          <Route
+            exact
+            path={ClientPath.EmailVerification}
+            component={EmailVerification}
+          />
+          <Route
+            exact
+            path={ClientPath.EmailReauthorization}
+            component={EmailReauthorization}
+          />
           <Route path={ClientPath.SignIn} component={SignIn}/>
           <Route path={ClientPath.Bookmark} component={Bookmark} />
           <Route path={ClientPath.LostAndFound} component={LostAndFound} />

@@ -46,13 +46,22 @@ const isSameStation = (
 };
 
 
-const validateTarget = ({target, startStation, arriveStation, stopoverStation, stopoverSelected}) => {
+const validateTarget = ({
+  target,
+  startStation,
+  arriveStation,
+  stopoverStation,
+  stopoverSelected
+}) => {
   const existPathTarget = checkPathTarget(target);
 
   const emptyStation =
     checkEmpty(startStation, StationKr.StartStation) ||
     checkEmpty(arriveStation, StationKr.ArriveStation) ||
-    (stopoverSelected ? checkEmpty(stopoverStation, StationKr.StopoverStation) : '');
+    (stopoverSelected ?
+      checkEmpty(stopoverStation, StationKr.StopoverStation) :
+      ''
+    );
 
   const sameStation =
     isSameStation(
