@@ -66,6 +66,7 @@ const OpenSearchHistory = styled.button`
   font-size: 18px;
   font-weight: bold;
   word-break: keep-all;
+  background-color: transparent;
   padding: 0;
   border: 0;
   
