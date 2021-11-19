@@ -2,6 +2,7 @@ import {observer} from 'mobx-react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { getAuthenticationHeader } from '../../lib/authenticateData';
 import TokenApi from '../../lib/customAxios';
 import { ServerPath } from '../../lib/dataPath';
 import { getUserInfo, removeUserInfo } from '../../lib/localStorage';
@@ -27,11 +28,13 @@ const Logout = () => {
 
   const handleClick = (event) => {
     event.preventDefault();
+    const {accessToken} = getUserInfo();
+
     TokenApi({
       method: 'POST',
       url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.LogOut}`,
       headers: {
-        Authorization: `Bearer ${getUserInfo().accessToken}`,
+        Authorization: getAuthenticationHeader(accessToken),
       }
     })
       .catch((err) => {

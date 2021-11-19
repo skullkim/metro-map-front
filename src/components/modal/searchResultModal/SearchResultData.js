@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import { Graph } from "react-d3-graph";
 import styled, { css } from "styled-components";
 
+import { getAuthenticationHeader } from '../../../lib/authenticateData';
 import TokenApi from '../../../lib/customAxios';
 import { getUserInfo } from '../../../lib/localStorage';
 import { makePathData, makeSubwayPathGraph, makeReqQuery, makeReqUrl } from "../../../lib/makeRequest";
@@ -52,7 +53,7 @@ const SearchResultData = () => {
       method: 'GET',
       url: `${process.env.REACT_APP_SERVER_ORIGIN}${url}`,
       headers: {
-        Authorization: `${accessToken ? `Bearer ${accessToken}` : ''}`,
+        Authorization: `${accessToken ? getAuthenticationHeader(accessToken) : ''}`,
       },
       params: data,
     })

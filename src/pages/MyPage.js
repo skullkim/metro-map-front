@@ -8,6 +8,7 @@ import { Wrapper } from '../components/styles/Authorization';
 import PageTitle from '../components/styles/PageTitle';
 import { Warning } from '../components/styles/ResultMessage';
 import { InputBox, SubmitButton } from '../components/styles/UserComplainMyPageInput';
+import { getAuthenticationHeader } from '../lib/authenticateData';
 import TokenApi from '../lib/customAxios';
 import { ClientPath, getChangeUserInformationUrl, getUserEmailUrl } from '../lib/dataPath';
 import { getUserInfo, removeUserInfo } from '../lib/localStorage';
@@ -32,7 +33,7 @@ const MyPage = () => {
       method: 'GET',
       url: `${getUserEmailUrl(userInfo.userId)}`,
       headers: {
-        Authorization: `Bearer ${userInfo.accessToken}`
+        Authorization: getAuthenticationHeader(userInfo.accessToken)
       }
     })
       .then(({data: {data: {email}}}) => {
@@ -68,7 +69,7 @@ const MyPage = () => {
         method: 'PUT',
         url: `${getChangeUserInformationUrl()}`,
         headers: {
-          Authorization: `Bearer ${userInfo.accessToken}`,
+          Authorization: getAuthenticationHeader(userInfo.accessToken),
         },
         data: {
           email, previousPassword, newPassword

@@ -49,3 +49,7 @@ export const getAuthenticateUrl = (authenticateType) => {
       throw new Error('invalid authenticateType');
   }
 }
+
+export const getAuthenticationHeader = (accessToken) => {
+  return `Bearer ${accessToken}`;
+}

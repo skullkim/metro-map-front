@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Wrapper } from '../components/styles/Authorization';
 import PageTitle from '../components/styles/PageTitle';
 import PathTable from '../components/user/PathTable';
+import { getAuthenticationHeader } from '../lib/authenticateData';
 import TokenApi from '../lib/customAxios';
 import { ClientPath, getDeleteUserBookMarkUrl, ServerPath } from '../lib/dataPath';
 import { getUserInfo } from '../lib/localStorage';
@@ -30,7 +31,7 @@ const Bookmark = () => {
       method: 'GET',
       url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.GetUserBookMark}/${userInfo.userId}`,
       headers: {
-        Authorization: `Bearer ${userInfo.accessToken}`,
+        Authorization: getAuthenticationHeader(userInfo.accessToken),
       }
     })
       .then(({data: {data}}) => {
@@ -49,7 +50,7 @@ const Bookmark = () => {
         method: 'DELETE',
         url: getDeleteUserBookMarkUrl(pathInfo.id, userInfo.userId),
         headers: {
-          Authorization: `Bearer ${userInfo.accessToken}`,
+          Authorization: getAuthenticationHeader(userInfo.accessToken),
         },
         data: {
           pathInfo

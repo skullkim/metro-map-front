@@ -50,6 +50,7 @@ const ValidateUserAccount = ({authData}) => {
     onSubmit: ({email, password}) => {
       const data = type === AuthType.EmailReauthorization ? {email} : {email, password};
       const url = getAuthenticateUrl(type);
+
       Api({
         method: 'POST',
         url,
