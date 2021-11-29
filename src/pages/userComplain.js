@@ -32,7 +32,6 @@ const ComplainContextLength = styled.p`
 const UserComplain = () => {
   const [complainContextLen, setComplainContextLen] = useState(0);
   const [currentFocused, setCurrentFocused] = useState('');
-  const [complainContextError, setComplainContextError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [failMessage, setFailMessage] = useState('');
 
@@ -54,13 +53,10 @@ const UserComplain = () => {
 
       complainContext: yup.string()
         .required(`${WarningMessage.EmptyComplainContext}`)
-        .min(minLen, {message: `${WarningMessage.ComplainContextIsTooShort}`})
-        .max(maxComplainContextLen, {message: `${WarningMessage.ComplainContextIsTooLong}`})
+        .min(minLen, `${WarningMessage.ComplainContextIsTooShort}`)
+        .max(maxComplainContextLen, `${WarningMessage.ComplainContextIsTooLong}`)
     }),
     onSubmit: ({email, subwayLine, complainContext: userComplainContext}) => {
-      if(userComplainContext.length <= 10) {
-        setComplainContextError(WarningMessage.ComplainContextIsTooShort);
-      }
       Api({
         method: 'POST',
         url: `${process.env.REACT_APP_SERVER_ORIGIN}${ServerPath.SendUserComplain}`,
@@ -152,9 +148,9 @@ const UserComplain = () => {
         />
         <ComplainContextLength>{complainContextLen}/300</ComplainContextLength>
         {formik.touched.complainContext &&
-          formik.errors.subwayLine &&
+          formik.errors.complainContext &&
           currentFocused === UserComplainName.ComplainContext ?
-          <Warning>{complainContextError}</Warning> :
+          <Warning>{formik.errors.complainContext}</Warning> :
           null
         }
         <SubmitButton
